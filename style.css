@@ -49,6 +49,10 @@ button { color: inherit; }
 
 .hero { min-height: 100svh; position: relative; display: grid; align-items: center; color: #fff; overflow: hidden; }
 .hero-media, .event-media { position: absolute; inset: -8%; background-size: cover; background-position: center; will-change: transform; }
+#heroMedia { background-image: url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2400&q=92"); }
+#ceremonyMedia { background-image: url("https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=2400&q=92"); }
+#receptionMedia { background-image: url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2400&q=92"); }
+
 .hero-vignette { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,8,6,.78) 0%, rgba(10,8,6,.37) 45%, rgba(10,8,6,.12) 72%), linear-gradient(0deg, rgba(8,6,4,.44), transparent 36%), radial-gradient(circle at 72% 36%, transparent 0 18%, rgba(8,6,4,.18) 56%, rgba(8,6,4,.55) 100%); }
 .hero-content { position: relative; z-index: 4; width: min(620px, 78vw); margin-left: clamp(30px, 10vw, 150px); margin-top: 28px; }
 .kicker { margin: 0 0 20px; font: 500 10px/1.2 var(--sans); letter-spacing: .28em; color: var(--gold-soft); }

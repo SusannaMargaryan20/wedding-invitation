@@ -1,6 +1,3 @@
-/* =========================================================
-   1) EDIT ONLY THIS OBJECT FOR WEDDING DETAILS
-   ========================================================= */
 const weddingConfig = {
   couple: {
     brideName: "Anna",
@@ -81,6 +78,9 @@ let iframeLoadedAfterSubmit = false;
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const on = (el, event, handler, options) => { if (el) el.addEventListener(event, handler, options); };
+const setText = (el, value) => { if (el && value != null) el.textContent = value; };
+const setHtml = (el, value) => { if (el && value != null) el.innerHTML = value; };
 
 function applyConfig() {
   const c = weddingConfig;
@@ -105,14 +105,20 @@ function applyConfig() {
 
   Object.entries(bindings).forEach(([key, value]) => $$(`[data-bind="${key}"]`).forEach(el => el.textContent = value));
 
-  $("#ceremonyTitle").innerHTML = c.ceremony.titleHtml;
-  $("#receptionTitle").innerHTML = c.reception.titleHtml;
-  $("#ceremonyMap").href = c.ceremony.mapUrl;
-  $("#receptionMap").href = c.reception.mapUrl;
-  $("#heroMedia").style.backgroundImage = `url("${c.images.hero}")`;
-  $("#storyImage").src = c.images.story;
-  $("#ceremonyMedia").style.backgroundImage = `url("${c.images.ceremony}")`;
-  $("#receptionMedia").style.backgroundImage = `url("${c.images.reception}")`;
+  setHtml($("#ceremonyTitle"), c.ceremony.titleHtml);
+  setHtml($("#receptionTitle"), c.reception.titleHtml);
+  const ceremonyMap = $("#ceremonyMap");
+  const receptionMap = $("#receptionMap");
+  const heroMedia = $("#heroMedia");
+  const storyImage = $("#storyImage");
+  const ceremonyMedia = $("#ceremonyMedia");
+  const receptionMedia = $("#receptionMedia");
+  if (ceremonyMap) ceremonyMap.href = c.ceremony.mapUrl;
+  if (receptionMap) receptionMap.href = c.reception.mapUrl;
+  if (heroMedia) heroMedia.style.backgroundImage = `url("${c.images.hero}")`;
+  if (storyImage) storyImage.src = c.images.story;
+  if (ceremonyMedia) ceremonyMedia.style.backgroundImage = `url("${c.images.ceremony}")`;
+  if (receptionMedia) receptionMedia.style.backgroundImage = `url("${c.images.reception}")`;
 }
 
 function getTranslation(path) {
@@ -124,8 +130,10 @@ function applyLanguage(lang) {
   currentLang = lang;
   localStorage.setItem("wedding-language", lang);
   document.documentElement.lang = lang;
-  $("#languageTrigger").firstChild.nodeValue = `${lang.toUpperCase()} `;
-  $("#formLanguage").value = lang;
+  const languageTrigger = $("#languageTrigger");
+  const formLanguage = $("#formLanguage");
+  if (languageTrigger?.firstChild) languageTrigger.firstChild.nodeValue = `${lang.toUpperCase()} `;
+  if (formLanguage) formLanguage.value = lang;
 
   $$('[data-i18n]').forEach(el => {
     const value = getTranslation(el.dataset.i18n);
@@ -148,36 +156,40 @@ function setupNavigation() {
   const languageTrigger = $("#languageTrigger");
   const languageMenu = $("#languageMenu");
 
-  menuToggle.addEventListener("click", () => {
+  on(menuToggle, "click", () => {
+    if (!mobileNav) return;
     const open = mobileNav.classList.toggle("open");
     menuToggle.setAttribute("aria-expanded", String(open));
   });
 
-  $$("a", mobileNav).forEach(a => a.addEventListener("click", () => {
-    mobileNav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-  }));
+  if (mobileNav) {
+    $$("a", mobileNav).forEach(a => on(a, "click", () => {
+      mobileNav.classList.remove("open");
+      menuToggle?.setAttribute("aria-expanded", "false");
+    }));
+  }
 
-  languageTrigger.addEventListener("click", (e) => {
+  on(languageTrigger, "click", (e) => {
     e.stopPropagation();
+    if (!languageMenu) return;
     const open = languageMenu.classList.toggle("open");
     languageTrigger.setAttribute("aria-expanded", String(open));
   });
 
-  $$('[data-lang]').forEach(button => button.addEventListener("click", () => {
+  $$('[data-lang]').forEach(button => on(button, "click", () => {
     applyLanguage(button.dataset.lang);
-    languageMenu.classList.remove("open");
-    languageTrigger.setAttribute("aria-expanded", "false");
+    languageMenu?.classList.remove("open");
+    languageTrigger?.setAttribute("aria-expanded", "false");
   }));
 
-  document.addEventListener("click", () => {
-    languageMenu.classList.remove("open");
-    languageTrigger.setAttribute("aria-expanded", "false");
+  on(document, "click", () => {
+    languageMenu?.classList.remove("open");
+    languageTrigger?.setAttribute("aria-expanded", "false");
   });
 
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 18);
+  const onScroll = () => header?.classList.toggle("scrolled", window.scrollY > 18);
   onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  on(window, "scroll", onScroll, { passive: true });
 }
 
 function setupRevealAnimations() {
@@ -199,27 +211,29 @@ function setupScrollMotion() {
   const progress = $("#pageProgress");
   const journeyFill = $("#journeyFill");
   const ceremonySection = $("#ceremony");
+  const receptionSection = $("#reception");
 
   let ticking = false;
   const render = () => {
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+    if (progress) progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+    if (hero) hero.style.transform = `translate3d(0, ${Math.min(y * .12, 75)}px, 0) scale(1.07)`;
 
-    hero.style.transform = `translate3d(0, ${Math.min(y * .12, 75)}px, 0) scale(1.07)`;
-
-    [ [ceremonySection, ceremony], [$("#reception"), reception] ].forEach(([section, media]) => {
+    [[ceremonySection, ceremony], [receptionSection, reception]].forEach(([section, media]) => {
+      if (!section || !media) return;
       const rect = section.getBoundingClientRect();
       const centerOffset = (window.innerHeight / 2) - (rect.top + rect.height / 2);
       const amount = Math.max(-70, Math.min(70, centerOffset * .08));
       media.style.transform = `translate3d(0, ${amount}px, 0) scale(1.08)`;
     });
 
-    const cRect = ceremonySection.getBoundingClientRect();
-    const raw = (window.innerHeight - cRect.top) / (window.innerHeight + cRect.height);
-    const p = Math.max(0, Math.min(1, raw));
-    journeyFill.style.height = `${p * 100}%`;
-
+    if (ceremonySection && journeyFill) {
+      const cRect = ceremonySection.getBoundingClientRect();
+      const raw = (window.innerHeight - cRect.top) / (window.innerHeight + cRect.height);
+      const p = Math.max(0, Math.min(1, raw));
+      journeyFill.style.height = `${p * 100}%`;
+    }
     ticking = false;
   };
 
@@ -231,8 +245,8 @@ function setupScrollMotion() {
   };
 
   render();
-  window.addEventListener("scroll", requestRender, { passive: true });
-  window.addEventListener("resize", requestRender);
+  on(window, "scroll", requestRender, { passive: true });
+  on(window, "resize", requestRender);
 }
 
 function setupRsvp() {
@@ -241,24 +255,29 @@ function setupRsvp() {
   const status = $("#formStatus");
   const submitButton = $("#submitButton");
   const frame = $("#rsvpFrame");
+  const minus = $("#guestMinus");
+  const plus = $("#guestPlus");
 
-  $("#guestMinus").addEventListener("click", () => count.value = Math.max(1, Number(count.value) - 1));
-  $("#guestPlus").addEventListener("click", () => count.value = Math.min(12, Number(count.value) + 1));
+  if (!form || !count || !status || !submitButton) return;
 
-  frame.addEventListener("load", () => {
+  on(minus, "click", () => count.value = Math.max(1, Number(count.value) - 1));
+  on(plus, "click", () => count.value = Math.min(12, Number(count.value) + 1));
+
+  on(frame, "load", () => {
     if (!isSubmitting || !iframeLoadedAfterSubmit) return;
     isSubmitting = false;
     iframeLoadedAfterSubmit = false;
     submitButton.disabled = false;
-    submitButton.querySelector("span").textContent = getTranslation("rsvp.confirm");
+    setText(submitButton.querySelector("span"), getTranslation("rsvp.confirm"));
     status.className = "form-status success";
     status.textContent = getTranslation("rsvp.success");
     form.reset();
     count.value = 1;
-    $("#formLanguage").value = currentLang;
+    const formLanguage = $("#formLanguage");
+    if (formLanguage) formLanguage.value = currentLang;
   });
 
-  form.addEventListener("submit", (event) => {
+  on(form, "submit", (event) => {
     status.className = "form-status";
     status.textContent = "";
 
@@ -279,15 +298,13 @@ function setupRsvp() {
     isSubmitting = true;
     iframeLoadedAfterSubmit = true;
     submitButton.disabled = true;
-    submitButton.querySelector("span").textContent = getTranslation("rsvp.sending");
+    setText(submitButton.querySelector("span"), getTranslation("rsvp.sending"));
 
-    // Browser submits the form to the hidden iframe. This avoids CORS issues with Apps Script.
     window.setTimeout(() => {
       if (isSubmitting) {
-        // The iframe usually fires load quickly. If Google is slow, restore button after 12s.
         isSubmitting = false;
         submitButton.disabled = false;
-        submitButton.querySelector("span").textContent = getTranslation("rsvp.confirm");
+        setText(submitButton.querySelector("span"), getTranslation("rsvp.confirm"));
         status.className = "form-status error";
         status.textContent = getTranslation("rsvp.error");
       }
@@ -295,9 +312,17 @@ function setupRsvp() {
   });
 }
 
-applyConfig();
-applyLanguage(currentLang);
-setupNavigation();
-setupRevealAnimations();
-setupScrollMotion();
-setupRsvp();
+function initWeddingSite() {
+  applyConfig();
+  applyLanguage(currentLang);
+  setupNavigation();
+  setupRevealAnimations();
+  setupScrollMotion();
+  setupRsvp();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initWeddingSite, { once: true });
+} else {
+  initWeddingSite();
+}
