@@ -1,3 +1,6 @@
+/* =========================================================
+   1) EDIT ONLY THIS OBJECT FOR WEDDING DETAILS
+   ========================================================= */
 const weddingConfig = {
   couple: {
     brideName: "Anna",
@@ -212,28 +215,80 @@ function setupScrollMotion() {
   const journeyFill = $("#journeyFill");
   const ceremonySection = $("#ceremony");
   const receptionSection = $("#reception");
+  const storySection = $("#story");
+  const storyVisual = $(".story-visual");
+  const storyFront = $(".photo-card-front");
+  const ceremonyBride = $("#ceremonyBride");
+  const ceremonyGroom = $("#ceremonyGroom");
+  const ceremonyStage = $("#ceremonyCoupleStage");
+  const danceCouple = $("#danceCouple");
+  const danceBride = $("#danceBride");
+  const danceGroom = $("#danceGroom");
+
+  const clamp = (n, min = 0, max = 1) => Math.max(min, Math.min(max, n));
+  const sectionProgress = (section) => {
+    if (!section) return 0;
+    const rect = section.getBoundingClientRect();
+    return clamp((window.innerHeight - rect.top) / (window.innerHeight + rect.height));
+  };
 
   let ticking = false;
   const render = () => {
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
-    if (hero) hero.style.transform = `translate3d(0, ${Math.min(y * .12, 75)}px, 0) scale(1.07)`;
 
+    // Cinematic background motion.
+    if (hero) hero.style.transform = `translate3d(0, ${Math.min(y * .12, 75)}px, 0) scale(${1.07 + Math.min(y / 12000, .025)})`;
     [[ceremonySection, ceremony], [receptionSection, reception]].forEach(([section, media]) => {
       if (!section || !media) return;
       const rect = section.getBoundingClientRect();
       const centerOffset = (window.innerHeight / 2) - (rect.top + rect.height / 2);
       const amount = Math.max(-70, Math.min(70, centerOffset * .08));
-      media.style.transform = `translate3d(0, ${amount}px, 0) scale(1.08)`;
+      media.style.transform = `translate3d(0, ${amount}px, 0) scale(1.09)`;
     });
 
-    if (ceremonySection && journeyFill) {
-      const cRect = ceremonySection.getBoundingClientRect();
-      const raw = (window.innerHeight - cRect.top) / (window.innerHeight + cRect.height);
-      const p = Math.max(0, Math.min(1, raw));
-      journeyFill.style.height = `${p * 100}%`;
+    // Story photo subtly floats and straightens as it comes into view.
+    if (storySection && storyVisual && storyFront) {
+      const p = sectionProgress(storySection);
+      storyVisual.style.transform = `translate3d(0, ${(0.5 - p) * 22}px, 0)`;
+      storyFront.style.transform = `rotate(${-4 + p * 2.2}deg) translateY(${(0.45 - p) * 8}px)`;
     }
+
+    // Ceremony choreography:
+    // 0–45%: bride + groom approach one another.
+    // 45–100%: they continue together toward the church and fade into the doorway.
+    if (ceremonySection && ceremonyBride && ceremonyGroom && ceremonyStage) {
+      const p = sectionProgress(ceremonySection);
+      const meet = clamp(p / .48);
+      const enter = clamp((p - .48) / .52);
+      const brideX = meet * 118 + enter * 12;
+      const groomX = -(meet * 118) - enter * 12;
+      const walkBob = Math.sin(p * Math.PI * 10) * (1 - enter) * 2.2;
+      const towardDoorY = -(enter * 128);
+      const shrink = 1 - enter * .44;
+      const fade = 1 - clamp((enter - .72) / .28) * .84;
+      ceremonyBride.style.transform = `translate3d(${brideX}px, ${walkBob + towardDoorY}px, 0) scale(${shrink})`;
+      ceremonyGroom.style.transform = `translate3d(${groomX}px, ${-walkBob + towardDoorY}px, 0) scale(${shrink})`;
+      ceremonyBride.style.opacity = fade;
+      ceremonyGroom.style.opacity = fade;
+      ceremonyStage.style.filter = `drop-shadow(0 18px 30px rgba(0,0,0,.22)) blur(${enter * .25}px)`;
+
+      if (journeyFill) journeyFill.style.height = `${p * 100}%`;
+    }
+
+    // Reception choreography: gentle first-dance sway tied to scrolling.
+    if (receptionSection && danceCouple && danceBride && danceGroom) {
+      const p = sectionProgress(receptionSection);
+      const eased = p * p * (3 - 2 * p);
+      const sway = Math.sin(eased * Math.PI * 3.2) * 5.5;
+      const lift = Math.sin(eased * Math.PI) * -10;
+      const scale = .88 + eased * .13;
+      danceCouple.style.transform = `translateX(-50%) translateY(${lift}px) rotate(${sway}deg) scale(${scale})`;
+      danceBride.style.transform = `rotate(${-7 - sway * .33}deg) translateX(${eased * 8}px)`;
+      danceGroom.style.transform = `rotate(${6 - sway * .22}deg) translateX(${-eased * 5}px)`;
+    }
+
     ticking = false;
   };
 

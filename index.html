@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"><span id="pageProgress"></span></div>
@@ -110,6 +110,29 @@
           <a class="ghost-button" id="ceremonyMap" target="_blank" rel="noopener"><span data-i18n="common.map">View on Map</span><b>↗</b></a>
         </div>
 
+        <div class="ceremony-couple-stage" id="ceremonyCoupleStage" aria-hidden="true">
+          <div class="ceremony-door-glow"></div>
+          <div class="figure bride-figure" id="ceremonyBride">
+            <svg viewBox="0 0 90 190" role="presentation">
+              <circle cx="45" cy="20" r="10" fill="currentColor" opacity=".96"/>
+              <path d="M45 33 C39 46 36 58 36 72 L24 132 L12 174 H78 L66 132 L54 72 C54 58 51 46 45 33Z" fill="currentColor" opacity=".92"/>
+              <path d="M38 49 C28 63 23 80 20 98" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+              <path d="M52 49 C61 63 66 79 69 95" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+              <path d="M35 41 C25 29 23 17 29 9" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="figure groom-figure" id="ceremonyGroom">
+            <svg viewBox="0 0 82 190" role="presentation">
+              <circle cx="41" cy="20" r="10" fill="currentColor" opacity=".96"/>
+              <path d="M30 35 H52 L61 93 L55 120 L59 177 H45 L41 126 L36 177 H22 L27 120 L21 93Z" fill="currentColor" opacity=".92"/>
+              <path d="M30 42 L18 92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <path d="M52 42 L66 92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <path d="M39 38 L41 64 L49 42" fill="none" stroke="#b99460" stroke-width="2.2" opacity=".9"/>
+            </svg>
+          </div>
+          <span class="couple-path-label">towards forever</span>
+        </div>
+
         <div class="journey-rail" aria-hidden="true">
           <small data-i18n-html="ceremony.progressTitle">SCROLL TO<br />SEE THE JOURNEY</small>
           <div class="journey-line"><span class="journey-fill" id="journeyFill"></span><b class="dot dot-one"></b><b class="dot dot-two"></b></div>
@@ -132,6 +155,18 @@
           <a class="ghost-button" id="receptionMap" target="_blank" rel="noopener"><span data-i18n="common.map">View on Map</span><b>↗</b></a>
         </div>
 
+        <div class="dance-stage" id="danceStage" aria-hidden="true">
+          <span class="dance-ring ring-one"></span><span class="dance-ring ring-two"></span>
+          <div class="dance-couple" id="danceCouple">
+            <div class="figure dance-bride" id="danceBride">
+              <svg viewBox="0 0 90 190" role="presentation"><circle cx="45" cy="20" r="10" fill="currentColor"/><path d="M45 33 C39 46 36 58 36 72 L24 132 L12 174 H78 L66 132 L54 72 C54 58 51 46 45 33Z" fill="currentColor"/><path d="M52 52 C63 62 68 75 73 91" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="figure dance-groom" id="danceGroom">
+              <svg viewBox="0 0 82 190" role="presentation"><circle cx="41" cy="20" r="10" fill="currentColor"/><path d="M30 35 H52 L61 93 L55 120 L59 177 H45 L41 126 L36 177 H22 L27 120 L21 93Z" fill="currentColor"/><path d="M30 49 C23 59 18 70 15 82" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <span class="dance-label">first dance</span>
+        </div>
         <div class="reception-note reveal-up" aria-hidden="true"><span data-i18n="reception.note">Dinner • Music • Dancing</span></div>
       </div>
     </section>
@@ -190,6 +225,6 @@
     <p><span data-bind="brideName">Anna</span> & <span data-bind="groomName">David</span> · <span data-bind="dayNumber">14</span> <span data-bind="monthYear">JUN 2025</span></p>
   </footer>
 
-  <script src="script.js?v=3" defer></script>
+  <script src="script.js?v=4" defer></script>
 </body>
 </html>
