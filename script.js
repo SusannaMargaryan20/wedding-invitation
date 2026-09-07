@@ -1,540 +1,790 @@
+/* =========================================================
+   GENERAL WEBSITE SETTINGS
+   Change names, initials, dates, venues, images and Formspree here.
+   ========================================================= */
+
+const weddingConfig = {
+  couple: {
+    brideName: "Anna",
+    groomName: "David",
+    brideInitial: "A",
+    groomInitial: "D"
+  },
+
+  wedding: {
+    dayShort: "SAT",
+    dayNumber: "14",
+    monthYear: "JUN 2025",
+    city: "YEREVAN, ARMENIA"
+  },
+
+  ceremony: {
+    titleHtml: "Saint Gregory<br><em>The Illuminator Church</em>",
+    date: "SAT, JUN 14, 2025",
+    time: "16:00",
+    location: "Yerevan, Armenia",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Saint+Gregory+the+Illuminator+Cathedral+Yerevan"
+  },
+
+  reception: {
+    titleHtml: "Grand Hotel Yerevan",
+    date: "SAT, JUN 14, 2025",
+    time: "19:00",
+    location: "Yerevan, Armenia",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Grand+Hotel+Yerevan"
+  },
+
+  images: {
+    hero:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=90",
+
+    story:
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=90",
+
+    ceremony:
+      "https://images.unsplash.com/photo-1548625361-1f2a9a7e1d6b?auto=format&fit=crop&w=2200&q=90",
+
+    reception:
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2200&q=90"
+  },
+
+  // Create a Formspree form and replace YOUR_FORM_ID.
+  formspreeEndpoint: "https://formspree.io/f/YOUR_FORM_ID"
+};
+
+/* =========================================================
+   ALL TRANSLATABLE WEBSITE TEXT
+   ========================================================= */
 
 const translations = {
   en: {
-    nav: { story: "Our Story", ceremony: "Ceremony", reception: "Reception", rsvp: "RSVP" },
+    nav: {
+      story: "Our Story",
+      ceremony: "The Ceremony",
+      reception: "The Reception",
+      rsvp: "RSVP"
+    },
+
     hero: {
-      eyebrow: "TOGETHER WITH THEIR FAMILIES",
-      subtitle: "invite you to celebrate their wedding",
-      cta: "Begin Our Journey",
+      kicker: "TOGETHER WITH THEIR FAMILIES",
+      invite: "INVITE YOU TO CELEBRATE THEIR WEDDING",
+      day: "SAT",
+      noteLine1: "Two hearts.",
+      noteLine2: "One journey.",
       scroll: "SCROLL"
     },
-    common: {
-      yerevanArmenia: "YEREVAN, ARMENIA",
-      yerevanArmeniaTitle: "Yerevan, Armenia",
-      dateTime: "DATE & TIME",
-      location: "LOCATION",
-      viewMap: "View on Map ↗"
-    },
+
     story: {
       eyebrow: "OUR STORY",
-      title: "Two hearts,<br><em>one journey.</em>",
-      p1: "Some stories begin with a grand moment. Ours began simply — with a smile, a conversation, and two people who kept choosing each other.",
-      p2: "Now we are beginning our favorite chapter, and we would love to have you beside us.",
-      note: "our favorite<br>chapter ♡"
+      title: "How It All<br>Began",
+      text:
+        "From a chance meeting to a lifetime together, our story is one of love, laughter and endless adventures. We can’t wait to continue it with you by our side.",
+      button: "Our Story",
+      note1: "Same",
+      note2: "love,",
+      note3: "new",
+      note4: "chapter."
     },
+
     ceremony: {
-      eyebrow: "THE CEREMONY",
-      title: "Saint Gregory<br><em>The Illuminator Church</em>",
-      datetime: "Saturday, June 14, 2025 · 16:00",
-      arrives: "THE COUPLE ARRIVES"
+      kicker: "THE CEREMONY",
+      progressTitle: "SCROLL TO<br>SEE THE JOURNEY",
+      progressChurch: "Church",
+      progressReception: "Reception"
     },
-    transition: { quote: "And so the adventure continues…" },
+
     reception: {
-      eyebrow: "THE RECEPTION",
-      title: "Grand Hotel<br><em>Yerevan</em>",
-      datetime: "Saturday, June 14, 2025 · 19:00",
-      dance: "LET'S DANCE"
+      kicker: "THE RECEPTION"
     },
-    schedule: {
-      eyebrow: "THE EVENING",
-      title: "A day to remember",
-      subtitle: "From the first blessing to the last dance.",
-      ceremony: "Holy Ceremony",
-      churchDesc: "Saint Gregory the Illuminator Church",
-      drinks: "Welcome Drinks",
-      drinksDesc: "A little toast before dinner",
-      dinner: "Dinner & Dancing",
-      hotelDesc: "Grand Hotel Yerevan",
-      lastDance: "One Last Dance",
-      lastDanceDesc: "Until the night becomes a memory"
+
+    common: {
+      map: "View on Map"
     },
-    gallery: { eyebrow: "A FEW MEMORIES", title: "Love, captured." },
+
     rsvp: {
-      eyebrow: "KINDLY RESPOND",
-      title: "Will you join us?",
-      intro: "Please tell us who you are coming with so we can prepare a place for everyone we love.",
+      title: "RSVP",
+      subtitle: "Please let us know if you will be joining us",
       sideLabel: "From which part are you coming?",
-      familyName: "Family name",
+      selectPart: "Select part",
+      brideSide: "Bride's side",
+      groomSide: "Groom's side",
+      friends: "Friends",
+      other: "Other",
+      familyName: "Family Name",
+      familyNamePlaceholder: "Enter family name",
       surname: "Surname",
-      guests: "Number of guests",
-      messageLabel: "Anything we should know?",
-      optional: "(optional)",
-      submit: "Confirm attendance",
-      familyNamePlaceholder: "Family name",
-      surnamePlaceholder: "Surname",
-      messagePlaceholder: "Dietary notes, wishes, etc.",
-      options: {
-        select: "Select family side",
-        bride: "Bride's family",
-        groom: "Groom's family",
-        friends: "Friends",
-        other: "Other"
-      },
-      sending: "Sending…",
-      notConfigured: translations[currentLanguage].rsvp.notConfigured,
-      genericError: translations[currentLanguage].rsvp.genericError,
-      success: "Thank you, {surname}! Your RSVP for {count} {guestWord} was sent successfully.",
-      guestSingular: "guest",
-      guestPlural: "guests"
+      surnamePlaceholder: "Enter surname",
+      count: "Count",
+      confirm: "Confirm",
+      note1: "We can't wait",
+      note2: "to celebrate with you!",
+      sending: "Sending...",
+      formNotConfigured:
+        "Formspree is not configured yet. Replace YOUR_FORM_ID in script.js.",
+      error: "We couldn't send your RSVP. Please try again.",
+      success:
+        "Thank you, {surname}! Your RSVP for {count} {guestWord} was sent successfully.",
+      guest: "guest",
+      guests: "guests"
     },
-    footer: {
-      withLove: "With love, Anna & David",
-      date: "14 · 06 · 2025 · Yerevan, Armenia"
-    },
+
     emailSubject: "New Wedding RSVP"
   },
 
   hy: {
-    nav: { story: "Մեր պատմությունը", ceremony: "Պսակադրություն", reception: "Հանդիսություն", rsvp: "Մասնակցություն" },
+    nav: {
+      story: "Մեր պատմությունը",
+      ceremony: "Պսակադրություն",
+      reception: "Հանդիսություն",
+      rsvp: "Մասնակցություն"
+    },
+
     hero: {
-      eyebrow: "ՄԵՐ ԸՆՏԱՆԻՔՆԵՐԻ ՀԵՏ ՄԻԱՍԻՆ",
-      subtitle: "սիրով հրավիրում ենք ձեզ կիսելու մեր հարսանիքի ուրախությունը",
-      cta: "Սկսել մեր ճանապարհը",
+      kicker: "ՄԵՐ ԸՆՏԱՆԻՔՆԵՐԻ ՀԵՏ ՄԻԱՍԻՆ",
+      invite: "ՍԻՐՈՎ ՀՐԱՎԻՐՈՒՄ ԵՆՔ ՁԵԶ ՄԵՐ ՀԱՐՍԱՆԻՔԻՆ",
+      day: "ՇԲԹ",
+      noteLine1: "Երկու սիրտ։",
+      noteLine2: "Մեկ ճանապարհ։",
       scroll: "ՈԼՈՐԵԼ"
     },
-    common: {
-      yerevanArmenia: "ԵՐԵՎԱՆ, ՀԱՅԱՍՏԱՆ",
-      yerevanArmeniaTitle: "Երևան, Հայաստան",
-      dateTime: "ԱՄՍԱԹԻՎ ԵՎ ԺԱՄ",
-      location: "ՎԱՅՐ",
-      viewMap: "Դիտել քարտեզի վրա ↗"
-    },
+
     story: {
       eyebrow: "ՄԵՐ ՊԱՏՄՈՒԹՅՈՒՆԸ",
-      title: "Երկու սիրտ,<br><em>մեկ ճանապարհ։</em>",
-      p1: "Որոշ պատմություններ սկսվում են մեծ իրադարձությամբ։ Մերը սկսվեց պարզապես՝ ժպիտով, զրույցով և երկու մարդկանցով, ովքեր շարունակեցին ընտրել միմյանց։",
-      p2: "Այժմ սկսում ենք մեր ամենասիրելի գլուխը և շատ կուզենք, որ դուք լինեք մեր կողքին։",
-      note: "մեր սիրելի<br>գլուխը ♡"
+      title: "Ինչպես ամեն ինչ<br>սկսվեց",
+      text:
+        "Պատահական հանդիպումից մինչև միասին անցկացվող մի ամբողջ կյանք՝ մեր պատմությունը սիրո, ծիծաղի և անվերջ արկածների մասին է։ Մենք անհամբեր սպասում ենք այն շարունակել ձեզ հետ միասին։",
+      button: "Մեր պատմությունը",
+      note1: "Նույն",
+      note2: "սերը,",
+      note3: "նոր",
+      note4: "գլուխը։"
     },
+
     ceremony: {
-      eyebrow: "ՊՍԱԿԱԴՐՈՒԹՅՈՒՆ",
-      title: "Սուրբ Գրիգոր<br><em>Լուսավորիչ եկեղեցի</em>",
-      datetime: "Շաբաթ, 14 հունիսի, 2025 · 16:00",
-      arrives: "ԶՈՒՅԳԸ ԺԱՄԱՆՈՒՄ Է"
+      kicker: "ՊՍԱԿԱԴՐՈՒԹՅՈՒՆ",
+      progressTitle: "ՈԼՈՐԵՔ՝<br>ՃԱՆԱՊԱՐՀԸ ՏԵՍՆԵԼՈՒ ՀԱՄԱՐ",
+      progressChurch: "Եկեղեցի",
+      progressReception: "Հանդիսություն"
     },
-    transition: { quote: "Եվ այսպես շարունակվում է մեր արկածը…" },
+
     reception: {
-      eyebrow: "ՀԱՆԴԻՍՈՒԹՅՈՒՆ",
-      title: "Grand Hotel<br><em>Yerevan</em>",
-      datetime: "Շաբաթ, 14 հունիսի, 2025 · 19:00",
-      dance: "ՊԱՐԵՆՔ"
+      kicker: "ՀԱՆԴԻՍՈՒԹՅՈՒՆ"
     },
-    schedule: {
-      eyebrow: "ԵՐԵԿՈՆ",
-      title: "Օր, որը կհիշենք",
-      subtitle: "Առաջին օրհնությունից մինչև վերջին պարը։",
-      ceremony: "Պսակադրություն",
-      churchDesc: "Սուրբ Գրիգոր Լուսավորիչ եկեղեցի",
-      drinks: "Ողջույնի խմիչքներ",
-      drinksDesc: "Մի փոքր կենաց՝ ընթրիքից առաջ",
-      dinner: "Ընթրիք և պար",
-      hotelDesc: "Grand Hotel Yerevan",
-      lastDance: "Վերջին պարը",
-      lastDanceDesc: "Մինչև գիշերը դառնա հիշողություն"
+
+    common: {
+      map: "Դիտել քարտեզում"
     },
-    gallery: { eyebrow: "ՄԻ ՔԱՆԻ ՀԻՇՈՂՈՒԹՅՈՒՆ", title: "Սերը՝ պահված կադրում։" },
+
     rsvp: {
-      eyebrow: "ԽՆԴՐՈՒՄ ԵՆՔ ՊԱՏԱՍԽԱՆԵԼ",
-      title: "Կմիանա՞ք մեզ",
-      intro: "Խնդրում ենք նշել, թե ում կողմից եք գալիս, որպեսզի կարողանանք տեղ պատրաստել բոլոր սիրելի հյուրերի համար։",
+      title: "ՄԱՍՆԱԿՑՈՒԹՅՈՒՆ",
+      subtitle: "Խնդրում ենք տեղեկացնել՝ կմիանա՞ք մեզ",
       sideLabel: "Ո՞ւմ կողմից եք գալիս",
+      selectPart: "Ընտրեք կողմը",
+      brideSide: "Հարսի կողմից",
+      groomSide: "Փեսայի կողմից",
+      friends: "Ընկերներ",
+      other: "Այլ",
       familyName: "Ընտանիքի անուն",
+      familyNamePlaceholder: "Մուտքագրեք ընտանիքի անունը",
       surname: "Ազգանուն",
-      guests: "Հյուրերի քանակ",
-      messageLabel: "Կա՞ որևէ բան, որ պետք է իմանանք",
-      optional: "(ըստ ցանկության)",
-      submit: "Հաստատել մասնակցությունը",
-      familyNamePlaceholder: "Ընտանիքի անուն",
-      surnamePlaceholder: "Ազգանուն",
-      messagePlaceholder: "Սննդային նախընտրություններ, մաղթանքներ և այլն",
-      options: {
-        select: "Ընտրեք կողմը",
-        bride: "Հարսի կողմից",
-        groom: "Փեսայի կողմից",
-        friends: "Ընկերներ",
-        other: "Այլ"
-      },
-      sending: "Ուղարկվում է…",
-      notConfigured: "Formspree-ը դեռ կարգավորված չէ։ index.html-ում փոխարինեք YOUR_FORM_ID-ը։",
-      genericError: "Չհաջողվեց ուղարկել պատասխանը։ Խնդրում ենք կրկին փորձել։",
-      success: "Շնորհակալություն, {surname}։ Ձեր պատասխանը {count} {guestWord}-ի համար հաջողությամբ ուղարկվեց։",
-      guestSingular: "հյուր",
-      guestPlural: "հյուր"
+      surnamePlaceholder: "Մուտքագրեք ազգանունը",
+      count: "Քանակ",
+      confirm: "Հաստատել",
+      note1: "Անհամբեր սպասում ենք",
+      note2: "ձեզ հետ տոնելուն։",
+      sending: "Ուղարկվում է...",
+      formNotConfigured:
+        "Formspree-ը դեռ կարգավորված չէ։ script.js-ում փոխարինեք YOUR_FORM_ID-ը։",
+      error: "Չհաջողվեց ուղարկել պատասխանը։ Խնդրում ենք կրկին փորձել։",
+      success:
+        "Շնորհակալություն, {surname}։ Ձեր պատասխանը {count} {guestWord}-ի համար հաջողությամբ ուղարկվեց։",
+      guest: "հյուր",
+      guests: "հյուր"
     },
-    footer: {
-      withLove: "Սիրով՝ Anna & David",
-      date: "14 · 06 · 2025 · Երևան, Հայաստան"
-    },
+
     emailSubject: "Նոր հարսանեկան RSVP"
   },
 
   ru: {
-    nav: { story: "Наша история", ceremony: "Церемония", reception: "Банкет", rsvp: "Ответ" },
+    nav: {
+      story: "Наша история",
+      ceremony: "Церемония",
+      reception: "Банкет",
+      rsvp: "Ответ"
+    },
+
     hero: {
-      eyebrow: "ВМЕСТЕ С НАШИМИ СЕМЬЯМИ",
-      subtitle: "приглашаем вас разделить радость нашей свадьбы",
-      cta: "Начать наше путешествие",
+      kicker: "ВМЕСТЕ С НАШИМИ СЕМЬЯМИ",
+      invite: "ПРИГЛАШАЕМ ВАС РАЗДЕЛИТЬ РАДОСТЬ НАШЕЙ СВАДЬБЫ",
+      day: "СБ",
+      noteLine1: "Два сердца.",
+      noteLine2: "Один путь.",
       scroll: "ЛИСТАЙТЕ"
     },
-    common: {
-      yerevanArmenia: "ЕРЕВАН, АРМЕНИЯ",
-      yerevanArmeniaTitle: "Ереван, Армения",
-      dateTime: "ДАТА И ВРЕМЯ",
-      location: "МЕСТО",
-      viewMap: "Открыть карту ↗"
-    },
+
     story: {
       eyebrow: "НАША ИСТОРИЯ",
-      title: "Два сердца,<br><em>один путь.</em>",
-      p1: "Некоторые истории начинаются с большого события. Наша началась просто — с улыбки, разговора и двух людей, которые снова и снова выбирали друг друга.",
-      p2: "Теперь мы начинаем нашу любимую главу и будем счастливы видеть вас рядом.",
-      note: "наша любимая<br>глава ♡"
+      title: "Как всё<br>началось",
+      text:
+        "От случайной встречи до целой жизни вместе — наша история наполнена любовью, смехом и бесконечными приключениями. Мы будем счастливы продолжить её рядом с вами.",
+      button: "Наша история",
+      note1: "Та же",
+      note2: "любовь,",
+      note3: "новая",
+      note4: "глава."
     },
+
     ceremony: {
-      eyebrow: "ЦЕРЕМОНИЯ",
-      title: "Собор Святого Григория<br><em>Просветителя</em>",
-      datetime: "Суббота, 14 июня 2025 · 16:00",
-      arrives: "ПАРА ПРИБЫВАЕТ"
+      kicker: "ЦЕРЕМОНИЯ",
+      progressTitle: "ЛИСТАЙТЕ,<br>ЧТОБЫ УВИДЕТЬ ПУТЬ",
+      progressChurch: "Церковь",
+      progressReception: "Банкет"
     },
-    transition: { quote: "И наше приключение продолжается…" },
+
     reception: {
-      eyebrow: "БАНКЕТ",
-      title: "Grand Hotel<br><em>Yerevan</em>",
-      datetime: "Суббота, 14 июня 2025 · 19:00",
-      dance: "ТАНЦУЕМ"
+      kicker: "БАНКЕТ"
     },
-    schedule: {
-      eyebrow: "ВЕЧЕР",
-      title: "День, который запомнится",
-      subtitle: "От первого благословения до последнего танца.",
-      ceremony: "Венчание",
-      churchDesc: "Собор Святого Григория Просветителя",
-      drinks: "Приветственные напитки",
-      drinksDesc: "Небольшой тост перед ужином",
-      dinner: "Ужин и танцы",
-      hotelDesc: "Grand Hotel Yerevan",
-      lastDance: "Последний танец",
-      lastDanceDesc: "Пока ночь не станет воспоминанием"
+
+    common: {
+      map: "Открыть карту"
     },
-    gallery: { eyebrow: "НЕСКОЛЬКО ВОСПОМИНАНИЙ", title: "Любовь в кадре." },
+
     rsvp: {
-      eyebrow: "ПРОСИМ ОТВЕТИТЬ",
-      title: "Вы будете с нами?",
-      intro: "Пожалуйста, укажите, с чьей стороны вы приглашены, чтобы мы могли подготовить место для каждого дорогого гостя.",
+      title: "ОТВЕТ",
+      subtitle: "Пожалуйста, сообщите нам, будете ли вы с нами",
       sideLabel: "С чьей стороны вы приходите?",
+      selectPart: "Выберите сторону",
+      brideSide: "Со стороны невесты",
+      groomSide: "Со стороны жениха",
+      friends: "Друзья",
+      other: "Другое",
       familyName: "Имя семьи",
+      familyNamePlaceholder: "Введите имя семьи",
       surname: "Фамилия",
-      guests: "Количество гостей",
-      messageLabel: "Есть ли что-то, что нам нужно знать?",
-      optional: "(необязательно)",
-      submit: "Подтвердить участие",
-      familyNamePlaceholder: "Имя семьи",
-      surnamePlaceholder: "Фамилия",
-      messagePlaceholder: "Пожелания, питание и т. д.",
-      options: {
-        select: "Выберите сторону",
-        bride: "Со стороны невесты",
-        groom: "Со стороны жениха",
-        friends: "Друзья",
-        other: "Другое"
-      },
-      sending: "Отправка…",
-      notConfigured: "Formspree еще не настроен. Замените YOUR_FORM_ID в index.html.",
-      genericError: "Не удалось отправить ответ. Попробуйте еще раз.",
-      success: "Спасибо, {surname}! Ваш ответ на {count} {guestWord} успешно отправлен.",
-      guestSingular: "гостя",
-      guestPlural: "гостей"
+      surnamePlaceholder: "Введите фамилию",
+      count: "Количество",
+      confirm: "Подтвердить",
+      note1: "Не можем дождаться,",
+      note2: "чтобы отпраздновать с вами!",
+      sending: "Отправка...",
+      formNotConfigured:
+        "Formspree еще не настроен. Замените YOUR_FORM_ID в script.js.",
+      error: "Не удалось отправить ответ. Пожалуйста, попробуйте еще раз.",
+      success:
+        "Спасибо, {surname}! Ваш ответ для {count} {guestWord} успешно отправлен.",
+      guest: "гостя",
+      guests: "гостей"
     },
-    footer: {
-      withLove: "С любовью, Anna & David",
-      date: "14 · 06 · 2025 · Ереван, Армения"
-    },
+
     emailSubject: "Новый свадебный RSVP"
   }
 };
 
-let currentLanguage = localStorage.getItem("weddingLanguage") || "en";
+/* =========================================================
+   CONFIG BINDING
+   ========================================================= */
 
-function getTranslation(path) {
-  return path.split(".").reduce((obj, key) => obj?.[key], translations[currentLanguage]);
+function applyGeneralConfig() {
+  const config = weddingConfig;
+
+  document.title = `${config.couple.brideName} & ${config.couple.groomName} — Wedding Invitation`;
+
+  document.getElementById("logoInitialOne").textContent =
+    config.couple.brideInitial;
+
+  document.getElementById("logoInitialTwo").textContent =
+    config.couple.groomInitial;
+
+  document.getElementById("heroBrideName").textContent =
+    config.couple.brideName;
+
+  document.getElementById("heroGroomName").textContent =
+    config.couple.groomName;
+
+  document.getElementById("heroDateNumber").textContent =
+    config.wedding.dayNumber;
+
+  document.getElementById("heroMonthYear").textContent =
+    config.wedding.monthYear;
+
+  document.getElementById("heroLocation").textContent =
+    config.wedding.city;
+
+  document.getElementById("ceremonyTitle").innerHTML =
+    config.ceremony.titleHtml;
+
+  document.getElementById("ceremonyDate").textContent =
+    config.ceremony.date;
+
+  document.getElementById("ceremonyTime").textContent =
+    config.ceremony.time;
+
+  document.getElementById("ceremonyLocation").textContent =
+    config.ceremony.location;
+
+  document.getElementById("ceremonyMap").href =
+    config.ceremony.mapUrl;
+
+  document.getElementById("receptionTitle").innerHTML =
+    config.reception.titleHtml;
+
+  document.getElementById("receptionDate").textContent =
+    config.reception.date;
+
+  document.getElementById("receptionTime").textContent =
+    config.reception.time;
+
+  document.getElementById("receptionLocation").textContent =
+    config.reception.location;
+
+  document.getElementById("receptionMap").href =
+    config.reception.mapUrl;
+
+  document.getElementById("heroBackground").style.backgroundImage =
+    `url("${config.images.hero}")`;
+
+  document.getElementById("storyImage").src =
+    config.images.story;
+
+  document.getElementById("ceremonyBackground").style.backgroundImage =
+    `url("${config.images.ceremony}")`;
+
+  document.getElementById("receptionBackground").style.backgroundImage =
+    `url("${config.images.reception}")`;
+
+  document.getElementById("rsvpForm").action =
+    config.formspreeEndpoint;
+}
+
+/* =========================================================
+   TRANSLATIONS
+   ========================================================= */
+
+let currentLanguage =
+  localStorage.getItem("wedding-language") || "en";
+
+function translationValue(path) {
+  return path
+    .split(".")
+    .reduce(
+      (current, key) => current?.[key],
+      translations[currentLanguage]
+    );
 }
 
 function applyTranslations() {
   document.documentElement.lang = currentLanguage;
 
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const value = getTranslation(el.dataset.i18n);
-    if (value !== undefined) el.textContent = value;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = translationValue(element.dataset.i18n);
+
+    if (value !== undefined) {
+      element.textContent = value;
+    }
   });
 
-  document.querySelectorAll("[data-i18n-html]").forEach(el => {
-    const value = getTranslation(el.dataset.i18nHtml);
-    if (value !== undefined) el.innerHTML = value;
-  });
+  document
+    .querySelectorAll("[data-i18n-html]")
+    .forEach((element) => {
+      const value = translationValue(element.dataset.i18nHtml);
 
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const value = getTranslation(el.dataset.i18nPlaceholder);
-    if (value !== undefined) el.placeholder = value;
-  });
+      if (value !== undefined) {
+        element.innerHTML = value;
+      }
+    });
 
-  const subjectInput = document.getElementById("emailSubject");
-  if (subjectInput) subjectInput.value = translations[currentLanguage].emailSubject;
+  document
+    .querySelectorAll("[data-i18n-placeholder]")
+    .forEach((element) => {
+      const value =
+        translationValue(
+          element.dataset.i18nPlaceholder
+        );
 
-  document.querySelectorAll(".lang-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
-  });
+      if (value !== undefined) {
+        element.placeholder = value;
+      }
+    });
+
+  document.getElementById("languageCurrent").textContent =
+    currentLanguage.toUpperCase();
+
+  document.getElementById("emailSubject").value =
+    translations[currentLanguage].emailSubject;
 }
 
-document.querySelectorAll(".lang-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    currentLanguage = btn.dataset.lang;
-    localStorage.setItem("weddingLanguage", currentLanguage);
-    applyTranslations();
-  });
+/* =========================================================
+   HEADER / MENUS
+   ========================================================= */
+
+const siteHeader =
+  document.getElementById("siteHeader");
+
+const language =
+  document.querySelector(".language");
+
+const languageCurrent =
+  document.getElementById("languageCurrent");
+
+const mobileMenuButton =
+  document.getElementById("mobileMenuButton");
+
+const mobileMenu =
+  document.getElementById("mobileMenu");
+
+window.addEventListener(
+  "scroll",
+  () => {
+    siteHeader.classList.toggle(
+      "scrolled",
+      window.scrollY > 40
+    );
+  },
+  { passive: true }
+);
+
+languageCurrent.addEventListener("click", () => {
+  language.classList.toggle("open");
 });
 
-applyTranslations();
+document
+  .querySelectorAll("[data-lang]")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      currentLanguage =
+        button.dataset.lang;
 
-const header = document.querySelector(".site-header");
-const menuToggle = document.querySelector(".menu-toggle");
-const cursorGlow = document.querySelector(".cursor-glow");
+      localStorage.setItem(
+        "wedding-language",
+        currentLanguage
+      );
 
-menuToggle?.addEventListener("click", () => {
-  const open = header.classList.toggle("nav-open");
-  menuToggle.setAttribute("aria-expanded", String(open));
+      applyTranslations();
+      language.classList.remove("open");
+    });
+  });
+
+mobileMenuButton.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
 });
 
-document.querySelectorAll(".site-header nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    header.classList.remove("nav-open");
-    menuToggle?.setAttribute("aria-expanded", "false");
+document
+  .querySelectorAll(".mobile-menu a")
+  .forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+    });
   });
+
+document.addEventListener("click", (event) => {
+  if (!language.contains(event.target)) {
+    language.classList.remove("open");
+  }
 });
 
-window.addEventListener("scroll", () => {
-  header.classList.toggle("scrolled", window.scrollY > 60);
-}, { passive: true });
+/* =========================================================
+   REVEAL ANIMATION
+   ========================================================= */
 
-/* Reveal sections */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
+const revealObserver =
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    {
+      threshold: 0.16
+    }
+  );
+
+document
+  .querySelectorAll(".reveal")
+  .forEach((element) => {
+    revealObserver.observe(element);
   });
-}, { threshold: 0.12 });
 
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+/* =========================================================
+   CEREMONY SCROLL ANIMATION
+   Couple comes closer and enters the church.
+   ========================================================= */
 
-/* Subtle desktop cursor glow */
-if (window.matchMedia("(pointer:fine)").matches) {
-  window.addEventListener("pointermove", e => {
-    cursorGlow.style.opacity = "1";
-    cursorGlow.style.left = `${e.clientX}px`;
-    cursorGlow.style.top = `${e.clientY}px`;
-  });
+const ceremonySection =
+  document.getElementById("ceremony");
+
+const walkingCouple =
+  document.getElementById("walkingCouple");
+
+function sectionProgress(section) {
+  const rect =
+    section.getBoundingClientRect();
+
+  const viewportHeight =
+    window.innerHeight;
+
+  return Math.min(
+    1,
+    Math.max(
+      0,
+      (viewportHeight - rect.top) /
+        (viewportHeight + rect.height)
+    )
+  );
 }
 
-/*
-  CEREMONY STORY:
-  0%   -> couple are separated
-  35%  -> they move toward one another
-  65%  -> they walk toward the church
-  100% -> they disappear through the door
-*/
-const ceremony = document.querySelector(".journey-ceremony");
-const ceremonyCouple = document.querySelector(".ceremony-couple");
-const bride = document.querySelector(".ceremony-couple .bride");
-const groom = document.querySelector(".ceremony-couple .groom");
-const churchDoor = document.querySelector(".church-door");
-const ceremonyImage = document.querySelector(".ceremony-image");
+function animateCeremony() {
+  const progress =
+    sectionProgress(ceremonySection);
 
-function clamp(n, min = 0, max = 1) {
-  return Math.min(max, Math.max(min, n));
+  const entrance =
+    Math.min(
+      1,
+      Math.max(
+        0,
+        (progress - .18) / .68
+      )
+    );
+
+  const scale =
+    1 - entrance * .48;
+
+  const translateY =
+    entrance * 112;
+
+  walkingCouple.style.transform =
+    `translateX(-50%) translateY(${translateY}px) scale(${scale})`;
+
+  walkingCouple.style.opacity =
+    String(
+      1 - Math.max(0, entrance - .75) * 3.7
+    );
 }
 
-function progressFor(section) {
-  const rect = section.getBoundingClientRect();
-  const scrollable = section.offsetHeight - window.innerHeight;
-  return clamp(-rect.top / scrollable);
-}
+/* =========================================================
+   RECEPTION DANCE ANIMATION
+   Couple gently dances based on scroll position.
+   ========================================================= */
 
-function updateCeremony() {
-  if (!ceremony) return;
-  const p = progressFor(ceremony);
+const receptionSection =
+  document.getElementById("reception");
 
-  // Background slowly moves as the visitor progresses.
-  ceremonyImage.style.transform = `scale(${1.1 - p * .07})`;
+const danceCouple =
+  document.getElementById("danceCouple");
 
-  // Couple begins apart, comes together, then walks into the church.
-  const approach = clamp(p / .45);
-  const enter = clamp((p - .45) / .55);
+function animateReception() {
+  const progress =
+    sectionProgress(receptionSection);
 
-  bride.style.left = `${20 + approach * 72 - enter * 42}px`;
-  groom.style.left = `${165 - approach * 72 - enter * 42}px`;
+  const angle =
+    Math.sin(progress * Math.PI * 6) * 4;
 
-  ceremonyCouple.style.transform =
-    `translateX(calc(-50% + ${enter * 25}px)) translateY(${enter * 75}px) scale(${1 - enter * .23})`;
+  const moveX =
+    Math.sin(progress * Math.PI * 3) * 8;
 
-  churchDoor.style.opacity = String(.2 + enter * .8);
-}
-
-/*
-  RECEPTION STORY:
-  0%   -> couple arrives
-  30%  -> moves together
-  50%+ -> dancing begins
-*/
-const reception = document.querySelector(".journey-reception");
-const danceCouple = document.querySelector(".dance-couple");
-const receptionImage = document.querySelector(".reception-image");
-
-function updateReception() {
-  if (!reception) return;
-  const p = progressFor(reception);
-
-  receptionImage.style.transform = `scale(${1.1 - p * .08})`;
-
-  const arrive = clamp(p / .35);
-  const dance = clamp((p - .28) / .72);
+  const moveY =
+    Math.abs(
+      Math.sin(progress * Math.PI * 5)
+    ) * -4;
 
   danceCouple.style.transform =
-    `translateX(calc(-50% + ${(1 - arrive) * 150}px)) rotate(${Math.sin(dance * Math.PI * 6) * 3}deg) scale(${.9 + dance * .1})`;
-
-  // A little alternating dance movement.
-  const sway = Math.sin(dance * Math.PI * 8);
-  document.querySelector(".dance-bride").style.transform =
-    `rotate(${sway * 7}deg) translateY(${Math.abs(sway) * -4}px)`;
-  document.querySelector(".dance-groom").style.transform =
-    `rotate(${-sway * 5}deg) translateY(${Math.abs(sway) * -3}px)`;
+    `translateX(calc(-50% + ${moveX}px)) translateY(${moveY}px) rotate(${angle}deg)`;
 }
 
-let ticking = false;
-function onScroll() {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      updateCeremony();
-      updateReception();
-      ticking = false;
-    });
-    ticking = true;
+let scrollTicking = false;
+
+function handleScrollAnimations() {
+  if (scrollTicking) {
+    return;
   }
-}
-window.addEventListener("scroll", onScroll, { passive: true });
-window.addEventListener("resize", onScroll);
-onScroll();
 
-/* RSVP guest counter */
-const countOutput = document.getElementById("guestCount");
-const countInput = document.getElementById("guestCountInput");
+  scrollTicking = true;
+
+  requestAnimationFrame(() => {
+    animateCeremony();
+    animateReception();
+
+    scrollTicking = false;
+  });
+}
+
+window.addEventListener(
+  "scroll",
+  handleScrollAnimations,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  handleScrollAnimations
+);
+
+/* =========================================================
+   RSVP COUNTER
+   ========================================================= */
+
 let guestCount = 1;
 
-function syncGuestCount() {
-  countOutput.textContent = String(guestCount);
-  countInput.value = String(guestCount);
+const guestCountOutput =
+  document.getElementById("guestCount");
+
+const guestCountInput =
+  document.getElementById("guestCountInput");
+
+function updateGuestCount() {
+  guestCountOutput.textContent =
+    String(guestCount);
+
+  guestCountInput.value =
+    String(guestCount);
 }
 
-document.querySelectorAll(".counter button").forEach(button => {
-  button.addEventListener("click", () => {
-    if (button.dataset.action === "plus") {
-      guestCount = Math.min(20, guestCount + 1);
-    }
+document
+  .getElementById("guestMinus")
+  .addEventListener("click", () => {
+    guestCount =
+      Math.max(1, guestCount - 1);
 
-    if (button.dataset.action === "minus") {
-      guestCount = Math.max(1, guestCount - 1);
-    }
-
-    syncGuestCount();
+    updateGuestCount();
   });
-});
 
-/*
-  REAL RSVP EMAIL SUBMISSION WITH FORMSPREE
+document
+  .getElementById("guestPlus")
+  .addEventListener("click", () => {
+    guestCount =
+      Math.min(20, guestCount + 1);
 
-  1. Create a Formspree account.
-  2. Create a new form.
-  3. Copy the endpoint, for example:
-     https://formspree.io/f/abcdwxyz
-  4. Replace YOUR_FORM_ID in index.html with your actual form ID.
+    updateGuestCount();
+  });
 
-  Formspree sends the submission to the email address configured
-  for your Formspree form.
-*/
-const rsvpForm = document.getElementById("rsvpForm");
-const formStatus = document.getElementById("formStatus");
-const submitButton = rsvpForm?.querySelector('button[type="submit"]');
+/* =========================================================
+   FORMSPREE RSVP
+   ========================================================= */
 
-rsvpForm?.addEventListener("submit", async event => {
-  event.preventDefault();
+const rsvpForm =
+  document.getElementById("rsvpForm");
 
-  if (!rsvpForm.checkValidity()) {
-    rsvpForm.reportValidity();
-    return;
-  }
+const rsvpSubmit =
+  document.getElementById("rsvpSubmit");
 
-  const endpoint = rsvpForm.action;
+const rsvpStatus =
+  document.getElementById("rsvpStatus");
 
-  if (endpoint.includes("YOUR_FORM_ID")) {
-    formStatus.textContent =
-      translations[currentLanguage].rsvp.notConfigured;
-    return;
-  }
+rsvpForm.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
 
-  const originalButtonText = submitButton.innerHTML;
-
-  try {
-    submitButton.disabled = true;
-    submitButton.textContent = translations[currentLanguage].rsvp.sending;
-    formStatus.textContent = "";
-
-    syncGuestCount();
-
-    const formData = new FormData(rsvpForm);
-
-    const response = await fetch(endpoint, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      let message = translations[currentLanguage].rsvp.genericError;
-
-      try {
-        const result = await response.json();
-
-        if (result?.errors?.length) {
-          message = result.errors.map(error => error.message).join(" ");
-        }
-      } catch (_) {
-        // Keep the generic message if Formspree returns a non-JSON error.
-      }
-
-      throw new Error(message);
+    if (!rsvpForm.checkValidity()) {
+      rsvpForm.reportValidity();
+      return;
     }
 
-    const submittedSurname =
-      document.getElementById("surname").value.trim();
+    if (
+      weddingConfig.formspreeEndpoint.includes(
+        "YOUR_FORM_ID"
+      )
+    ) {
+      rsvpStatus.textContent =
+        translations[
+          currentLanguage
+        ].rsvp.formNotConfigured;
 
-    const guestWord =
-      guestCount === 1
-        ? translations[currentLanguage].rsvp.guestSingular
-        : translations[currentLanguage].rsvp.guestPlural;
+      return;
+    }
 
-    formStatus.textContent = translations[currentLanguage].rsvp.success
-      .replace("{surname}", submittedSurname || "")
-      .replace("{count}", String(guestCount))
-      .replace("{guestWord}", guestWord);
+    const originalButton =
+      rsvpSubmit.innerHTML;
 
-    rsvpForm.reset();
-    guestCount = 1;
-    syncGuestCount();
-  } catch (error) {
-    console.error("RSVP submission failed:", error);
-    formStatus.textContent =
-      error.message || translations[currentLanguage].rsvp.genericError;
-  } finally {
-    submitButton.disabled = false;
-    submitButton.innerHTML = originalButtonText;
+    const surname =
+      document
+        .getElementById("surname")
+        .value
+        .trim();
+
+    try {
+      rsvpSubmit.disabled = true;
+
+      rsvpSubmit.textContent =
+        translations[
+          currentLanguage
+        ].rsvp.sending;
+
+      rsvpStatus.textContent = "";
+
+      updateGuestCount();
+
+      const response =
+        await fetch(
+          weddingConfig.formspreeEndpoint,
+          {
+            method: "POST",
+            body: new FormData(rsvpForm),
+            headers: {
+              Accept: "application/json"
+            }
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          translations[
+            currentLanguage
+          ].rsvp.error
+        );
+      }
+
+      const rsvpText =
+        translations[
+          currentLanguage
+        ].rsvp;
+
+      const guestWord =
+        guestCount === 1
+          ? rsvpText.guest
+          : rsvpText.guests;
+
+      rsvpStatus.textContent =
+        rsvpText.success
+          .replace(
+            "{surname}",
+            surname
+          )
+          .replace(
+            "{count}",
+            String(guestCount)
+          )
+          .replace(
+            "{guestWord}",
+            guestWord
+          );
+
+      rsvpForm.reset();
+
+      guestCount = 1;
+      updateGuestCount();
+    } catch (error) {
+      rsvpStatus.textContent =
+        error.message ||
+        translations[
+          currentLanguage
+        ].rsvp.error;
+    } finally {
+      rsvpSubmit.disabled = false;
+      rsvpSubmit.innerHTML =
+        originalButton;
+    }
   }
-});
+);
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+applyGeneralConfig();
+applyTranslations();
+updateGuestCount();
+handleScrollAnimations();
