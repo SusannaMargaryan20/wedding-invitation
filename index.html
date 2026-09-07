@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A cinematic wedding invitation for Anna & David." />
+  <title>Anna & David — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Anna and David home">
+      <span>A</span><i>&</i><span>D</span>
+    </a>
+    <nav>
+      <a href="#story" data-i18n="nav.story">Our Story</a>
+      <a href="#ceremony" data-i18n="nav.ceremony">Ceremony</a>
+      <a href="#reception" data-i18n="nav.reception">Reception</a>
+      <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+    </nav>
+    <div class="header-actions">
+      <div class="language-switcher" aria-label="Language switcher">
+        <button type="button" data-lang="en" class="lang-btn active">EN</button>
+        <button type="button" data-lang="hy" class="lang-btn">HY</button>
+        <button type="button" data-lang="ru" class="lang-btn">RU</button>
+      </div>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow" data-i18n="hero.eyebrow">TOGETHER WITH THEIR FAMILIES</p>
+        <h1>Anna <em>&</em> David</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">invite you to celebrate their wedding</p>
+        <div class="hero-date">
+          <span>SAT</span><b></b><span>14</span><b></b><span>JUN 2025</span>
+        </div>
+        <p class="location" data-i18n="common.yerevanArmenia">YEREVAN, ARMENIA</p>
+        <a class="gold-button" href="#ceremony" data-i18n="hero.cta">Begin Our Journey <span>↓</span></a>
+      </div>
+      <div class="scroll-hint" data-i18n="hero.scroll">SCROLL <span>↓</span></div>
+      <div class="botanical botanical-left">❧</div>
+      <div class="botanical botanical-right">❧</div>
+    </section>
+
+    <section class="story section-light" id="story">
+      <div class="container story-grid">
+        <div class="story-copy reveal">
+          <p class="eyebrow dark" data-i18n="story.eyebrow">OUR STORY</p>
+          <h2 data-i18n-html="story.title">Two hearts,<br><em>one journey.</em></h2>
+          <p data-i18n="story.p1">
+            Some stories begin with a grand moment. Ours began simply —
+            with a smile, a conversation, and two people who kept choosing
+            each other.
+          </p>
+          <p data-i18n="story.p2">
+            Now we are beginning our favorite chapter, and we would love
+            to have you beside us.
+          </p>
+          <div class="signature">Anna <span>&</span> David</div>
+        </div>
+        <div class="story-image reveal">
+          <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1100&q=85" alt="Bride and groom together">
+          </div>
+          <span class="photo-note" data-i18n-html="story.note">our favorite<br>chapter ♡</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll-driven ceremony scene -->
+    <section class="journey journey-ceremony" id="ceremony">
+      <div class="journey-sticky">
+        <div class="scene-image ceremony-image"></div>
+        <div class="scene-vignette"></div>
+
+        <div class="journey-copy">
+          <p class="eyebrow" data-i18n="ceremony.eyebrow">THE CEREMONY</p>
+          <h2 data-i18n-html="ceremony.title">Saint Gregory<br><em>The Illuminator Church</em></h2>
+          <div class="event-meta">
+            <div><span class="meta-icon">◷</span><div><small data-i18n="common.dateTime">DATE & TIME</small><strong data-i18n="ceremony.datetime">Saturday, June 14, 2025 · 16:00</strong></div></div>
+            <div><span class="meta-icon">⌖</span><div><small data-i18n="common.location">LOCATION</small><strong data-i18n="common.yerevanArmeniaTitle">Yerevan, Armenia</strong></div></div>
+          </div>
+          <a class="outline-button" href="https://www.google.com/maps/search/?api=1&query=Saint+Gregory+the+Illuminator+Cathedral+Yerevan" target="_blank" rel="noopener" data-i18n="common.viewMap">View on Map ↗</a>
+        </div>
+
+        <div class="couple-stage ceremony-couple" aria-hidden="true">
+          <div class="couple bride">
+            <div class="head"></div><div class="body"></div><div class="dress"></div><div class="arm"></div>
+          </div>
+          <div class="couple groom">
+            <div class="head"></div><div class="body"></div><div class="arm"></div><div class="leg leg-a"></div><div class="leg leg-b"></div>
+          </div>
+          <div class="church-door">♥</div>
+        </div>
+
+        <div class="journey-caption">
+          <span class="progress-dot active"></span>
+          <span data-i18n="ceremony.arrives">THE COUPLE ARRIVES</span>
+          <span class="progress-line"></span>
+          <span class="progress-dot"></span>
+          <span data-i18n="ceremony.eyebrow">THE CEREMONY</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="transition-quote">
+      <div class="container reveal">
+        <span class="quote-mark">“</span>
+        <p data-i18n="transition.quote">And so the adventure continues…</p>
+        <span class="quote-mark">”</span>
+      </div>
+    </section>
+
+    <!-- Scroll-driven reception scene -->
+    <section class="journey journey-reception" id="reception">
+      <div class="journey-sticky">
+        <div class="scene-image reception-image"></div>
+        <div class="scene-vignette"></div>
+
+        <div class="journey-copy">
+          <p class="eyebrow" data-i18n="reception.eyebrow">THE RECEPTION</p>
+          <h2 data-i18n-html="reception.title">Grand Hotel<br><em>Yerevan</em></h2>
+          <div class="event-meta">
+            <div><span class="meta-icon">◷</span><div><small data-i18n="common.dateTime">DATE & TIME</small><strong data-i18n="reception.datetime">Saturday, June 14, 2025 · 19:00</strong></div></div>
+            <div><span class="meta-icon">⌖</span><div><small data-i18n="common.location">LOCATION</small><strong>Yerevan, Armenia</strong></div></div>
+          </div>
+          <a class="outline-button" href="https://www.google.com/maps/search/?api=1&query=Grand+Hotel+Yerevan" target="_blank" rel="noopener" data-i18n="common.viewMap">View on Map ↗</a>
+        </div>
+
+        <div class="dance-stage" aria-hidden="true">
+          <div class="dance-couple">
+            <div class="dance-bride">
+              <span class="d-head"></span><span class="d-body"></span><span class="d-skirt"></span>
+              <span class="d-arm d-arm-1"></span><span class="d-arm d-arm-2"></span>
+            </div>
+            <div class="dance-groom">
+              <span class="d-head"></span><span class="d-body"></span>
+              <span class="d-leg d-leg-1"></span><span class="d-leg d-leg-2"></span>
+              <span class="d-arm d-arm-1"></span><span class="d-arm d-arm-2"></span>
+            </div>
+          </div>
+          <div class="floor-light"></div>
+        </div>
+
+        <div class="dance-label" data-i18n="reception.dance">LET'S DANCE</div>
+      </div>
+    </section>
+
+    <section class="schedule section-light">
+      <div class="container">
+        <div class="center-heading reveal">
+          <p class="eyebrow dark" data-i18n="schedule.eyebrow">THE EVENING</p>
+          <h2 data-i18n="schedule.title">A day to remember</h2>
+          <p data-i18n="schedule.subtitle">From the first blessing to the last dance.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <span class="time">16:00</span>
+            <div><span class="timeline-icon">✦</span><h3 data-i18n="schedule.ceremony">Holy Ceremony</h3><p data-i18n="schedule.churchDesc">Saint Gregory the Illuminator Church</p></div>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="time">18:30</span>
+            <div><span class="timeline-icon">♡</span><h3 data-i18n="schedule.drinks">Welcome Drinks</h3><p data-i18n="schedule.drinksDesc">A little toast before dinner</p></div>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="time">19:00</span>
+            <div><span class="timeline-icon">♩</span><h3 data-i18n="schedule.dinner">Dinner & Dancing</h3><p data-i18n="schedule.hotelDesc">Grand Hotel Yerevan</p></div>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="time">23:30</span>
+            <div><span class="timeline-icon">✧</span><h3 data-i18n="schedule.lastDance">One Last Dance</h3><p data-i18n="schedule.lastDanceDesc">Until the night becomes a memory</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery section-light">
+      <div class="container">
+        <div class="center-heading reveal">
+          <p class="eyebrow dark" data-i18n="gallery.eyebrow">A FEW MEMORIES</p>
+          <h2 data-i18n="gallery.title">Love, captured.</h2>
+        </div>
+        <div class="gallery-grid">
+          <img class="gallery-a reveal" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=80" alt="Wedding flowers">
+          <img class="gallery-b reveal" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="Wedding rings">
+          <img class="gallery-c reveal" src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=900&q=80" alt="Wedding table">
+          <img class="gallery-d reveal" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Wedding couple">
+        </div>
+      </div>
+    </section>
+
+    <section class="rsvp" id="rsvp">
+      <div class="rsvp-bg"></div>
+      <div class="rsvp-card reveal">
+        <p class="eyebrow dark" data-i18n="rsvp.eyebrow">KINDLY RESPOND</p>
+        <h2 data-i18n="rsvp.title">Will you join us?</h2>
+        <p class="rsvp-intro" data-i18n="rsvp.intro">Please tell us who you are coming with so we can prepare a place for everyone we love.</p>
+
+        <form
+          id="rsvpForm"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+        >
+          <div class="form-grid">
+            <label>
+              <span data-i18n="rsvp.sideLabel">From which part are you coming?</span>
+              <select id="side" name="familySide" required>
+                <option value="" data-i18n="rsvp.options.select">Select family side</option>
+                <option value="bride" data-i18n="rsvp.options.bride">Bride's family</option>
+                <option value="groom" data-i18n="rsvp.options.groom">Groom's family</option>
+                <option value="friends" data-i18n="rsvp.options.friends">Friends</option>
+                <option value="other" data-i18n="rsvp.options.other">Other</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="rsvp.familyName">Family name</span>
+              <input id="familyName" name="familyName" type="text" placeholder="Family name" data-i18n-placeholder="rsvp.familyNamePlaceholder" required>
+            </label>
+            <label>
+              <span data-i18n="rsvp.surname">Surname</span>
+              <input id="surname" name="surname" type="text" placeholder="Surname" data-i18n-placeholder="rsvp.surnamePlaceholder" required>
+            </label>
+            <label>
+              <span data-i18n="rsvp.guests">Number of guests</span>
+              <div class="counter">
+                <button type="button" data-action="minus">−</button>
+                <output id="guestCount">1</output>
+                <input id="guestCountInput" name="guestCount" type="hidden" value="1">
+                <button type="button" data-action="plus">+</button>
+              </div>
+            </label>
+          </div>
+
+          <label class="message-label">
+            <span data-i18n="rsvp.messageLabel">Anything we should know? <small data-i18n="rsvp.optional">(optional)</small></span>
+            <textarea id="message" name="message" rows="3" placeholder="Dietary notes, wishes, etc." data-i18n-placeholder="rsvp.messagePlaceholder"></textarea>
+          <input type="hidden" name="_subject" value="New Wedding RSVP" id="emailSubject">
+          </label>
+
+          <button class="submit-button" type="submit" data-i18n="rsvp.submit">Confirm attendance <span>→</span></button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-monogram">A <i>&</i> D</div>
+    <p data-i18n="footer.withLove">With love, Anna & David</p>
+    <small data-i18n="footer.date">14 · 06 · 2025 · Yerevan, Armenia</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
