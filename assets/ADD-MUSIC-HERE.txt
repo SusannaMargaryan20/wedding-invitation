@@ -1,5 +1,0 @@
-Add your licensed tango / wedding audio file here and name it:
-
-wedding-tango.mp3
-
-Or change the music.src path in config.js.
