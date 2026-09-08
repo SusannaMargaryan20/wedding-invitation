@@ -1,230 +1,418 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#17130f" />
-  <meta name="description" content="Wedding invitation" />
-  <title>Wedding Invitation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F3EA">
+<title>Anna &amp; David — 14 June 2025</title>
+<meta name="description" content="Together with their families, Anna and David invite you to celebrate their wedding in Yerevan, Armenia.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=4" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F7F3EA'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='18' fill='%23C29B5B' text-anchor='middle'%3E%26%3C/text%3E%3C/svg%3E">
 </head>
-<body>
-  <div class="page-progress" aria-hidden="true"><span id="pageProgress"></span></div>
 
-  <header class="site-header" id="siteHeader">
-    <a class="brand" href="#home" aria-label="Wedding home">
-      <span class="brand-flourish" aria-hidden="true">❦</span>
-      <span class="brand-name"><span data-bind="brideInitial">A</span><i>&</i><span data-bind="groomInitial">D</span></span>
+<body class="is-loading">
+
+<!-- ============================================================
+     SVG SPRITE — silhouettes, botanicals, marks
+     ============================================================ -->
+<svg class="svg-sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="fig-bride" viewBox="0 0 140 300">
+      <path class="fig-veil" d="M70 24 C 44 24 34 44 32 70 C 28 118 20 190 8 292 L 30 292 C 34 200 40 132 46 92 C 50 60 56 40 70 34 Z"/>
+      <path class="fig-veil" d="M70 24 C 96 24 106 44 108 70 C 112 118 120 190 132 292 L 110 292 C 106 200 100 132 94 92 C 90 60 84 40 70 34 Z"/>
+      <path class="fig-body" d="M70 6 C 62 6 56 13 56 22 C 56 31 62 38 70 38 C 78 38 84 31 84 22 C 84 13 78 6 70 6 Z"/>
+      <path class="fig-body" d="M70 40 C 60 44 54 58 53 78 C 52 96 50 110 47 124 C 38 168 26 236 21 292 L 119 292 C 114 236 102 168 93 124 C 90 110 88 96 87 78 C 86 58 80 44 70 40 Z"/>
+    </symbol>
+
+    <symbol id="fig-groom" viewBox="0 0 140 300">
+      <path class="fig-body" d="M70 6 C 62 6 56 13 56 22 C 56 31 62 38 70 38 C 78 38 84 31 84 22 C 84 13 78 6 70 6 Z"/>
+      <path class="fig-body" d="M70 41 C 57 41 46 49 43 64 L 36 112 C 34 124 36 132 40 137 L 45 292 L 63 292 L 67 186 L 73 186 L 77 292 L 95 292 L 100 137 C 104 132 106 124 104 112 L 97 64 C 94 49 83 41 70 41 Z"/>
+      <path class="fig-shirt" d="M70 44 L 62 56 L 70 96 L 78 56 Z"/>
+    </symbol>
+
+    <symbol id="sprig" viewBox="0 0 130 210">
+      <path d="M16 206 C 44 172 66 124 78 74 C 84 48 88 24 90 4" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      <path d="M0 0 C 13 -11 28 -9 37 -2 C 26 9 9 11 0 0 Z" transform="translate(80,60) rotate(-16)"/>
+      <path d="M0 0 C -13 -11 -28 -9 -37 -2 C -26 9 -9 11 0 0 Z" transform="translate(76,86) rotate(14)"/>
+      <path d="M0 0 C 13 -11 28 -9 37 -2 C 26 9 9 11 0 0 Z" transform="translate(70,108) rotate(-8)"/>
+      <path d="M0 0 C -13 -11 -28 -9 -37 -2 C -26 9 -9 11 0 0 Z" transform="translate(60,132) rotate(22)"/>
+      <path d="M0 0 C 13 -11 28 -9 37 -2 C 26 9 9 11 0 0 Z" transform="translate(48,156) rotate(2)"/>
+      <path d="M0 0 C -13 -11 -28 -9 -37 -2 C -26 9 -9 11 0 0 Z" transform="translate(34,178) rotate(30)"/>
+      <path d="M0 0 C 9 -8 20 -7 26 -2 C 18 6 6 8 0 0 Z" transform="translate(86,30) rotate(-24)"/>
+    </symbol>
+
+    <symbol id="church" viewBox="0 0 200 220">
+      <path d="M100 4 L 100 22 M 92 12 L 108 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M100 24 L 128 92 L 72 92 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M72 92 L 128 92 L 128 214 L 72 214 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M56 122 L 72 122 L 72 214 L 56 214 Z M 128 122 L 144 122 L 144 214 L 128 214 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M100 150 C 90 150 86 158 86 168 L 86 214 L 114 214 L 114 168 C 114 158 110 150 100 150 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M100 108 m -8 0 a 8 8 0 1 0 16 0 a 8 8 0 1 0 -16 0" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header" id="header">
+  <div class="header__inner">
+
+    <a class="logo" href="#top" aria-label="Anna and David">
+      <svg class="logo__leaf logo__leaf--l" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+      <span class="logo__mark">
+        <span class="logo__initial" data-config="brideInitial">A</span>
+        <span class="logo__amp">&amp;</span>
+        <span class="logo__initial" data-config="groomInitial">D</span>
+      </span>
+      <svg class="logo__leaf logo__leaf--r" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
     </a>
 
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="#story" data-i18n="nav.story">Our Story</a>
-      <a href="#ceremony" data-i18n="nav.ceremony">The Ceremony</a>
-      <a href="#reception" data-i18n="nav.reception">The Reception</a>
-      <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#story" data-i18n="nav.story">Our story</a></li>
+        <li><a class="nav__link" href="#ceremony" data-i18n="nav.ceremony">The ceremony</a></li>
+        <li><a class="nav__link" href="#reception" data-i18n="nav.reception">The reception</a></li>
+        <li><a class="nav__link nav__link--accent" href="#rsvp" data-i18n="nav.rsvp">RSVP</a></li>
+      </ul>
     </nav>
 
-    <div class="header-actions">
-      <div class="language-switcher">
-        <button class="language-trigger" id="languageTrigger" type="button" aria-haspopup="true" aria-expanded="false">EN <span>⌄</span></button>
-        <div class="language-menu" id="languageMenu" role="menu">
-          <button type="button" data-lang="en">EN</button>
-          <button type="button" data-lang="hy">HY</button>
-          <button type="button" data-lang="ru">RU</button>
-        </div>
+    <div class="header__tools">
+      <div class="lang" id="lang" role="group" aria-label="Language">
+        <button class="lang__btn is-active" type="button" data-lang="en">EN</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button class="lang__btn" type="button" data-lang="hy">ՀԱՅ</button>
+        <span class="lang__sep" aria-hidden="true"></span>
+        <button class="lang__btn" type="button" data-lang="ru">РУ</button>
       </div>
 
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav" hidden>
+  <div class="mobile-nav__inner">
+    <a class="mobile-nav__link" href="#story" data-i18n="nav.story">Our story</a>
+    <a class="mobile-nav__link" href="#ceremony" data-i18n="nav.ceremony">The ceremony</a>
+    <a class="mobile-nav__link" href="#reception" data-i18n="nav.reception">The reception</a>
+    <a class="mobile-nav__link" href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
+    <p class="mobile-nav__note script" data-i18n="hero.note" data-i18n-html>Two hearts.<br>One journey.</p>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero__media">
+    <img class="hero__img" id="heroImg" alt="" fetchpriority="high" decoding="async">
+    <div class="hero__scrim"></div>
+  </div>
+
+  <svg class="hero__botanical hero__botanical--tl" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+  <svg class="hero__botanical hero__botanical--br" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+
+  <div class="hero__inner">
+    <div class="hero__content">
+      <p class="eyebrow hero__eyebrow" data-anim="1" data-i18n="hero.eyebrow">Together with their families</p>
+
+      <h1 class="hero__names" data-anim="2">
+        <span class="hero__name" id="heroBride">Anna</span>
+        <span class="hero__amp">&amp;</span>
+        <span class="hero__name" id="heroGroom">David</span>
+      </h1>
+
+      <p class="hero__invite" data-anim="3" data-i18n="hero.invite">Invite you to celebrate their wedding</p>
+
+      <div class="hero__meta" data-anim="4">
+        <div class="datestamp">
+          <span class="datestamp__day" id="heroDay">SAT</span>
+          <span class="datestamp__rule" aria-hidden="true"></span>
+          <span class="datestamp__num" id="heroNum">14</span>
+          <span class="datestamp__rule" aria-hidden="true"></span>
+          <span class="datestamp__month" id="heroMonth">JUN 2025</span>
+        </div>
+        <p class="hero__city" id="heroCity" data-anim="5">Yerevan, Armenia</p>
+      </div>
     </div>
 
-    <div class="mobile-nav" id="mobileNav">
-      <a href="#story" data-i18n="nav.story">Our Story</a>
-      <a href="#ceremony" data-i18n="nav.ceremony">The Ceremony</a>
-      <a href="#reception" data-i18n="nav.reception">The Reception</a>
-      <a href="#rsvp" data-i18n="nav.rsvp">RSVP</a>
-    </div>
-  </header>
+    <p class="hero__note script" data-anim="6" data-i18n="hero.note" data-i18n-html>Two hearts.<br>One journey.</p>
+  </div>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-media media-parallax" id="heroMedia" aria-hidden="true"></div>
-      <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="botanical botanical-left" aria-hidden="true"></div>
-      <div class="botanical botanical-right" aria-hidden="true"></div>
+  <a class="scroll-cue" href="#story" data-anim="7">
+    <span class="scroll-cue__label" data-i18n="hero.scroll">Scroll</span>
+    <span class="scroll-cue__line" aria-hidden="true"></span>
+  </a>
+</section>
 
-      <div class="hero-content reveal-up">
-        <p class="kicker" data-i18n="hero.kicker">TOGETHER WITH THEIR FAMILIES</p>
-        <h1><span data-bind="brideName">Anna</span><em>&</em><span data-bind="groomName">David</span></h1>
-        <p class="hero-subtitle" data-i18n="hero.invite">INVITE YOU TO CELEBRATE THEIR WEDDING</p>
+<!-- ============================================================
+     OUR STORY
+     ============================================================ -->
+<section class="story section" id="story">
+  <div class="wrap story__grid">
 
-        <div class="date-lockup" aria-label="Wedding date">
-          <span data-bind="dayShort">SAT</span><i></i><strong data-bind="dayNumber">14</strong><i></i><span data-bind="monthYear">JUN 2025</span>
-        </div>
-        <p class="hero-location" data-bind="city">YEREVAN, ARMENIA</p>
-      </div>
-
-      <div class="hero-note" aria-hidden="true">
-        <span data-i18n="hero.note1">Two hearts.</span>
-        <span data-i18n="hero.note2">One journey.</span>
-      </div>
-
-      <a class="scroll-cue" href="#story" aria-label="Scroll to our story">
-        <span>↓</span><small data-i18n="hero.scroll">SCROLL</small>
+    <div class="story__text">
+      <p class="eyebrow reveal" data-i18n="story.eyebrow">Our story</p>
+      <h2 class="h-display reveal" data-delay="1" data-i18n="story.title">How it all began</h2>
+      <p class="story__para reveal" data-delay="2" data-i18n="story.para">Some stories begin with a grand moment. Ours began quietly — with a conversation that somehow never really ended.</p>
+      <p class="story__para story__para--sub reveal" data-delay="3" data-i18n="story.para2">Seven years, three cities and one small apartment full of plants later, we are asking the people we love most to stand with us in Yerevan.</p>
+      <a class="link-arrow reveal" data-delay="4" href="#ceremony">
+        <span data-i18n="story.cta">Read our story</span>
+        <span class="link-arrow__mark" aria-hidden="true">→</span>
       </a>
-    </section>
+    </div>
 
-    <section class="story section-light" id="story">
-      <div class="section-shell story-grid">
-        <div class="story-copy reveal-up">
-          <p class="eyebrow"><span data-i18n="story.eyebrow">OUR STORY</span><i></i></p>
-          <h2 data-i18n-html="story.title">How It All<br />Began</h2>
-          <p class="body-copy" data-i18n="story.text">From a chance meeting to a lifetime together, our story is one of love, laughter and endless adventures. We can’t wait to continue it with you by our side.</p>
-          <a href="#ceremony" class="text-button"><span data-i18n="story.button">Continue the journey</span><b>→</b></a>
+    <div class="story__media">
+      <svg class="story__botanical" id="storyBotanical" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+
+      <figure class="frame frame--main" id="storyFrameMain">
+        <img id="storyImg" alt="Anna and David" loading="lazy" decoding="async">
+      </figure>
+
+      <figure class="frame frame--sub" id="storyFrameSub">
+        <img id="storyImgAlt" alt="" loading="lazy" decoding="async">
+      </figure>
+
+      <p class="story__note script" data-i18n="story.note" data-i18n-html>Same love,<br>new chapter.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     JOURNEY RAIL (fixed, desktop) — church → reception
+     ============================================================ -->
+<div class="journey journey--fixed" id="journey" aria-hidden="true">
+  <div class="journey__node is-active" data-node="1">
+    <span class="journey__num">01</span>
+    <span class="journey__label" data-i18n="journey.church">Church</span>
+  </div>
+  <div class="journey__track"><span class="journey__fill" id="journeyFill"></span></div>
+  <div class="journey__node" data-node="2">
+    <span class="journey__num">02</span>
+    <span class="journey__label" data-i18n="journey.reception">Reception</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     CEREMONY
+     ============================================================ -->
+<section class="scene scene--ceremony" id="ceremony">
+  <div class="scene__media">
+    <img class="scene__img" id="ceremonyImg" alt="" loading="lazy" decoding="async">
+    <div class="scene__scrim"></div>
+  </div>
+
+  <!-- scroll-driven couple walk -->
+  <div class="stage" id="ceremonyStage" aria-hidden="true">
+    <svg class="stage__church" id="stageChurch" viewBox="0 0 200 220"><use href="#church"></use></svg>
+    <div class="stage__glow" id="stageGlow"></div>
+    <div class="stage__pair" id="ceremonyPair">
+      <div class="figure figure--bride" id="ceremonyBride">
+        <svg viewBox="0 0 140 300"><use href="#fig-bride"></use></svg>
+      </div>
+      <div class="figure figure--groom" id="ceremonyGroom">
+        <svg viewBox="0 0 140 300"><use href="#fig-groom"></use></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap scene__inner">
+    <div class="scene__text">
+      <p class="eyebrow reveal" data-i18n="ceremony.eyebrow">The ceremony</p>
+      <h2 class="h-display h-display--light reveal" data-delay="1" id="ceremonyTitle">Saint Gregory the Illuminator Church</h2>
+
+      <dl class="details reveal" data-delay="2">
+        <div class="details__row">
+          <dt data-i18n="label.when">When</dt>
+          <dd><span id="ceremonyDate">Saturday, June 14, 2025</span> · <span id="ceremonyTime">16:00</span></dd>
         </div>
+        <div class="details__row">
+          <dt data-i18n="label.where">Where</dt>
+          <dd id="ceremonyPlace">Yerevan, Armenia</dd>
+        </div>
+      </dl>
 
-        <div class="story-visual reveal-up">
-          <div class="photo-stack" id="storyPhotoStack">
-            <div class="photo-card photo-card-back"></div>
-            <div class="photo-card photo-card-front"><img id="storyImage" alt="Wedding couple" /></div>
-            <div class="story-caption" data-i18n="story.note">Same love, new chapter. ♡</div>
-          </div>
+      <a class="link-arrow link-arrow--light reveal" data-delay="3" id="ceremonyMap" href="#" target="_blank" rel="noopener">
+        <span data-i18n="cta.map">View on map</span>
+        <span class="link-arrow__mark" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="scene__aside">
+      <div class="journey journey--inline">
+        <div class="journey__node is-active">
+          <span class="journey__num">01</span>
+          <span class="journey__label" data-i18n="journey.church">Church</span>
+        </div>
+        <div class="journey__track"><span class="journey__fill" id="journeyFillInline"></span></div>
+        <div class="journey__node" id="journeyNodeInline2">
+          <span class="journey__num">02</span>
+          <span class="journey__label" data-i18n="journey.reception">Reception</span>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="event-section event-dark" id="ceremony">
-      <div class="event-media media-parallax" id="ceremonyMedia" aria-hidden="true"></div>
-      <div class="event-shade" aria-hidden="true"></div>
-      <div class="section-shell event-layout">
-        <div class="event-card reveal-up">
-          <p class="kicker" data-i18n="ceremony.kicker">THE CEREMONY</p>
-          <h2 id="ceremonyTitle">Saint Gregory<br /><em>The Illuminator Church</em></h2>
-          <div class="event-meta">
-            <div><span class="meta-icon">◷</span><p><strong data-bind="ceremonyDate">SAT, JUN 14, 2025</strong><small data-bind="ceremonyTime">16:00</small></p></div>
-            <div><span class="meta-icon">⌖</span><p><strong data-bind="ceremonyLocation">Yerevan, Armenia</strong></p></div>
-          </div>
-          <a class="ghost-button" id="ceremonyMap" target="_blank" rel="noopener"><span data-i18n="common.map">View on Map</span><b>↗</b></a>
-        </div>
+<!-- ============================================================
+     RECEPTION
+     ============================================================ -->
+<section class="scene scene--reception" id="reception">
+  <div class="scene__media">
+    <img class="scene__img" id="receptionImg" alt="" loading="lazy" decoding="async">
+    <div class="scene__scrim scene__scrim--warm"></div>
+  </div>
 
-        <div class="ceremony-couple-stage" id="ceremonyCoupleStage" aria-hidden="true">
-          <div class="ceremony-door-glow"></div>
-          <div class="figure bride-figure" id="ceremonyBride">
-            <svg viewBox="0 0 90 190" role="presentation">
-              <circle cx="45" cy="20" r="10" fill="currentColor" opacity=".96"/>
-              <path d="M45 33 C39 46 36 58 36 72 L24 132 L12 174 H78 L66 132 L54 72 C54 58 51 46 45 33Z" fill="currentColor" opacity=".92"/>
-              <path d="M38 49 C28 63 23 80 20 98" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-              <path d="M52 49 C61 63 66 79 69 95" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-              <path d="M35 41 C25 29 23 17 29 9" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".7"/>
-            </svg>
-          </div>
-          <div class="figure groom-figure" id="ceremonyGroom">
-            <svg viewBox="0 0 82 190" role="presentation">
-              <circle cx="41" cy="20" r="10" fill="currentColor" opacity=".96"/>
-              <path d="M30 35 H52 L61 93 L55 120 L59 177 H45 L41 126 L36 177 H22 L27 120 L21 93Z" fill="currentColor" opacity=".92"/>
-              <path d="M30 42 L18 92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-              <path d="M52 42 L66 92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-              <path d="M39 38 L41 64 L49 42" fill="none" stroke="#b99460" stroke-width="2.2" opacity=".9"/>
-            </svg>
-          </div>
-          <span class="couple-path-label">towards forever</span>
-        </div>
-
-        <div class="journey-rail" aria-hidden="true">
-          <small data-i18n-html="ceremony.progressTitle">SCROLL TO<br />SEE THE JOURNEY</small>
-          <div class="journey-line"><span class="journey-fill" id="journeyFill"></span><b class="dot dot-one"></b><b class="dot dot-two"></b></div>
-          <div class="journey-labels"><span data-i18n="ceremony.progressChurch">Church</span><span data-i18n="ceremony.progressReception">Reception</span></div>
-        </div>
+  <div class="stage stage--dance" id="receptionStage" aria-hidden="true">
+    <div class="stage__floor"></div>
+    <div class="stage__pair" id="receptionPair">
+      <div class="figure figure--bride" id="danceBride">
+        <svg viewBox="0 0 140 300"><use href="#fig-bride"></use></svg>
       </div>
-    </section>
-
-    <section class="event-section event-warm" id="reception">
-      <div class="event-media media-parallax" id="receptionMedia" aria-hidden="true"></div>
-      <div class="event-shade" aria-hidden="true"></div>
-      <div class="section-shell event-layout reception-layout">
-        <div class="event-card reveal-up">
-          <p class="kicker" data-i18n="reception.kicker">THE RECEPTION</p>
-          <h2 id="receptionTitle">Grand Hotel Yerevan</h2>
-          <div class="event-meta">
-            <div><span class="meta-icon">◷</span><p><strong data-bind="receptionDate">SAT, JUN 14, 2025</strong><small data-bind="receptionTime">19:00</small></p></div>
-            <div><span class="meta-icon">⌖</span><p><strong data-bind="receptionLocation">Yerevan, Armenia</strong></p></div>
-          </div>
-          <a class="ghost-button" id="receptionMap" target="_blank" rel="noopener"><span data-i18n="common.map">View on Map</span><b>↗</b></a>
-        </div>
-
-        <div class="dance-stage" id="danceStage" aria-hidden="true">
-          <span class="dance-ring ring-one"></span><span class="dance-ring ring-two"></span>
-          <div class="dance-couple" id="danceCouple">
-            <div class="figure dance-bride" id="danceBride">
-              <svg viewBox="0 0 90 190" role="presentation"><circle cx="45" cy="20" r="10" fill="currentColor"/><path d="M45 33 C39 46 36 58 36 72 L24 132 L12 174 H78 L66 132 L54 72 C54 58 51 46 45 33Z" fill="currentColor"/><path d="M52 52 C63 62 68 75 73 91" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="figure dance-groom" id="danceGroom">
-              <svg viewBox="0 0 82 190" role="presentation"><circle cx="41" cy="20" r="10" fill="currentColor"/><path d="M30 35 H52 L61 93 L55 120 L59 177 H45 L41 126 L36 177 H22 L27 120 L21 93Z" fill="currentColor"/><path d="M30 49 C23 59 18 70 15 82" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg>
-            </div>
-          </div>
-          <span class="dance-label">first dance</span>
-        </div>
-        <div class="reception-note reveal-up" aria-hidden="true"><span data-i18n="reception.note">Dinner • Music • Dancing</span></div>
+      <div class="figure figure--groom" id="danceGroom">
+        <svg viewBox="0 0 140 300"><use href="#fig-groom"></use></svg>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <section class="rsvp section-light" id="rsvp">
-      <div class="rsvp-flower rsvp-flower-left" aria-hidden="true"></div>
-      <div class="rsvp-flower rsvp-flower-right" aria-hidden="true"></div>
-      <div class="section-shell rsvp-shell">
-        <div class="rsvp-heading reveal-up">
-          <p class="eyebrow centered"><i></i><span data-i18n="rsvp.title">RSVP</span><i></i></p>
-          <h2 data-i18n="rsvp.heading">Will you join us?</h2>
-          <p data-i18n="rsvp.subtitle">Please let us know if you will be celebrating with us.</p>
+  <div class="wrap scene__inner">
+    <div class="scene__text">
+      <p class="eyebrow reveal" data-i18n="reception.eyebrow">The reception</p>
+      <h2 class="h-display h-display--light reveal" data-delay="1" id="receptionTitle">Grand Hotel Yerevan</h2>
+
+      <dl class="details reveal" data-delay="2">
+        <div class="details__row">
+          <dt data-i18n="label.when">When</dt>
+          <dd><span id="receptionDate">Saturday, June 14, 2025</span> · <span id="receptionTime">19:00</span></dd>
+        </div>
+        <div class="details__row">
+          <dt data-i18n="label.where">Where</dt>
+          <dd id="receptionPlace">Yerevan, Armenia</dd>
+        </div>
+      </dl>
+
+      <a class="link-arrow link-arrow--light reveal" data-delay="3" id="receptionMap" href="#" target="_blank" rel="noopener">
+        <span data-i18n="cta.map">View on map</span>
+        <span class="link-arrow__mark" aria-hidden="true">→</span>
+      </a>
+
+      <p class="scene__note script reveal" data-delay="4" data-i18n="reception.note">Dinner, dancing &amp; a night to remember.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RSVP
+     ============================================================ -->
+<section class="rsvp section" id="rsvp">
+  <svg class="rsvp__botanical rsvp__botanical--l" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+  <svg class="rsvp__botanical rsvp__botanical--r" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+
+  <div class="wrap rsvp__inner">
+    <h2 class="h-display rsvp__title reveal" data-i18n="rsvp.title">Will you join us?</h2>
+    <p class="rsvp__sub reveal" data-delay="1" data-i18n="rsvp.sub">We would be delighted to celebrate this day with you. Please let us know if you'll be joining us.</p>
+
+    <form class="form reveal" data-delay="2" id="rsvpForm" novalidate>
+      <div class="form__grid">
+
+        <div class="field">
+          <label class="field__label" for="rsvpSide" data-i18n="form.side">From which side?</label>
+          <div class="field__control field__control--select">
+            <select class="input" id="rsvpSide" name="side" required>
+              <option value="" data-i18n="form.sidePlaceholder">Please choose</option>
+              <option value="bride" data-i18n="form.sideBride">Bride's side</option>
+              <option value="groom" data-i18n="form.sideGroom">Groom's side</option>
+              <option value="friends" data-i18n="form.sideFriends">Friends</option>
+              <option value="other" data-i18n="form.sideOther">Other</option>
+            </select>
+            <span class="field__caret" aria-hidden="true"></span>
+          </div>
+          <p class="field__error" id="errSide" role="alert"></p>
         </div>
 
-        <form class="rsvp-form reveal-up" id="rsvpForm" method="POST" target="rsvpFrame" novalidate>
-          <div class="form-grid">
-            <label class="field">
-              <span data-i18n="rsvp.sideLabel">From which side are you coming?</span>
-              <select name="familySide" id="familySide" required>
-                <option value="" data-i18n="rsvp.selectPart">Select side</option>
-                <option value="bride" data-i18n="rsvp.brideSide">Bride's side</option>
-                <option value="groom" data-i18n="rsvp.groomSide">Groom's side</option>
-                <option value="friends" data-i18n="rsvp.friends">Friends</option>
-                <option value="other" data-i18n="rsvp.other">Other</option>
-              </select>
-            </label>
-
-            <label class="field"><span data-i18n="rsvp.familyName">Family Name</span><input type="text" name="familyName" id="familyName" required data-i18n-placeholder="rsvp.familyNamePlaceholder" placeholder="Enter family name" /></label>
-            <label class="field"><span data-i18n="rsvp.surname">Surname</span><input type="text" name="surname" id="surname" required data-i18n-placeholder="rsvp.surnamePlaceholder" placeholder="Enter surname" /></label>
-
-            <div class="field guest-field">
-              <span data-i18n="rsvp.count">Guests</span>
-              <div class="guest-counter">
-                <button type="button" id="guestMinus" aria-label="Decrease guests">−</button>
-                <input type="number" name="guestCount" id="guestCount" min="1" max="12" value="1" readonly />
-                <button type="button" id="guestPlus" aria-label="Increase guests">+</button>
-              </div>
-            </div>
+        <div class="field">
+          <label class="field__label" for="rsvpFamily" data-i18n="form.family">Family name</label>
+          <div class="field__control">
+            <input class="input" id="rsvpFamily" name="familyName" type="text" autocomplete="family-name"
+                   maxlength="60" data-i18n-placeholder="form.familyPh" placeholder="Margaryan" required>
           </div>
+          <p class="field__error" id="errFamily" role="alert"></p>
+        </div>
 
-          <input type="hidden" name="language" id="formLanguage" value="en" />
-          <input type="hidden" name="source" value="Wedding website" />
+        <div class="field">
+          <label class="field__label" for="rsvpSurname" data-i18n="form.surname">Surname</label>
+          <div class="field__control">
+            <input class="input" id="rsvpSurname" name="surname" type="text" autocomplete="given-name"
+                   maxlength="60" data-i18n-placeholder="form.surnamePh" placeholder="Susanna" required>
+          </div>
+          <p class="field__error" id="errSurname" role="alert"></p>
+        </div>
 
-          <button class="submit-button" id="submitButton" type="submit"><span data-i18n="rsvp.confirm">Confirm attendance</span><b>→</b></button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
+        <div class="field field--counter">
+          <span class="field__label" id="guestsLabel" data-i18n="form.guests">Guests</span>
+          <div class="counter" role="group" aria-labelledby="guestsLabel">
+            <button class="counter__btn" type="button" id="guestMinus" data-i18n-aria="form.guestsLess" aria-label="Fewer guests">−</button>
+            <span class="counter__value" id="guestValue" aria-live="polite">1</span>
+            <button class="counter__btn" type="button" id="guestPlus" data-i18n-aria="form.guestsMore" aria-label="More guests">+</button>
+          </div>
+          <input type="hidden" id="rsvpGuests" name="guestCount" value="1">
+          <p class="field__error" id="errGuests" role="alert"></p>
+        </div>
 
-        <div class="rsvp-note" aria-hidden="true"><span data-i18n="rsvp.note">We can't wait to celebrate with you! ♡</span></div>
-        <iframe name="rsvpFrame" id="rsvpFrame" title="RSVP submission" hidden></iframe>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <span class="brand-name"><span data-bind="brideInitial">A</span><i>&</i><span data-bind="groomInitial">D</span></span>
-    <p><span data-bind="brideName">Anna</span> & <span data-bind="groomName">David</span> · <span data-bind="dayNumber">14</span> <span data-bind="monthYear">JUN 2025</span></p>
-  </footer>
+      <div class="form__actions">
+        <button class="btn" type="submit" id="rsvpSubmit">
+          <span class="btn__label" id="rsvpSubmitLabel" data-i18n="form.submit">Confirm attendance</span>
+          <span class="btn__mark" aria-hidden="true">→</span>
+        </button>
+        <p class="form__status" id="rsvpStatus" role="status" aria-live="polite"></p>
+      </div>
 
-  <script src="script.js?v=4" defer></script>
+      <p class="rsvp__hand script" data-i18n="rsvp.hand">We can't wait to celebrate with you! ♡</p>
+    </form>
+
+    <div class="thanks" id="rsvpThanks" hidden>
+      <svg class="thanks__leaf" viewBox="0 0 130 210" aria-hidden="true"><use href="#sprig"></use></svg>
+      <p class="thanks__title" data-i18n="rsvp.thanksTitle">Thank you. Your attendance has been confirmed.</p>
+      <p class="thanks__text" data-i18n="rsvp.thanksText">We will send the final details closer to the day. Travel safely — and see you in Yerevan.</p>
+      <p class="thanks__hand script" data-i18n="rsvp.thanksHand">With love, A &amp; D</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span class="logo logo--footer" aria-hidden="true">
+      <svg class="logo__leaf logo__leaf--l" viewBox="0 0 130 210"><use href="#sprig"></use></svg>
+      <span class="logo__mark">
+        <span class="logo__initial" data-config="brideInitial">A</span>
+        <span class="logo__amp">&amp;</span>
+        <span class="logo__initial" data-config="groomInitial">D</span>
+      </span>
+      <svg class="logo__leaf logo__leaf--r" viewBox="0 0 130 210"><use href="#sprig"></use></svg>
+    </span>
+    <p class="footer__names" id="footerNames">Anna &amp; David</p>
+    <p class="footer__date"><span id="footerDate">14 June 2025</span> · <span id="footerCity">Yerevan, Armenia</span></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
