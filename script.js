@@ -51,7 +51,7 @@ const weddingConfig = {
     hero: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80",
     story: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80",
     storyAlt: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80",
-    ceremony: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2000&q=80",
+    /* the ceremony backdrop is drawn and animated in SVG — no photo needed */
     reception: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2000&q=80"
   },
 
@@ -117,10 +117,10 @@ const translations = {
     "form.sideGroom": "Groom's side",
     "form.sideFriends": "Friends",
     "form.sideOther": "Other",
-    "form.family": "Family name",
-    "form.familyPh": "Margaryan",
-    "form.surname": "First name",
-    "form.surnamePh": "Susanna",
+    "form.firstName": "First name",
+    "form.firstNamePh": "Susanna",
+    "form.lastName": "Last name",
+    "form.lastNamePh": "Margaryan",
     "form.guests": "Guests",
     "form.guestsMore": "Add a guest",
     "form.guestsLess": "Remove a guest",
@@ -129,8 +129,8 @@ const translations = {
     "form.sent": "Sent ✓",
 
     "err.side": "Choose which side you're joining from.",
-    "err.family": "Add your family name.",
-    "err.surname": "Add your first name.",
+    "err.firstName": "Add your first name.",
+    "err.lastName": "Add your last name.",
     "err.guests": "Choose between 1 and 10 guests.",
     "err.send": "That didn't send. Check your connection and try again.",
     "status.demo": "Demo mode — connect the RSVP endpoint to receive this by email.",
@@ -193,10 +193,10 @@ const translations = {
     "form.sideGroom": "Փեսայի կողմից",
     "form.sideFriends": "Ընկերներ",
     "form.sideOther": "Այլ",
-    "form.family": "Ազգանուն",
-    "form.familyPh": "Մարգարյան",
-    "form.surname": "Անուն",
-    "form.surnamePh": "Սուսաննա",
+    "form.firstName": "Անուն",
+    "form.firstNamePh": "Սուսաննա",
+    "form.lastName": "Ազգանուն",
+    "form.lastNamePh": "Մարգարյան",
     "form.guests": "Հյուրեր",
     "form.guestsMore": "Ավելացնել հյուր",
     "form.guestsLess": "Պակասեցնել հյուրին",
@@ -205,8 +205,8 @@ const translations = {
     "form.sent": "Ուղարկված է ✓",
 
     "err.side": "Նշեք, թե որ կողմից եք։",
-    "err.family": "Լրացրեք ազգանունը։",
-    "err.surname": "Լրացրեք անունը։",
+    "err.firstName": "Լրացրեք անունը։",
+    "err.lastName": "Լրացրեք ազգանունը։",
     "err.guests": "Ընտրեք 1-ից 10 հյուր։",
     "err.send": "Չհաջողվեց ուղարկել։ Ստուգեք կապը և կրկին փորձեք։",
     "status.demo": "Դեմո ռեժիմ — միացրեք RSVP հասցեն՝ նամակ ստանալու համար։",
@@ -269,10 +269,10 @@ const translations = {
     "form.sideGroom": "Со стороны жениха",
     "form.sideFriends": "Друзья",
     "form.sideOther": "Другое",
-    "form.family": "Фамилия",
-    "form.familyPh": "Маргарян",
-    "form.surname": "Имя",
-    "form.surnamePh": "Сусанна",
+    "form.firstName": "Имя",
+    "form.firstNamePh": "Сусанна",
+    "form.lastName": "Фамилия",
+    "form.lastNamePh": "Маргарян",
     "form.guests": "Гости",
     "form.guestsMore": "Добавить гостя",
     "form.guestsLess": "Убрать гостя",
@@ -281,8 +281,8 @@ const translations = {
     "form.sent": "Отправлено ✓",
 
     "err.side": "Укажите, с чьей вы стороны.",
-    "err.family": "Введите фамилию.",
-    "err.surname": "Введите имя.",
+    "err.firstName": "Введите имя.",
+    "err.lastName": "Введите фамилию.",
     "err.guests": "Выберите от 1 до 10 гостей.",
     "err.send": "Отправить не удалось. Проверьте соединение и попробуйте снова.",
     "status.demo": "Демо-режим — подключите адрес RSVP, чтобы получать письма.",
@@ -414,7 +414,6 @@ function applyImages() {
     ["heroImg", weddingConfig.images.hero],
     ["storyImg", weddingConfig.images.story],
     ["storyImgAlt", weddingConfig.images.storyAlt || weddingConfig.images.story],
-    ["ceremonyImg", weddingConfig.images.ceremony],
     ["receptionImg", weddingConfig.images.reception]
   ];
 
@@ -545,37 +544,22 @@ function initScenes() {
   const ceremony = document.getElementById("ceremony");
   const reception = document.getElementById("reception");
 
-  const stage = document.getElementById("ceremonyStage");
-  const pair = document.getElementById("ceremonyPair");
-  const bride = document.getElementById("ceremonyBride");
-  const groom = document.getElementById("ceremonyGroom");
-  const church = document.getElementById("stageChurch");
-  const glow = document.getElementById("stageGlow");
-
   const dStage = document.getElementById("receptionStage");
   const dPair = document.getElementById("receptionPair");
   const dBride = document.getElementById("danceBride");
   const dGroom = document.getElementById("danceGroom");
 
-  const rail = document.getElementById("journey");
-  const fill = document.getElementById("journeyFill");
   const fillInline = document.getElementById("journeyFillInline");
   const node2 = document.getElementById("journeyNodeInline2");
-  const railNodes = rail ? $$(".journey__node", rail) : [];
 
   const botanical = document.getElementById("storyBotanical");
   const story = document.getElementById("story");
 
   /* static, complete layout when motion is reduced */
   function restStatic() {
-    if (pair) { pair.style.transform = "translate3d(-50%,0,0)"; pair.style.opacity = "1"; }
-    if (bride) bride.style.transform = "translate3d(calc(-50% - 70px),0,0)";
-    if (groom) groom.style.transform = "translate3d(calc(-50% + 70px),0,0)";
     if (dPair) { dPair.style.transform = "translate3d(-50%,0,0)"; dPair.style.opacity = "1"; }
     if (dBride) dBride.style.transform = "translate3d(calc(-50% - 22px),0,0)";
     if (dGroom) dGroom.style.transform = "translate3d(calc(-50% + 22px),0,0)";
-    if (glow) glow.style.opacity = "0.35";
-    if (fill) fill.style.transform = "scaleY(1)";
     if (fillInline) fillInline.style.transform = isCompact() ? "scaleX(1)" : "scaleY(1)";
     if (node2) node2.classList.add("is-active");
   }
@@ -608,38 +592,6 @@ function initScenes() {
       }
     }
 
-    /* --- ceremony: walk toward each other, then into the church --- */
-    if (ceremony && stage && pair && bride && groom) {
-      const r = ceremony.getBoundingClientRect();
-      const active = r.bottom > -240 && r.top < vh + 240;
-      if (active) {
-        const p = clamp01((vh - r.top) / (vh + r.height));
-        const width = stage.offsetWidth || vh;
-
-        const approach = easeInOut(clamp01((p - 0.10) / 0.30));   // phase 1 + 2
-        const walk = easeInOut(clamp01((p - 0.46) / 0.32));       // phase 3 + 4
-        const fade = easeInOut(clamp01((p - 0.72) / 0.20));       // phase 5
-
-        const spread = width * (small ? 0.24 : 0.30);
-        const rest = small ? 15 : 26;
-        const step = small ? 0 : Math.sin(now / 340) * 2.2 * (1 - approach);
-
-        const bx = -(spread * (1 - approach) + rest);
-        const gx = (spread * (1 - approach) + rest);
-
-        bride.style.transform = "translate3d(calc(-50% + " + bx.toFixed(1) + "px)," + step.toFixed(2) + "px,0)";
-        groom.style.transform = "translate3d(calc(-50% + " + gx.toFixed(1) + "px)," + (-step).toFixed(2) + "px,0)";
-
-        const lift = -walk * (small ? 46 : 96);
-        const scale = 1 - walk * (small ? 0.5 : 0.62);
-        pair.style.transform = "translate3d(-50%," + lift.toFixed(1) + "px,0) scale(" + scale.toFixed(3) + ")";
-        pair.style.opacity = (1 - fade).toFixed(3);
-
-        if (glow) glow.style.opacity = (walk * 0.85 * (0.35 + fade * 0.65)).toFixed(3);
-        if (church) church.style.opacity = (0.35 + walk * 0.65).toFixed(3);
-      }
-    }
-
     /* --- journey progress: church → reception --- */
     if (ceremony && reception) {
       const cr = ceremony.getBoundingClientRect();
@@ -648,15 +600,8 @@ function initScenes() {
       const span = (rr.top - cr.top) + rr.height * 0.4;
       const jp = clamp01(-start / (span || 1));
 
-      if (fill) fill.style.transform = "scaleY(" + jp.toFixed(3) + ")";
       if (fillInline) fillInline.style.transform = (isCompact() ? "scaleX(" : "scaleY(") + jp.toFixed(3) + ")";
       if (node2) node2.classList.toggle("is-active", jp > 0.55);
-      if (railNodes.length === 2) railNodes[1].classList.toggle("is-active", jp > 0.55);
-
-      if (rail) {
-        const visible = cr.top < vh * 0.5 && rr.bottom > vh * 0.4;
-        rail.classList.toggle("is-visible", visible);
-      }
     }
 
     /* --- reception: the first dance --- */
@@ -706,14 +651,254 @@ function initScenes() {
   requestAnimationFrame(frame);
 }
 
+/* ---------- 9b. Ceremony scene: walk in, marry, come out under rose petals ---------- */
+function initCeremonyScene() {
+  const section = document.getElementById("ceremony");
+  const bride = document.getElementById("artBride");
+  const groom = document.getElementById("artGroom");
+  if (!section || !bride || !groom) return;
+
+  const glow = document.getElementById("doorGlow");
+  const spill = document.getElementById("doorSpill");
+  const guests = document.getElementById("guests");
+  const canvas = document.getElementById("petalCanvas");
+  const ctx = canvas && canvas.getContext ? canvas.getContext("2d") : null;
+
+  /* timeline, in milliseconds — 5 full seconds are spent inside the church */
+  const T = {
+    start: 400,     // a beat before they set off
+    meet: 3600,     // they meet in the middle of the aisle
+    hold: 4300,     // a pause, facing each other
+    door: 7000,     // they reach the doorway
+    gone: 7500,     // inside
+    appear: 12500,  // 5 seconds later, back at the door
+    cheer: 12700,   // guests raise their arms
+    front: 15400,   // they step out to the front
+    loop: 26000     // the scene begins again
+  };
+
+  const GROUND = 860, DOOR_Y = 700, DOOR_S = 0.4;
+  const POS = {
+    bride: { start: 620, meet: 742, door: 782, front: 748 },
+    groom: { start: 1180, meet: 858, door: 818, front: 852 }
+  };
+  const COLORS = ["#C9757E", "#B4596A", "#DFA3A3", "#EBD1C2", "#C29B5B"];
+
+  let petals = [];
+  let didBurst = false;
+  let rafId = null;
+  let startedAt = 0;
+  let cw = 0, ch = 0;
+
+  const seg = (t, a, b) => clamp01((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+
+  function place(el, x, y, s, o) {
+    el.setAttribute("transform", "translate(" + x.toFixed(1) + "," + y.toFixed(1) + ") scale(" + s.toFixed(3) + ")");
+    el.style.opacity = o.toFixed(3);
+  }
+
+  /* position of one figure at time t */
+  function figureAt(t, key) {
+    const k = POS[key];
+    let x = k.start, y = GROUND, s = 1, o = 1, moving = false;
+
+    if (t < T.start) {
+      x = k.start;
+    } else if (t < T.meet) {
+      x = lerp(k.start, k.meet, easeInOut(seg(t, T.start, T.meet)));
+      moving = true;
+    } else if (t < T.hold) {
+      x = k.meet;
+    } else if (t < T.door) {
+      const p = easeInOut(seg(t, T.hold, T.door));
+      x = lerp(k.meet, k.door, p);
+      y = lerp(GROUND, DOOR_Y, p);
+      s = lerp(1, DOOR_S, p);
+      moving = true;
+    } else if (t < T.gone) {
+      x = k.door; y = DOOR_Y; s = DOOR_S;
+      o = 1 - seg(t, T.door, T.gone);
+    } else if (t < T.appear) {
+      x = k.door; y = DOOR_Y; s = DOOR_S; o = 0;
+    } else if (t < T.front) {
+      const p = easeInOut(seg(t, T.appear, T.front));
+      x = lerp(k.door, k.front, p);
+      y = lerp(DOOR_Y, GROUND, p);
+      s = lerp(DOOR_S, 1, p);
+      o = seg(t, T.appear, T.appear + 500);
+      moving = true;
+    } else {
+      const sway = Math.sin((t - T.front) / 950);
+      x = k.front + sway * (key === "bride" ? 4 : -4);
+      y = GROUND;
+    }
+
+    if (moving) y += Math.sin(t / 155) * 3 * s;
+    return { x: x, y: y, s: s, o: o };
+  }
+
+  /* --- petals --- */
+  function resize() {
+    if (!canvas) return;
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cw = r.width; ch = r.height;
+    canvas.width = Math.round(cw * dpr);
+    canvas.height = Math.round(ch * dpr);
+    if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function spawn(count) {
+    const small = isSmall();
+    for (let i = 0; i < count; i++) {
+      const left = i % 2 === 0;
+      const from = left ? 630 : 970;
+      const dir = left ? 1 : -1;
+      petals.push({
+        x: from + (Math.random() - 0.5) * 230,
+        y: 700 + (Math.random() - 0.5) * 120,
+        vx: dir * (0.4 + Math.random() * 2.1),
+        vy: -(2.4 + Math.random() * 5),
+        r: (small ? 3 : 4.5) + Math.random() * 3.5,
+        rot: Math.random() * Math.PI,
+        spin: (Math.random() - 0.5) * 0.09,
+        phase: Math.random() * Math.PI * 2,
+        color: COLORS[(Math.random() * COLORS.length) | 0],
+        alpha: 0.55 + Math.random() * 0.3
+      });
+    }
+  }
+
+  function drawPetals(t) {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, cw, ch);
+    if (!petals.length) return;
+
+    const k = Math.max(cw / 1600, ch / 900);
+    const ox = (cw - 1600 * k) / 2;
+    const oy = (ch - 900 * k) / 2;
+
+    for (let i = petals.length - 1; i >= 0; i--) {
+      const p = petals[i];
+      p.vy += 0.1;
+      p.vx *= 0.995;
+      p.x += p.vx + Math.sin(p.phase + t / 320) * 0.9;
+      p.y += p.vy;
+      p.rot += p.spin;
+
+      if (p.y > 980 || p.x < -160 || p.x > 1760) { petals.splice(i, 1); continue; }
+
+      ctx.save();
+      ctx.translate(ox + p.x * k, oy + p.y * k);
+      ctx.rotate(p.rot);
+      const edge = Math.min(1, Math.min(p.x - 470, 1140 - p.x) / 110);
+      ctx.globalAlpha = p.alpha * Math.max(0, edge) * (p.y > 860 ? Math.max(0, 1 - (p.y - 860) / 120) : 1);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.r * k, p.r * 0.55 * k, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /* --- frame --- */
+  function render(now) {
+    let t = now - startedAt;
+
+    if (t > T.loop) {
+      startedAt = now;
+      t = 0;
+      didBurst = false;
+      petals.length = 0;
+      if (guests) guests.classList.remove("is-cheering");
+    }
+
+    const b = figureAt(t, "bride");
+    const g = figureAt(t, "groom");
+    place(bride, b.x, b.y, b.s, b.o);
+    place(groom, g.x, g.y, g.s, g.o);
+
+    let light = 0.12;
+    if (t >= T.hold && t < T.door) light = lerp(0.12, 0.92, easeInOut(seg(t, T.hold, T.door)));
+    else if (t >= T.door && t < T.appear) light = 0.92 + Math.sin(t / 520) * 0.06;
+    else if (t >= T.appear && t < T.front) light = lerp(0.92, 0.45, easeInOut(seg(t, T.appear, T.front)));
+    else if (t >= T.front) light = 0.45 + Math.sin(t / 900) * 0.05;
+
+    if (glow) glow.setAttribute("opacity", light.toFixed(3));
+    if (spill) spill.setAttribute("opacity", (light * 0.8).toFixed(3));
+
+    if (guests) guests.classList.toggle("is-cheering", t >= T.cheer && t < T.loop - 2000);
+
+    if (t >= T.cheer && !didBurst) {
+      spawn(isSmall() ? 18 : 40);
+      didBurst = true;
+    }
+    if (didBurst && t < T.cheer + 4000 && Math.random() < 0.32) {
+      spawn(1);
+    }
+
+    drawPetals(t);
+    rafId = requestAnimationFrame(render);
+  }
+
+  function start() {
+    if (rafId !== null) return;
+    resize();
+    startedAt = performance.now();
+    didBurst = false;
+    petals.length = 0;
+    if (guests) guests.classList.remove("is-cheering");
+    rafId = requestAnimationFrame(render);
+  }
+
+  function stop() {
+    if (rafId === null) return;
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  /* the finished picture, for reduced motion */
+  function restFinal() {
+    const b = figureAt(T.front + 1, "bride");
+    const g = figureAt(T.front + 1, "groom");
+    place(bride, b.x, b.y, b.s, 1);
+    place(groom, g.x, g.y, g.s, 1);
+    if (glow) glow.setAttribute("opacity", "0.5");
+    if (spill) spill.setAttribute("opacity", "0.4");
+    if (guests) guests.classList.add("is-cheering");
+  }
+
+  if (prefersReduced.matches) { restFinal(); return; }
+
+  window.addEventListener("resize", resize, { passive: true });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
+
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !document.hidden) start(); else stop();
+      });
+    }, { threshold: 0.25 });
+    obs.observe(section);
+  } else {
+    start();
+  }
+
+  if (prefersReduced.addEventListener) {
+    prefersReduced.addEventListener("change", e => { if (e.matches) { stop(); petals.length = 0; if (ctx) ctx.clearRect(0, 0, cw, ch); restFinal(); } });
+  }
+}
+
 /* ---------- 10. RSVP form ---------- */
 function initRsvp() {
   const form = document.getElementById("rsvpForm");
   if (!form) return;
 
   const side = document.getElementById("rsvpSide");
-  const family = document.getElementById("rsvpFamily");
-  const surname = document.getElementById("rsvpSurname");
+  const first = document.getElementById("rsvpFirst");
+  const last = document.getElementById("rsvpLast");
   const guestsInput = document.getElementById("rsvpGuests");
   const guestValue = document.getElementById("guestValue");
   const minus = document.getElementById("guestMinus");
@@ -759,7 +944,7 @@ function initRsvp() {
     if (wrapper) wrapper.classList.remove("has-error");
   }
 
-  [[side, "errSide"], [family, "errFamily"], [surname, "errSurname"]].forEach(pairArr => {
+  [[side, "errSide"], [first, "errFirst"], [last, "errLast"]].forEach(pairArr => {
     const el = pairArr[0];
     if (!el) return;
     const evt = el.tagName === "SELECT" ? "change" : "input";
@@ -768,12 +953,12 @@ function initRsvp() {
 
   function validate() {
     let ok = true;
-    ["errSide", "errFamily", "errSurname", "errGuests"].forEach(clearError);
+    ["errSide", "errFirst", "errLast", "errGuests"].forEach(clearError);
 
     const allowed = ["bride", "groom", "friends", "other"];
     if (!side || allowed.indexOf(side.value) === -1) { showError("errSide", side, "err.side"); ok = false; }
-    if (!family || family.value.trim().length < 2) { showError("errFamily", family, "err.family"); ok = false; }
-    if (!surname || surname.value.trim().length < 2) { showError("errSurname", surname, "err.surname"); ok = false; }
+    if (!first || first.value.trim().length < 2) { showError("errFirst", first, "err.firstName"); ok = false; }
+    if (!last || last.value.trim().length < 2) { showError("errLast", last, "err.lastName"); ok = false; }
     if (!(guests >= MIN && guests <= MAX)) { showError("errGuests", null, "err.guests"); ok = false; }
 
     if (!ok) {
@@ -828,8 +1013,8 @@ function initRsvp() {
 
     const payload = {
       side: side.value,
-      familyName: family.value.trim(),
-      surname: surname.value.trim(),
+      firstName: first.value.trim(),
+      lastName: last.value.trim(),
       guestCount: guests,
       language: currentLang,
       submittedAt: new Date().toISOString()
@@ -877,6 +1062,7 @@ function boot() {
   initNavHighlight();
   initReveals();
   initScenes();
+  initCeremonyScene();
   initRsvp();
 
   const hero = document.getElementById("heroImg");

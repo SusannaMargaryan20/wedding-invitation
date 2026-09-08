@@ -62,7 +62,7 @@ function doPost(e) {
     const data = validate(payload);
 
     const recipient = routeEmail(data.side);
-    const guestName = data.surname + " " + data.familyName;
+    const guestName = data.firstName + " " + data.lastName;
 
     MailApp.sendEmail({
       to: recipient,
@@ -133,11 +133,13 @@ function validate(payload) {
   const side = sanitizeText(payload.side, 20).toLowerCase();
   if (ALLOWED_SIDES.indexOf(side) === -1) throw new Error("Invalid side");
 
-  const familyName = sanitizeText(payload.familyName, 60);
-  if (familyName.length < 2) throw new Error("Invalid family name");
+  // firstName / lastName are the current keys; familyName / surname are
+  // accepted too so an older deployment of the form keeps working.
+  const firstName = sanitizeText(payload.firstName || payload.surname, 60);
+  if (firstName.length < 2) throw new Error("Invalid first name");
 
-  const surname = sanitizeText(payload.surname, 60);
-  if (surname.length < 2) throw new Error("Invalid surname");
+  const lastName = sanitizeText(payload.lastName || payload.familyName, 60);
+  if (lastName.length < 2) throw new Error("Invalid last name");
 
   const guestCount = parseInt(payload.guestCount, 10);
   if (isNaN(guestCount) || guestCount < MIN_GUESTS || guestCount > MAX_GUESTS) {
@@ -156,8 +158,8 @@ function validate(payload) {
   return {
     side: side,
     sideLabel: SIDE_LABELS[side],
-    familyName: familyName,
-    surname: surname,
+    firstName: firstName,
+    lastName: lastName,
     guestCount: guestCount,
     language: language,
     languageLabel: LANGUAGE_LABELS[language],
@@ -268,10 +270,10 @@ function logToSheet(data, guestName, recipient) {
     let sheet = ss.getSheetByName(RSVP_CONFIG.SHEET_NAME);
     if (!sheet) {
       sheet = ss.insertSheet(RSVP_CONFIG.SHEET_NAME);
-      sheet.appendRow(["Submitted", "Guest", "Family name", "First name", "Side", "Guests", "Language", "Sent to"]);
+      sheet.appendRow(["Submitted", "Guest", "First name", "Last name", "Side", "Guests", "Language", "Sent to"]);
     }
     sheet.appendRow([
-      data.submittedLabel, guestName, data.familyName, data.surname,
+      data.submittedLabel, guestName, data.firstName, data.lastName,
       data.sideLabel, data.guestCount, data.languageLabel, recipient
     ]);
   } catch (err) {
@@ -295,8 +297,8 @@ function testRsvp() {
     postData: {
       contents: JSON.stringify({
         side: "bride",
-        familyName: "Margaryan",
-        surname: "Susanna",
+        firstName: "Susanna",
+        lastName: "Margaryan",
         guestCount: 4,
         language: "en",
         submittedAt: new Date().toISOString()

@@ -269,9 +269,11 @@ dl,dd,dt,p,h1,h2,h3,figure{margin:0;}
   align-items:center;
   justify-content:center;
   opacity:0;
+  pointer-events:none;
   transition:opacity .5s var(--ease);
 }
-.mobile-nav.is-open{opacity:1;}
+.mobile-nav[hidden]{display:none;}
+.mobile-nav.is-open{opacity:1;pointer-events:auto;}
 .mobile-nav__inner{
   text-align:center;
   padding:var(--gut);
@@ -539,17 +541,6 @@ body.is-ready .hero__names[data-anim]{clip-path:inset(-20% -10% -20% -10%);}
 
 /* ---------- 7. Journey rail ---------- */
 .journey{display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
-.journey--fixed{
-  position:fixed;
-  right:clamp(18px,3vw,44px);
-  top:50%;
-  transform:translateY(-50%);
-  z-index:40;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .6s var(--ease);
-}
-.journey--fixed.is-visible{opacity:1;}
 .journey__node{display:flex;align-items:baseline;gap:12px;opacity:.4;transition:opacity .6s var(--ease);}
 .journey__node.is-active{opacity:1;}
 .journey__num{
@@ -646,6 +637,33 @@ body.is-ready .hero__names[data-anim]{clip-path:inset(-20% -10% -20% -10%);}
 }
 .scene__aside{flex:0 0 auto;padding-bottom:6px;}
 
+/* animated ceremony scene */
+.scene__media--art{background:#14131A;}
+.artscene{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.scene__scrim--art{
+  background:
+    linear-gradient(96deg,rgba(9,8,7,.84) 0%,rgba(9,8,7,.55) 32%,rgba(9,8,7,.08) 58%,rgba(9,8,7,.3) 100%),
+    linear-gradient(to bottom,rgba(9,8,7,.55),transparent 26%,rgba(9,8,7,.55));
+}
+.stars circle{fill:rgba(240,236,228,.55);}
+.mountain--far{fill:#252231;}
+.mountain--near{fill:#191821;}
+.snow{fill:rgba(232,228,240,.3);}
+.ground{fill:#151311;}
+.tree{fill:#0D0C10;}
+.church__body{fill:#100F13;}
+.church__wing{fill:#0C0B0F;}
+.church__roof{fill:#08080B;}
+.church__cross{stroke:#C29B5B;stroke-width:4;fill:none;stroke-linecap:round;}
+.church__win{fill:rgba(232,190,124,.72);}
+.church__door{fill:#EFC98F;}
+.guest__still,.guest__cheer{transition:opacity .55s var(--ease);}
+.guest__cheer{opacity:0;}
+.guests.is-cheering .guest__cheer{opacity:1;}
+.guests.is-cheering .guest__still{opacity:0;}
+.art-figure{filter:drop-shadow(0 2px 12px rgba(226,180,110,.3));}
+
 /* stage + figures */
 .stage{
   position:absolute;
@@ -679,33 +697,7 @@ body.is-ready .hero__names[data-anim]{clip-path:inset(-20% -10% -20% -10%);}
   display:block;
 }
 .figure--groom{width:clamp(46px,6.2vw,76px);}
-.fig-body{fill:rgba(12,11,10,.9);}
-.fig-veil{fill:rgba(255,252,245,.3);}
-.fig-shirt{fill:rgba(255,252,245,.75);}
-.scene--reception .fig-body{fill:rgba(10,8,6,.88);}
-.scene--reception .fig-veil{fill:rgba(255,236,204,.4);}
 
-.stage__church{
-  position:absolute;
-  left:50%;
-  bottom:8%;
-  width:min(230px,34vw);
-  height:auto;
-  transform:translateX(-50%);
-  color:rgba(240,232,214,.16);
-  opacity:.9;
-}
-.stage__glow{
-  position:absolute;
-  left:50%;
-  bottom:10%;
-  width:min(120px,20vw);
-  height:min(190px,30vh);
-  transform:translateX(-50%) scaleY(1);
-  background:radial-gradient(ellipse at 50% 100%,rgba(214,178,116,.55),rgba(214,178,116,0) 70%);
-  opacity:0;
-  will-change:opacity;
-}
 .stage--dance .stage__floor{
   position:absolute;
   left:50%;
@@ -957,7 +949,6 @@ body.is-ready .hero__names[data-anim]{clip-path:inset(-20% -10% -20% -10%);}
   .frame--main{width:70%;left:0;}
   .frame--sub{width:44%;bottom:6%;}
   .story__note{left:auto;right:2%;bottom:-14px;}
-  .journey--fixed{display:none;}
 
   .scene__inner{flex-direction:column;align-items:flex-start;gap:44px;}
   .scene__text{max-width:none;}
@@ -1016,7 +1007,6 @@ body.is-ready .hero__names[data-anim]{clip-path:inset(-20% -10% -20% -10%);}
   .stage__pair{width:88vw;}
   .figure{width:56px;}
   .figure--groom{width:50px;}
-  .stage__church{width:44vw;bottom:6%;}
 
   .form__grid{grid-template-columns:1fr;gap:22px;}
   .btn{width:100%;}
