@@ -1,55 +1,47 @@
-# Armenian Wedding Website
+# Wedding Website V2
 
-This project is a complete responsive wedding invitation website built with plain HTML, CSS and JavaScript.
+This version is intentionally much closer to the selected mockup.
+
+## What changed
+- Uses the selected design's warm cream / rose / Armenian-stone visual palette.
+- Uses photo-based cinematic scenes instead of CSS-drawn bride/groom/church characters.
+- The church section is a scroll-controlled story:
+  1. approaching the church
+  2. entering / ceremony
+  3. leaving the church with animated rose petals
+- Ballroom section uses the same visual language as the selected design.
+- Armenian typography uses `Noto Serif Armenian`.
+- HY / EN / RU translation applies to all site text.
+- Responsive mobile layout.
+- RSVP form remains configurable.
+- Optional music URL in `script.js`; otherwise the page generates a quiet instrumental waltz with WebAudio.
 
 ## Files
 - `index.html`
 - `styles.css`
 - `script.js`
+- `assets/hero.jpg`
+- `assets/church-enter.jpg`
+- `assets/church-exit.jpg`
+- `assets/ballroom.jpg`
 
-## What is included
-- Armenian / English / Russian language switcher
-- Elegant Armenian typography (`Noto Serif Armenian`)
-- Couple journey map animation
-- Bride + groom approaching the Armenian church
-- Church doors opening
-- Couple exiting the church
-- Guests appearing and rose petals falling
-- Wedding day timeline
-- Animated first dance
-- Built-in WebAudio romantic waltz (no MP3 required)
-- RSVP form
-- Mobile responsive design
-- Configurable RSVP backend URL
+## Configuration
+Open `script.js` and edit `CONFIG`.
 
-## Run
-Open `index.html` directly, or use VS Code Live Server.
-
-## Connect RSVP to Gmail with Google Apps Script
-
-1. Create a Google Sheet.
-2. Open Extensions → Apps Script.
-3. Use a `doPost(e)` function that reads `JSON.parse(e.postData.contents)`.
-4. Save the data to your sheet and optionally call `MailApp.sendEmail(...)`.
-5. Deploy as Web App.
-6. Copy the deployment URL.
-7. Put it in `script.js`:
-
+### Google Apps Script RSVP
+Set:
 ```js
-const CONFIG = {
-  rsvpEndpoint: "YOUR_GOOGLE_APPS_SCRIPT_URL"
-}
+rsvpEndpoint: "YOUR_DEPLOYED_APPS_SCRIPT_URL"
 ```
 
-## Change names/date/locations
-Update the `CONFIG` object and the translation strings in `script.js`.
+Until an endpoint is set, form submissions are stored only in the browser's localStorage for testing.
 
-## Change ceremony/reception map links
-Edit the two `href` values on `.map-link` elements in `index.html`.
+### Music
+You can set:
+```js
+musicUrl: "assets/your-song.mp3"
+```
+or leave it empty to use the built-in generated waltz.
 
-## Production recommendation
-For a real wedding:
-- Use your own photographs or generated illustrations as section backgrounds.
-- Replace demo names/locations.
-- Use a dedicated Apps Script endpoint or serverless function for RSVP.
-- Keep the endpoint write-only; never expose Gmail credentials in frontend code.
+## Run
+Open `index.html` directly or use VS Code Live Server.
