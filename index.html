@@ -1,274 +1,302 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hy">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#f2e7dc" />
-  <title>Արփինե & Տիգրան — Հարսանիք</title>
-  <meta name="description" content="Elegant Armenian wedding invitation" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Serif+Armenian:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Արփինե &amp; Տիգրան — 17.05.2025</title>
+<meta name="description" content="Արփինեի և Տիգրանի հարսանիքի հրավեր" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="https://images.pexels.com/photos/10279188/pexels-photo-10279188.jpeg?auto=compress&cs=tinysrgb&w=1600" />
+
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
 
-  <header class="header" id="header">
-    <a href="#home" class="monogram" aria-label="Home">A<span>&</span>T</a>
-
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#home" data-i18n="nav.story">Մեր մասին</a>
-      <a href="#ceremony" data-i18n="nav.day">Օրակարգ</a>
-      <a href="#details" data-i18n="nav.details">Վայրերը</a>
-      <a href="#rsvp">RSVP</a>
-    </nav>
-
-    <div class="header-side">
-      <div class="languages">
-        <button type="button" data-lang="hy" class="active">HY</button>
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="ru">RU</button>
-      </div>
-      <button type="button" class="menu" id="menuButton" aria-label="Menu" aria-expanded="false">
-        <i></i><i></i>
-      </button>
-    </div>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
-    <a href="#home" data-i18n="nav.story">Մեր մասին</a>
-    <a href="#ceremony" data-i18n="nav.day">Օրակարգ</a>
-    <a href="#details" data-i18n="nav.details">Վայրերը</a>
-    <a href="#rsvp">RSVP</a>
+<!-- ============================== HEADER ============================== -->
+<header class="site-header">
+  <nav class="nav-primary">
+    <a href="#story" data-i18n="nav_about">ՄԵՐ ՄԱՍԻՆ</a>
+    <a href="#day" data-i18n="nav_diary">ՕՐԱԳԻՐ</a>
+    <a href="#dance" data-i18n="nav_places">ՎԱՅՐԵՐԸ</a>
+    <a href="#rsvp" data-i18n="nav_rsvp">RSVP</a>
   </nav>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="hero-paper"></div>
-      <div class="hero-flower flower-left" aria-hidden="true">
-        <svg viewBox="0 0 220 600">
-          <path d="M134 600C85 472 150 384 96 263C68 198 66 131 107 38"/>
-          <path d="M103 468C52 448 33 409 32 373M111 397c44-21 72-51 82-91M91 302c-38-22-58-56-62-95M96 229c42-12 72-35 91-70"/>
-          <ellipse cx="27" cy="369" rx="28" ry="11" transform="rotate(30 27 369)"/>
-          <ellipse cx="184" cy="306" rx="30" ry="12" transform="rotate(-39 184 306)"/>
-          <ellipse cx="27" cy="204" rx="28" ry="11" transform="rotate(36 27 204)"/>
-          <ellipse cx="183" cy="158" rx="31" ry="12" transform="rotate(-35 183 158)"/>
+  <a href="#top" class="header-monogram" data-config="monogram">Ա&amp;Տ</a>
+
+  <div class="header-right">
+    <div class="lang-switch">
+      <button data-lang="hy" class="active">HY</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="ru">RU</button>
+    </div>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu">
+  <a href="#story" data-i18n="nav_about">ՄԵՐ ՄԱՍԻՆ</a>
+  <a href="#day" data-i18n="nav_diary">ՕՐԱԳԻՐ</a>
+  <a href="#dance" data-i18n="nav_places">ՎԱՅՐԵՐԸ</a>
+  <a href="#rsvp" data-i18n="nav_rsvp">RSVP</a>
+</div>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <h1 class="hero-names">
+      <span data-config="brideName">Արփինե</span>
+      <span class="amp">&amp;</span>
+      <span data-config="groomName">Տիգրան</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <div class="hero-date" data-config="weddingDateDisplay">17 ՄԱՅԻՍ 2025</div>
+    <p class="hero-quote" data-i18n="hero_quote">«Սեր, որ սկսվում է հավերժություն…»</p>
+  </div>
+
+  <div class="hero-visual">
+    <div class="img-wrap">
+      <img src="https://images.pexels.com/photos/10279188/pexels-photo-10279188.jpeg?auto=compress&cs=tinysrgb&w=1600"
+           alt="Bride and groom walking toward an Armenian church" />
+    </div>
+    <p class="hero-poem">Երկու սրտեր, մեկ ուղի հավերժության...</p>
+  </div>
+
+  <div class="scroll-cue">
+    <span data-i18n="hero_scroll">ոլորել</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ====================== CINEMATIC CHURCH STORY ====================== -->
+<section class="cinema" id="story">
+  <div class="cinema-sticky">
+
+    <div class="cinema-layer mountains"
+         data-in-start="0" data-in-end="0.02" data-out-start="0.98" data-out-end="1"
+         data-speed="-6" data-scale-from="1.08" data-scale-to="1.18">
+      <img src="https://images.pexels.com/photos/11885453/pexels-photo-11885453.jpeg?auto=compress&cs=tinysrgb&w=1920"
+           alt="Khor Virap monastery beneath Mount Ararat" />
+    </div>
+
+    <div class="cinema-layer approach"
+         data-in-start="0" data-in-end="0.08" data-out-start="0.42" data-out-end="0.52"
+         data-speed="-2" data-scale-from="1.0" data-scale-to="1.22">
+      <img src="https://images.pexels.com/photos/10279188/pexels-photo-10279188.jpeg?auto=compress&cs=tinysrgb&w=1920"
+           alt="The couple approaching the church" />
+    </div>
+
+    <div class="cinema-layer entrance"
+         data-in-start="0.44" data-in-end="0.54" data-out-start="0.7" data-out-end="0.78"
+         data-speed="1" data-scale-from="1.1" data-scale-to="1.0">
+      <img src="https://images.pexels.com/photos/11885463/pexels-photo-11885463.jpeg?auto=compress&cs=tinysrgb&w=1920"
+           alt="Sunlight over the church entrance" />
+    </div>
+
+    <div class="cinema-layer exit"
+         data-in-start="0.72" data-in-end="0.82" data-out-start="1" data-out-end="1.01"
+         data-speed="2" data-scale-from="1.14" data-scale-to="1.0">
+      <img src="https://images.pexels.com/photos/29624022/pexels-photo-29624022.jpeg?auto=compress&cs=tinysrgb&w=1920"
+           alt="Golden light as the celebration begins" />
+    </div>
+
+    <div class="cinema-layer scrim" data-in-start="0" data-in-end="0.01" data-out-start="0.99" data-out-end="1" data-speed="0"></div>
+
+    <div class="cinema-text" data-in-start="0.08" data-in-end="0.16" data-out-start="0.3" data-out-end="0.38">
+      <p data-i18n="story_line1">Ծանապարհներ, որ առանձին են սկսվել,</p>
+      <p data-i18n="story_line2">հանդիպում են մեկ դռան առաջ...</p>
+    </div>
+
+    <div class="cinema-text" data-in-start="0.5" data-in-end="0.58" data-out-start="0.66" data-out-end="0.7">
+      <p data-i18n="story_line3">Երկու սիրտ, մեկ ուխտագնացություն դեպի սրբություն,</p>
+    </div>
+
+    <div class="cinema-text" data-in-start="0.74" data-in-end="0.8" data-out-start="0.9" data-out-end="0.96">
+      <p data-i18n="story_line5">Սերն ավելի գեղեցիկ է, երբ կիսում ես...</p>
+    </div>
+
+    <div class="petal-layer"></div>
+
+    <div class="cinema-progress"><div class="fill"></div></div>
+  </div>
+</section>
+
+<!-- ============================== OUR DAY ============================== -->
+<section class="day-section" id="day">
+  <div class="section-title-wrap reveal">
+    <h2 class="section-title" data-i18n="day_title">ՄԵՐ ՕՐԸ</h2>
+    <div class="section-title-rules"><span class="rule"></span><span class="rule"></span></div>
+  </div>
+
+  <div class="day-grid">
+    <div class="day-col reveal-left">
+      <div class="day-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 6 L36 12 L28 12 Z"/>
+          <line x1="32" y1="4" x2="32" y2="12"/>
+          <line x1="29" y1="6" x2="35" y2="6"/>
+          <path d="M18 58 V30 L32 16 L46 30 V58 Z"/>
+          <path d="M27 58 V44 C27 40 37 40 37 44 V58"/>
+          <line x1="18" y1="46" x2="24" y2="46"/>
+          <line x1="40" y1="46" x2="46" y2="46"/>
         </svg>
       </div>
-
-      <div class="hero-copy reveal">
-        <p class="overline" data-i18n="hero.overline">ՄԵՐ ՍԻՐՈ ՕՐԸ</p>
-        <h1>
-          <span data-i18n="names.bride">Արփինե</span>
-          <em data-i18n="hero.and">և</em>
-          <span data-i18n="names.groom">Տիգրան</span>
-        </h1>
-        <div class="tiny-ornament"><i></i><span>✦</span><i></i></div>
-        <p class="date" data-i18n="hero.date">17 ՄԱՅԻՍ 2025</p>
-        <p class="quote" data-i18n="hero.quote">«Այն, որ սկսվում է սիրուց, դառնում է հավերժություն…»</p>
+      <div class="day-event-title" data-i18n="day_ceremony">ՀԱՐՍԱՆԵԿԱՆ ԱՐԱՐՈՂՈՒԹՅՈՒՆ</div>
+      <div class="day-date" data-config="weddingDateDisplay">17 ՄԱՅԻՍ 2025</div>
+      <div class="day-date" style="font-size:15px;color:var(--secondary-text)">
+        <span data-i18n="day_at">ժամը</span> <span data-config="churchTime">16:00</span>
       </div>
-
-      <div class="hero-visual reveal">
-        <div class="hero-photo">
-          <img src="assets/hero.jpg" alt="Bride and groom walking toward an Armenian church" />
-          <div class="soft-wash"></div>
-        </div>
-        <blockquote data-i18n="hero.sideQuote">Երկու սրտեր։ Մեկ ուղի։ Հավերժ…</blockquote>
+      <div class="day-place">
+        <span data-config="churchName">Սուրբ Գայանե եկեղեցի</span>
+        <small data-config="churchCity">Էջմիածին, Հայաստան</small>
       </div>
-
-      <a class="scroll" href="#ceremony">
-        <span>SCROLL</span>
-        <b></b>
+      <a class="day-map-btn" data-href-config="churchMapUrl" target="_blank" rel="noopener">
+        📍 <span data-i18n="day_map">ԴԻՏԵԼ ՔԱՐՏԵԶԸ</span>
       </a>
-    </section>
+    </div>
 
-    <!-- CINEMATIC CHURCH STORY -->
-    <section class="church-story" id="ceremony">
-      <div class="story-sticky">
-        <div class="story-scene scene-1 active" data-scene="1">
-          <img src="assets/hero.jpg" alt="" />
-          <div class="scene-wash"></div>
-          <div class="scene-copy left">
-            <span class="scene-number">01</span>
-            <h2 data-i18n="story.approach.title">Ճանապարհ դեպի եկեղեցի</h2>
-            <p data-i18n="story.approach.text">Քայլ առ քայլ՝ դեպի այն վայրը, որտեղ մեր երկու պատմությունները դառնում են մեկը։</p>
-          </div>
-        </div>
+    <div class="day-divider reveal"></div>
 
-        <div class="story-scene scene-2" data-scene="2">
-          <img src="assets/church-enter.jpg" alt="" />
-          <div class="scene-wash"></div>
-          <div class="scene-copy right">
-            <span class="scene-number">02</span>
-            <h2 data-i18n="story.enter.title">Մեր «Այո»-ն</h2>
-            <p data-i18n="story.enter.text">Հայկական եկեղեցու քարե կամարների ներքո՝ ամենակարևոր խոստումը։</p>
-          </div>
-        </div>
-
-        <div class="story-scene scene-3" data-scene="3">
-          <img src="assets/church-exit.jpg" alt="" />
-          <div class="scene-wash"></div>
-          <div class="scene-copy left bottom">
-            <span class="scene-number">03</span>
-            <h2 data-i18n="story.exit.title">Եվ սկսվում է մեր նոր ճանապարհը</h2>
-            <p data-i18n="story.exit.text">Եկեղեցուց դուրս՝ մեր սիրելիների ժպիտների և վարդի թերթիկների միջով։</p>
-          </div>
-          <div class="petals" id="petals" aria-hidden="true"></div>
-        </div>
-
-        <div class="story-progress" aria-hidden="true">
-          <span class="p active"></span><span class="p"></span><span class="p"></span>
-        </div>
-      </div>
-    </section>
-
-    <!-- DAY DETAILS -->
-    <section class="details" id="details">
-      <div class="section-title reveal">
-        <div class="title-rule"><i></i><span>✦</span><i></i></div>
-        <p class="overline" data-i18n="details.overline">ՄԵՐ ՕՐԸ</p>
-        <h2 data-i18n="details.title">Սպասում ենք Ձեզ մեր ամենագեղեցիկ օրը կիսելու</h2>
-      </div>
-
-      <div class="event-grid">
-        <article class="event-card reveal">
-          <svg class="event-icon church-icon" viewBox="0 0 100 110" aria-hidden="true">
-            <path d="M50 6v16M43 14h14M31 41 50 21l19 20v12h12v50H19V53h12z"/>
-            <path d="M38 103V69c0-9 24-9 24 0v34M31 54h38M10 103h80"/>
-          </svg>
-          <p class="event-kicker" data-i18n="details.ceremony.label">ՀԱՐՍԱՆԵԿԱՆ ԱՐԱՐՈՂՈՒԹՅՈՒՆ</p>
-          <h3 data-i18n="details.ceremony.date">17 ՄԱՅԻՍ 2025</h3>
-          <strong>16:00</strong>
-          <p data-i18n="details.ceremony.location">Սուրբ Գայանե եկեղեցի<br>Էջմիածին, Հայաստան</p>
-          <a href="https://maps.google.com/?q=Saint+Gayane+Church+Vagharshapat" target="_blank" rel="noopener">
-            <span>⌖</span><b data-i18n="common.map">ԴԻՏԵԼ ՔԱՐՏԵԶԸ</b>
-          </a>
-        </article>
-
-        <div class="event-divider"><span>✦</span></div>
-
-        <article class="event-card reveal">
-          <svg class="event-icon glasses-icon" viewBox="0 0 110 110" aria-hidden="true">
-            <path d="M12 8h34l-5 37c-3 18-24 18-27 0zM29 63v31M15 101h28"/>
-            <path d="M64 8h34l-2 37c-2 18-24 18-27 0zM82 63v31M68 101h28"/>
-            <path d="M15 39h28M67 39h28"/>
-          </svg>
-          <p class="event-kicker" data-i18n="details.reception.label">ՀԱՆԴԻՍՈՒԹՅՈՒՆ</p>
-          <h3 data-i18n="details.reception.date">17 ՄԱՅԻՍ 2025</h3>
-          <strong>19:00</strong>
-          <p data-i18n="details.reception.location">Royal Garden<br>Երևան, Հայաստան</p>
-          <a href="https://maps.google.com/" target="_blank" rel="noopener">
-            <span>⌖</span><b data-i18n="common.map">ԴԻՏԵԼ ՔԱՐՏԵԶԸ</b>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <!-- BALLROOM -->
-    <section class="ballroom" id="ballroom">
-      <div class="ballroom-image">
-        <img src="assets/ballroom.jpg" alt="Bride and groom dancing in a warm ballroom" />
-      </div>
-      <div class="ballroom-gradient"></div>
-      <div class="ballroom-copy reveal">
-        <p class="overline" data-i18n="dance.overline">ԵՐԲ ՍԿՍՎՈՒՄ Է ԵՐԱԺՇՏՈՒԹՅՈՒՆԸ</p>
-        <h2 data-i18n="dance.title">Մեր առաջին պարը</h2>
-        <p data-i18n="dance.text">Մի պահ, որտեղ մնացած աշխարհը լռում է։</p>
-
-        <button class="music-button" id="musicButton" type="button">
-          <span class="music-circle"><i>▶</i></span>
-          <span data-i18n="dance.play">Միացնել երաժշտությունը</span>
-        </button>
-      </div>
-
-      <div class="bokeh" aria-hidden="true"></div>
-    </section>
-
-    <!-- RSVP -->
-    <section class="rsvp" id="rsvp">
-      <div class="botanical botanical-left" aria-hidden="true">
-        <svg viewBox="0 0 320 500">
-          <path d="M70 500C120 405 118 307 182 222C228 161 228 83 205 18"/>
-          <path d="M125 374C86 357 55 324 38 282M151 314c50-22 89-55 115-100M177 226c-35-32-51-69-51-112M208 141c33-17 57-43 73-76"/>
-          <ellipse cx="46" cy="281" rx="36" ry="15" transform="rotate(31 46 281)"/>
-          <ellipse cx="272" cy="210" rx="38" ry="15" transform="rotate(-34 272 210)"/>
-          <ellipse cx="126" cy="110" rx="36" ry="15" transform="rotate(61 126 110)"/>
-          <ellipse cx="282" cy="66" rx="35" ry="14" transform="rotate(-43 282 66)"/>
+    <div class="day-col reveal-right">
+      <div class="day-icon">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 10 L24 34 C24 40 34 40 34 34 L38 10 Z"/>
+          <line x1="29" y1="40" x2="29" y2="54"/>
+          <line x1="21" y1="54" x2="37" y2="54"/>
+          <path d="M40 20 L43 30 C43 34 49 34 49 30 L46 16" transform="translate(2,4)"/>
         </svg>
       </div>
-
-      <div class="rsvp-inner reveal">
-        <p class="invite" data-i18n="rsvp.invite">Կլինե՞ք մեզ հետ մեր ամենագեղեցիկ օրը նշելու…</p>
-        <div class="rsvp-heading">
-          <i></i><span>RSVP</span><i></i>
-        </div>
-        <p class="rsvp-sub" data-i18n="rsvp.sub">Խնդրում ենք հաստատել Ձեր մասնակցությունը</p>
-
-        <form id="rsvpForm">
-          <div class="fields">
-            <label>
-              <span data-i18n="form.firstName">Անուն *</span>
-              <input name="firstName" required autocomplete="given-name" />
-            </label>
-            <label>
-              <span data-i18n="form.lastName">Ազգանուն *</span>
-              <input name="lastName" required autocomplete="family-name" />
-            </label>
-            <label>
-              <span data-i18n="form.guests">Հյուրերի քանակ *</span>
-              <select name="guests" required>
-                <option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option>
-                <option value="5">5+</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="rsvp-options">
-            <fieldset>
-              <legend data-i18n="form.side">Կողմը *</legend>
-              <label><input type="radio" name="side" value="bride" required><span data-i18n="form.brideSide">Հարսի կողմը</span></label>
-              <label><input type="radio" name="side" value="groom" required><span data-i18n="form.groomSide">Փեսայի կողմը</span></label>
-            </fieldset>
-
-            <fieldset>
-              <legend data-i18n="form.attendance">Մասնակցություն *</legend>
-              <label><input type="radio" name="attendance" value="yes" required><span data-i18n="form.yes">Այո</span></label>
-              <label><input type="radio" name="attendance" value="no" required><span data-i18n="form.no">Ոչ</span></label>
-            </fieldset>
-          </div>
-
-          <label class="message">
-            <span data-i18n="form.message">Մաղթանք կամ հաղորդագրություն</span>
-            <textarea name="message" rows="3"></textarea>
-          </label>
-
-          <button class="submit" type="submit">
-            <span data-i18n="form.submit">Ուղարկել պատասխանը</span>
-          </button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </form>
+      <div class="day-event-title" data-i18n="day_reception">ՀԱՆԴԻՍՈՒԹՅՈՒՆ</div>
+      <div class="day-date" data-config="weddingDateDisplay">17 ՄԱՅԻՍ 2025</div>
+      <div class="day-date" style="font-size:15px;color:var(--secondary-text)">
+        <span data-i18n="day_at">ժամը</span> <span data-config="restaurantTime">19:00</span>
       </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-ararat" aria-hidden="true">
-      <svg viewBox="0 0 1500 390" preserveAspectRatio="none">
-        <path class="far" d="M0 360 210 312 360 245 492 291 666 170 750 241 874 202 994 288 1154 225 1310 291 1500 258 1500 390 0 390Z"/>
-        <path class="near" d="M0 390 310 339 525 286 692 96 826 272 1015 234 1190 323 1500 282 1500 390Z"/>
-      </svg>
+      <div class="day-place">
+        <span data-config="restaurantName">Royal Garden</span>
+        <small data-config="restaurantCity">Երևան, Հայաստան</small>
+      </div>
+      <a class="day-map-btn" data-href-config="restaurantMapUrl" target="_blank" rel="noopener">
+        📍 <span data-i18n="day_map">ԴԻՏԵԼ ՔԱՐՏԵԶԸ</span>
+      </a>
     </div>
-    <div class="footer-inner reveal">
-      <div class="footer-monogram">A<span>&</span>T</div>
-      <small>17.05.2025</small>
-      <p data-i18n="footer.line">Մեր սիրո պատմությունը շարունակվում է…</p>
-      <b>A LOVE STORY — ROOTED IN ARMENIA</b>
-    </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ========================= RESTAURANT / DANCE ========================= -->
+<section class="dance-section" id="dance">
+  <div class="dance-bg">
+    <img src="https://images.pexels.com/photos/29624022/pexels-photo-29624022.jpeg?auto=compress&cs=tinysrgb&w=1920"
+         alt="Candlelit ballroom set for the reception" />
+  </div>
+  <div class="dance-bokeh"></div>
+
+  <div class="dance-copy reveal">
+    <div class="dance-eyebrow" data-i18n="dance_eyebrow">ՄԵՐ ԱՌԱՋԻՆ ՊԱՐԸ</div>
+    <p class="dance-title" data-i18n="dance_line">Երաժշտություն, որ պատմելու է մեր սիրո պատմությունը…</p>
+    <button class="music-btn">
+      <span class="play-circle">
+        <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        <span class="music-bars"><span></span><span></span><span></span></span>
+      </span>
+      <span data-i18n="dance_music">Մեր երաժշտությունը</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============================== RSVP ============================== -->
+<section class="rsvp-section" id="rsvp">
+  <svg class="botanical bl" viewBox="0 0 200 260" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M10 250 C 40 180, 30 120, 60 40" />
+    <path d="M60 40 C 75 55, 95 55, 105 40 C 95 25, 75 25, 60 40 Z"/>
+    <path d="M40 90 C 55 100, 70 95, 78 80 C 68 68, 50 70, 40 90 Z"/>
+    <path d="M25 150 C 42 158, 55 152, 60 138 C 48 128, 32 132, 25 150 Z"/>
+    <path d="M18 205 C 34 212, 46 206, 50 193 C 39 184, 24 187, 18 205 Z"/>
+  </svg>
+  <svg class="botanical tr" viewBox="0 0 200 260" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M190 10 C 160 80, 170 140, 140 220" />
+    <path d="M140 220 C 125 205, 105 205, 95 220 C 105 235, 125 235, 140 220 Z"/>
+    <path d="M160 170 C 145 160, 130 165, 122 180 C 132 192, 150 190, 160 170 Z"/>
+    <path d="M175 110 C 158 102, 145 108, 140 122 C 152 132, 168 128, 175 110 Z"/>
+  </svg>
+
+  <p class="rsvp-lead reveal" data-i18n="rsvp_lead">Կլինե՞ք մեզ հետ մեր ամենագեղեցիկ օրը նշելու…</p>
+  <div class="rsvp-title-wrap reveal">
+    <div class="ornament"><span class="rsvp-title" data-i18n="rsvp_title">RSVP</span></div>
+  </div>
+
+  <form class="rsvp-form" id="rsvp-form">
+    <div class="form-row">
+      <div class="field">
+        <label data-i18n="f_firstname">Անուն</label>
+        <input type="text" name="firstName" required />
+      </div>
+      <div class="field">
+        <label data-i18n="f_lastname">Ազգանուն</label>
+        <input type="text" name="lastName" required />
+      </div>
+      <div class="field">
+        <label data-i18n="f_guests">Հյուրերի քանակ</label>
+        <input type="number" name="guestsCount" min="1" value="1" required />
+      </div>
+    </div>
+
+    <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+      <div class="field">
+        <label data-i18n="f_side">Կողմը</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="side" value="bride" required /> <span data-i18n="f_side_bride">Հարսի կողմը</span></label>
+          <label class="radio-option"><input type="radio" name="side" value="groom" /> <span data-i18n="f_side_groom">Փեսայի կողմը</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label data-i18n="f_attendance">Մասնակցություն</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="attendance" value="yes" required /> <span data-i18n="f_yes">Այո</span></label>
+          <label class="radio-option"><input type="radio" name="attendance" value="no" /> <span data-i18n="f_no">Ոչ</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label data-i18n="f_message">Մաղթանք / հաղորդագրություն</label>
+      <textarea name="message" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="rsvp-submit" data-i18n="f_submit">ՈՒՂԱՐԿԵԼ ՊԱՏԱՍԽԱՆԸ</button>
+    <p class="rsvp-feedback" id="rsvp-feedback"></p>
+  </form>
+</section>
+
+<!-- ============================== FINAL ============================== -->
+<section class="final-section">
+  <div class="final-bg">
+    <img src="https://images.pexels.com/photos/11885453/pexels-photo-11885453.jpeg?auto=compress&cs=tinysrgb&w=1920"
+         alt="Mount Ararat at sunset" />
+  </div>
+  <div class="final-content reveal-scale">
+    <div class="final-monogram" data-config="monogramLatin">A &amp; T</div>
+    <div class="final-date">17.05.2025</div>
+    <p class="final-quote" data-i18n="final_line1">«Մեր սիրո պատմությունը շարունակվում է…»</p>
+    <div class="final-tag" data-i18n="final_line2">ՍԵՐ, ԱՐՄԱՏԱՎՈՐՎԱԾ ՀԱՅԱՍՏԱՆՈՒՄ</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span data-config="brideNameLatin">Arpine</span> &amp; <span data-config="groomNameLatin">Tigran</span> · With love
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/rsvp.js"></script>
 </body>
 </html>
