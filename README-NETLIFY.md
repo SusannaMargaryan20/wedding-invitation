@@ -1,59 +1,44 @@
-# Netlify + Resend deployment
+# Netlify + Resend setup
 
-This project is ready to deploy directly from GitHub to Netlify.
+This project is ready for GitHub -> Netlify deployment.
 
-## 1. Push the project to GitHub
+## Netlify settings
 
-Commit the whole project, but never commit a real `.env` file or API key.
+- Base directory: leave empty
+- Build command: leave empty
+- Publish directory: `public`
+- Functions directory: `netlify/functions`
 
-## 2. Import it in Netlify
+## The only Environment Variable you must add
 
-In Netlify:
+In Resend Dashboard -> API Keys, create an API key and copy it.
 
-1. Add new project / Import an existing project.
-2. Connect GitHub.
-3. Select this repository.
-4. Netlify reads `netlify.toml` automatically.
-5. No build command is required.
-6. Publish directory is already configured as `public`.
+In Netlify -> Project configuration -> Environment variables -> Add a variable:
 
-## 3. Add environment variables in Netlify
+- Key: `RESEND_API_KEY`
+- Value: the Resend key beginning with `re_...`
 
-Open your Netlify project settings and add:
+Then redeploy the site.
 
-- `RESEND_API_KEY` (required)
-- `RESEND_FROM_EMAIL` (optional; defaults to `onboarding@resend.dev`)
-- `BRIDE_EMAIL` (optional; defaults to `margarsusanna5@gmail.com`)
-- `GROOM_EMAIL` (optional; defaults to `margarsusanna5@gmail.com`)
+Do NOT put the Resend API key in GitHub or frontend JavaScript.
 
-Do not put `RESEND_API_KEY` in frontend JavaScript or GitHub.
+## RSVP recipients
 
-## 4. Resend setup
+Recipients are in `netlify/functions/wedding-config.mjs`.
 
-Create a Resend API key and use a sender address from a domain verified in Resend, for example:
+For this project:
 
-`rsvp@yourdomain.com`
+- Bride: `margarsusanna5@gmail.com`
+- Groom: `margarsusanna5@gmail.com`
 
-Bride and groom recipients stay separate/configurable. For this project both currently default to `margarsusanna5@gmail.com`. Later you can change `BRIDE_EMAIL` and `GROOM_EMAIL` independently in Netlify Environment Variables without editing the code.
+They are kept as two separate config fields so you can set different addresses for another wedding later.
 
-## How it works
+## Sender
 
-The existing frontend sends the form to:
+For testing, the function sends from `Wedding RSVP <onboarding@resend.dev>`.
+This works for Resend's test flow when sending to the email associated with your Resend account.
+For sending to arbitrary recipient addresses later, verify your own domain in Resend and then change the `from` address.
 
-`POST /api/rsvp`
+## Music
 
-Netlify redirects it internally to:
-
-`/.netlify/functions/rsvp`
-
-The Netlify Function uses `BRIDE_EMAIL` when the guest selects bride and `GROOM_EMAIL` when the guest selects groom. Both are currently set to `margarsusanna5@gmail.com`.
-
-Then it sends the email through Resend.
-
-## Local testing (optional)
-
-If you install Netlify CLI, you can run:
-
-`netlify dev`
-
-For the live site, no local Node/Express server is needed.
+The deploy uses `/wedding-music.mp3`, a smaller 44.1 kHz / 128 kbps MP3 for faster loading. Playback starts directly from the Open Invitation user gesture to satisfy browser autoplay rules.

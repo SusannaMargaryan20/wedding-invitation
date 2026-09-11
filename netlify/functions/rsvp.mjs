@@ -1,3 +1,5 @@
+import { WEDDING_EMAIL_CONFIG } from './wedding-config.mjs';
+
 const escapeHtml = (value = '') => String(value)
   .trim()
   .replace(/[&<>'"]/g, char => ({
@@ -26,15 +28,15 @@ export default async (request) => {
       return Response.json({ message: 'Invalid RSVP data.' }, { status: 400 });
     }
 
-    // Keep bride and groom recipients separate/configurable.
-    // For now both default to the same Gmail address.
-    const brideEmail = process.env.BRIDE_EMAIL || 'margarsusanna5@gmail.com';
-    const groomEmail = process.env.GROOM_EMAIL || 'margarsusanna5@gmail.com';
-    const to = side === 'bride' ? brideEmail : groomEmail;
-    const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    // Bride and groom stay separately configurable in wedding-config.mjs.
+    // For this wedding both currently point to the same Gmail address.
+    const to = side === 'bride'
+      ? WEDDING_EMAIL_CONFIG.brideEmail
+      : WEDDING_EMAIL_CONFIG.groomEmail;
+    const from = 'onboarding@resend.dev';
 
     if (!process.env.RESEND_API_KEY) {
-      return Response.json({ message: 'RESEND_API_KEY is missing.' }, { status: 500 });
+      return Response.json({ message: 'Email service is not configured yet. Add RESEND_API_KEY in Netlify Environment Variables.' }, { status: 500 });
     }
 
     const response = await fetch('https://api.resend.com/emails', {

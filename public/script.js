@@ -1,5 +1,5 @@
 const CONFIG = {
-  musicUrl: "/assets/music/ti-amo.mp3",
+  musicUrl: "/wedding-music.mp3",
   musicVolume: 0.75,
   churchMapQuery: "Saint Gayane Church, Vagharshapat, Armenia",
   restaurantMapQuery: "Royal Garden, Yerevan, Armenia"
@@ -237,38 +237,13 @@ const danceMusic = $("#danceMusic");
 
 let musicStarted = false;
 let musicMuted = false;
+let musicPlayPromise = null;
 
 if (weddingMusic) {
-  // Use a root-relative URL so the file resolves correctly on Netlify,
-  // regardless of the current page URL.
   weddingMusic.src = CONFIG.musicUrl;
   weddingMusic.volume = CONFIG.musicVolume;
   weddingMusic.loop = true;
-  weddingMusic.preload = "auto";
-  weddingMusic.load();
-}
-
-async function startMusic(){
-  if(!weddingMusic) return false;
-
-  try {
-    weddingMusic.muted = false;
-    weddingMusic.volume = CONFIG.musicVolume;
-
-    // play() is called from a real user interaction (Open invitation / music button).
-    // This keeps playback compatible with browser autoplay policies.
-    const playPromise = weddingMusic.play();
-    if(playPromise) await playPromise;
-
-    musicStarted = true;
-    musicMuted = false;
-    updateMusicUI();
-    return true;
-  } catch(error) {
-    musicStarted = false;
-    console.warn("Music could not start:", error);
-    return false;
-  }
+  weddingMusic.preload = "metadata";
 }
 
 function updateMusicUI(){
@@ -280,11 +255,42 @@ function updateMusicUI(){
   if(icon) icon.textContent = musicMuted ? "♩" : "♫";
 }
 
-async function toggleMusic(){
+function startMusicFromGesture(){
+  if(!weddingMusic) return;
+
+  weddingMusic.muted = false;
+  weddingMusic.volume = CONFIG.musicVolume;
+
+  // IMPORTANT: call play() synchronously from the user's real gesture.
+  // This is the most reliable pattern for Chrome/Safari autoplay policies.
+  if (!musicPlayPromise || weddingMusic.paused) {
+    musicPlayPromise = weddingMusic.play();
+
+    if (musicPlayPromise?.then) {
+      musicPlayPromise
+        .then(() => {
+          musicStarted = true;
+          musicMuted = false;
+          updateMusicUI();
+        })
+        .catch(error => {
+          musicStarted = false;
+          musicPlayPromise = null;
+          console.warn("Wedding music could not start:", error);
+        });
+    } else {
+      musicStarted = true;
+      musicMuted = false;
+      updateMusicUI();
+    }
+  }
+}
+
+function toggleMusic(){
   if(!weddingMusic) return;
 
   if(!musicStarted || weddingMusic.paused){
-    await startMusic();
+    startMusicFromGesture();
     return;
   }
 
@@ -293,10 +299,14 @@ async function toggleMusic(){
   updateMusicUI();
 }
 
+// Start on pointerdown so play() runs at the earliest possible point in the
+// user's gesture. The click handler below is kept as a keyboard/fallback path.
+openInvitation.addEventListener("pointerdown", startMusicFromGesture);
+
 openInvitation.addEventListener("click", () => {
-  // Start audio immediately inside the click event. This is important on mobile
-  // browsers and deployed HTTPS sites with strict autoplay policies.
-  void startMusic();
+  if(!musicStarted && weddingMusic?.paused){
+    startMusicFromGesture();
+  }
 
   document.body.classList.add("opened");
   document.body.classList.remove("locked");
@@ -308,6 +318,10 @@ openInvitation.addEventListener("click", () => {
 
 musicControl.addEventListener("click", toggleMusic);
 danceMusic.addEventListener("click", toggleMusic);
+
+weddingMusic?.addEventListener("error", () => {
+  console.error("Wedding music failed to load:", weddingMusic.error);
+});
 
 /* --------------------------------------------------
    HEADER + PAGE PROGRESS
