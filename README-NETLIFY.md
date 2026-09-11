@@ -21,10 +21,9 @@ In Netlify:
 
 Open your Netlify project settings and add:
 
-- `RESEND_API_KEY`
-- `RESEND_FROM_EMAIL`
-- `BRIDE_EMAIL`
-- `GROOM_EMAIL`
+- `RESEND_API_KEY` (required)
+- `RESEND_FROM_EMAIL` (optional; defaults to `onboarding@resend.dev`)
+- `RSVP_EMAIL` (optional; defaults to `margarsusanna5@gmail.com`)
 
 Do not put `RESEND_API_KEY` in frontend JavaScript or GitHub.
 
@@ -34,7 +33,7 @@ Create a Resend API key and use a sender address from a domain verified in Resen
 
 `rsvp@yourdomain.com`
 
-Then set bride and groom recipient addresses to any Gmail addresses you want.
+All RSVP submissions currently go to `margarsusanna5@gmail.com`. You can later change only `RSVP_EMAIL` in Netlify Environment Variables without editing the code.
 
 ## How it works
 
@@ -46,10 +45,7 @@ Netlify redirects it internally to:
 
 `/.netlify/functions/rsvp`
 
-The Netlify Function chooses the recipient:
-
-- `side = bride` -> `BRIDE_EMAIL`
-- `side = groom` -> `GROOM_EMAIL`
+The Netlify Function keeps the bride/groom selection in the email details, but both cases are sent to the same configured RSVP inbox.
 
 Then it sends the email through Resend.
 

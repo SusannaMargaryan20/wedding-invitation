@@ -26,12 +26,13 @@ export default async (request) => {
       return Response.json({ message: 'Invalid RSVP data.' }, { status: 400 });
     }
 
-    const to = side === 'bride'
-      ? process.env.BRIDE_EMAIL
-      : process.env.GROOM_EMAIL;
+    // All RSVP submissions currently go to the same inbox.
+    // RSVP_EMAIL can override this later from Netlify without changing code.
+    const to = process.env.RSVP_EMAIL || 'margarsusanna5@gmail.com';
+    const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 
-    if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL || !to) {
-      return Response.json({ message: 'Email configuration is missing.' }, { status: 500 });
+    if (!process.env.RESEND_API_KEY) {
+      return Response.json({ message: 'RESEND_API_KEY is missing.' }, { status: 500 });
     }
 
     const response = await fetch('https://api.resend.com/emails', {
@@ -41,7 +42,7 @@ export default async (request) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: `Wedding RSVP <${process.env.RESEND_FROM_EMAIL}>`,
+        from: `Wedding RSVP <${from}>`,
         to: [to],
         subject: `Wedding RSVP — ${escapeHtml(firstName)} ${escapeHtml(lastName)}`,
         html: `

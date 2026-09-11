@@ -8,3 +8,10 @@
   from = "/api/rsvp"
   to = "/.netlify/functions/rsvp"
   status = 200
+
+[[headers]]
+  for = "/assets/music/*.mp3"
+  [headers.values]
+    Content-Type = "audio/mpeg"
+    Cache-Control = "public, max-age=3600"
+

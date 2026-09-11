@@ -1,5 +1,5 @@
 const CONFIG = {
-  musicUrl: "assets/music/ti-amo.mp3",
+  musicUrl: "/assets/music/ti-amo.mp3",
   musicVolume: 0.75,
   churchMapQuery: "Saint Gayane Church, Vagharshapat, Armenia",
   restaurantMapQuery: "Royal Garden, Yerevan, Armenia"
@@ -90,6 +90,8 @@ const TRANSLATIONS = {
     "Խոստումների պահը": "The moment of vows",
     "Վարդերի ճանապարհը": "The path of roses",
     "Պատմությունը շարունակվում է": "The story continues",
+    "Ուղարկվում է…": "Sending…",
+    "Չհաջողվեց ուղարկել։ Փորձեք կրկին։": "Could not send. Please try again.",
     "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Thank you. We look forward to celebrating with you ♡"
   },
   ru: {
@@ -166,6 +168,8 @@ const TRANSLATIONS = {
     "Խոստումների պահը": "Момент клятв",
     "Վարդերի ճանապարհը": "Дорога из роз",
     "Պատմությունը շարունակվում է": "История продолжается",
+    "Ուղարկվում է…": "Отправляется…",
+    "Չհաջողվեց ուղարկել։ Փորձեք կրկին։": "Не удалось отправить. Попробуйте ещё раз.",
     "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Спасибо. Будем рады отпраздновать этот день вместе с вами ♡"
   }
 };
@@ -216,8 +220,8 @@ function translatePage(language){
     selectPlace(activeMapTab.dataset.place);
   }
 
-  if(formStatus?.textContent.trim()){
-    formStatus.textContent = translateText("Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡");
+  if(formStatus?.dataset.statusKey){
+    formStatus.textContent = translateText(formStatus.dataset.statusKey);
   }
 }
 
@@ -235,27 +239,35 @@ let musicStarted = false;
 let musicMuted = false;
 
 if (weddingMusic) {
+  // Use a root-relative URL so the file resolves correctly on Netlify,
+  // regardless of the current page URL.
   weddingMusic.src = CONFIG.musicUrl;
   weddingMusic.volume = CONFIG.musicVolume;
   weddingMusic.loop = true;
+  weddingMusic.preload = "auto";
+  weddingMusic.load();
 }
 
 async function startMusic(){
-  if(!weddingMusic) return;
+  if(!weddingMusic) return false;
 
   try {
-    if(!musicStarted){
-      weddingMusic.currentTime = 0;
-    }
-
     weddingMusic.muted = false;
-    await weddingMusic.play();
+    weddingMusic.volume = CONFIG.musicVolume;
+
+    // play() is called from a real user interaction (Open invitation / music button).
+    // This keeps playback compatible with browser autoplay policies.
+    const playPromise = weddingMusic.play();
+    if(playPromise) await playPromise;
 
     musicStarted = true;
     musicMuted = false;
     updateMusicUI();
+    return true;
   } catch(error) {
-    console.warn("Music could not start automatically:", error);
+    musicStarted = false;
+    console.warn("Music could not start:", error);
+    return false;
   }
 }
 
@@ -281,12 +293,13 @@ async function toggleMusic(){
   updateMusicUI();
 }
 
-openInvitation.addEventListener("click", async () => {
+openInvitation.addEventListener("click", () => {
+  // Start audio immediately inside the click event. This is important on mobile
+  // browsers and deployed HTTPS sites with strict autoplay policies.
+  void startMusic();
+
   document.body.classList.add("opened");
   document.body.classList.remove("locked");
-
-  // The click is a real user interaction, so browsers allow audio playback here.
-  await startMusic();
 
   setTimeout(() => {
     inviteGate.setAttribute("aria-hidden", "true");
@@ -663,20 +676,38 @@ selectPlace("church");
 
 const rsvpForm = $("#rsvpForm");
 const formStatus = $("#formStatus");
+const RSVP_API_URL = "/api/rsvp"; // Netlify routes this to the RSVP serverless function.
 
-rsvpForm.addEventListener("submit", e => {
+rsvpForm.addEventListener("submit", async e => {
   e.preventDefault();
 
   if(!rsvpForm.reportValidity()) return;
 
+  const submitButton = rsvpForm.querySelector('button[type="submit"]');
   const data = Object.fromEntries(new FormData(rsvpForm).entries());
 
-  const saved = JSON.parse(localStorage.getItem("wedding-rsvps") || "[]");
-  saved.push({...data, submittedAt:new Date().toISOString()});
-  localStorage.setItem("wedding-rsvps", JSON.stringify(saved));
+  submitButton.disabled = true;
+  formStatus.dataset.statusKey = "Ուղարկվում է…";
+  formStatus.textContent = translateText(formStatus.dataset.statusKey);
 
-  rsvpForm.reset();
-  formStatus.textContent = translateText("Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡");
+  try {
+    const response = await fetch(RSVP_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    if(!response.ok) throw new Error("RSVP request failed");
+
+    rsvpForm.reset();
+    formStatus.dataset.statusKey = "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡";
+  } catch(error) {
+    console.error(error);
+    formStatus.dataset.statusKey = "Չհաջողվեց ուղարկել։ Փորձեք կրկին։";
+  } finally {
+    formStatus.textContent = translateText(formStatus.dataset.statusKey);
+    submitButton.disabled = false;
+  }
 });
 
 /* Start with the invitation gate locked. */
