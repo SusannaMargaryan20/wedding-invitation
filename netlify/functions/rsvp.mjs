@@ -26,9 +26,11 @@ export default async (request) => {
       return Response.json({ message: 'Invalid RSVP data.' }, { status: 400 });
     }
 
-    // All RSVP submissions currently go to the same inbox.
-    // RSVP_EMAIL can override this later from Netlify without changing code.
-    const to = process.env.RSVP_EMAIL || 'margarsusanna5@gmail.com';
+    // Keep bride and groom recipients separate/configurable.
+    // For now both default to the same Gmail address.
+    const brideEmail = process.env.BRIDE_EMAIL || 'margarsusanna5@gmail.com';
+    const groomEmail = process.env.GROOM_EMAIL || 'margarsusanna5@gmail.com';
+    const to = side === 'bride' ? brideEmail : groomEmail;
     const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 
     if (!process.env.RESEND_API_KEY) {
