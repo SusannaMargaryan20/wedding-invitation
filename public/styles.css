@@ -560,6 +560,12 @@ input,select,textarea{width:100%;border:1px solid rgba(113,74,56,.2);border-radi
    the aggressive tall-screen crop from the original layout.
    ========================================================= */
 @media(max-width:680px){
+  /* Keep the live story label near the top of the mobile photo.
+     The larger 5:4 image stage moved it too far down visually. */
+  .story-live{
+    top:32px;
+  }
+
   /* 16:9 was too short on phones. 5:4 gives the artwork much
      more visual weight while keeping the central composition. */
   .hero-image{
