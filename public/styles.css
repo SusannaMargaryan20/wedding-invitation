@@ -553,3 +553,61 @@ input,select,textarea{width:100%;border:1px solid rgba(113,74,56,.2);border-radi
   }
   .dance-music{margin-left:auto;margin-right:auto}
 }
+
+/* =========================================================
+   MOBILE IMAGE SIZE BALANCE
+   Make phone imagery feel fuller again without returning to
+   the aggressive tall-screen crop from the original layout.
+   ========================================================= */
+@media(max-width:680px){
+  /* 16:9 was too short on phones. 5:4 gives the artwork much
+     more visual weight while keeping the central composition. */
+  .hero-image{
+    aspect-ratio:5 / 4;
+    height:auto;
+    min-height:0;
+  }
+  .hero-image img{
+    object-fit:cover;
+    object-position:center center;
+  }
+
+  /* Give every ceremony scene a larger photo stage. */
+  .story-section{
+    height:740px;
+    min-height:740px;
+  }
+  .story-scene>img{
+    height:auto;
+    aspect-ratio:5 / 4;
+    object-fit:cover;
+    object-position:center center;
+  }
+
+  .approach-base,
+  .approach-person{
+    height:auto;
+    aspect-ratio:5 / 4;
+    background-size:cover;
+    background-position:center center;
+  }
+
+  /* Slightly raise the copy so it still has breathing room under
+     the now-larger photo area. */
+  .scene-copy,
+  .scene-copy-left,
+  .scene-copy-right,
+  .scene-copy-bottom{
+    bottom:62px;
+  }
+
+  /* The dance source is close to square, so a square mobile stage
+     makes the couple noticeably larger with only mild side crop. */
+  .dance-animation{
+    aspect-ratio:1 / 1;
+  }
+  .dance-frame{
+    object-fit:cover;
+    object-position:center center;
+  }
+}
