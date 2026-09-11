@@ -1,8 +1,19 @@
+const DEFAULT_WEDDING_ID = "hrant-anna";
+const requestedWeddingId = new URLSearchParams(window.location.search).get("wedding");
+const ACTIVE_WEDDING_ID = window.WEDDING_CONFIGS?.[requestedWeddingId]
+  ? requestedWeddingId
+  : DEFAULT_WEDDING_ID;
+const ACTIVE_WEDDING = window.WEDDING_CONFIGS?.[ACTIVE_WEDDING_ID];
+
+if(!ACTIVE_WEDDING){
+  throw new Error("Wedding configuration is missing.");
+}
+
 const CONFIG = {
-  musicUrl: "/wedding-music.mp3",
+  musicUrl: ACTIVE_WEDDING.music.url,
   musicVolume: 0.75,
-  churchMapQuery: "Saint Gayane Church, Vagharshapat, Armenia",
-  restaurantMapQuery: "Royal Garden, Yerevan, Armenia"
+  churchMapQuery: ACTIVE_WEDDING.ceremony.mapQuery,
+  restaurantMapQuery: ACTIVE_WEDDING.reception.mapQuery
 };
 
 const $ = (selector, root=document) => root.querySelector(selector);
@@ -14,6 +25,136 @@ const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
 
 let currentLanguage = "hy";
 const ORIGINAL_DOCUMENT_TITLE = document.title;
+
+const MONTHS = {
+  hy: [
+    { upper: "ՀՈՒՆՎԱՐ", title: "Հունվար", date: "ՀՈՒՆՎԱՐ" },
+    { upper: "ՓԵՏՐՎԱՐ", title: "Փետրվար", date: "ՓԵՏՐՎԱՐ" },
+    { upper: "ՄԱՐՏ", title: "Մարտ", date: "ՄԱՐՏ" },
+    { upper: "ԱՊՐԻԼ", title: "Ապրիլ", date: "ԱՊՐԻԼ" },
+    { upper: "ՄԱՅԻՍ", title: "Մայիս", date: "ՄԱՅԻՍ" },
+    { upper: "ՀՈՒՆԻՍ", title: "Հունիս", date: "ՀՈՒՆԻՍ" },
+    { upper: "ՀՈՒԼԻՍ", title: "Հուլիս", date: "ՀՈՒԼԻՍ" },
+    { upper: "ՕԳՈՍՏՈՍ", title: "Օգոստոս", date: "ՕԳՈՍՏՈՍ" },
+    { upper: "ՍԵՊՏԵՄԲԵՐ", title: "Սեպտեմբեր", date: "ՍԵՊՏԵՄԲԵՐ" },
+    { upper: "ՀՈԿՏԵՄԲԵՐ", title: "Հոկտեմբեր", date: "ՀՈԿՏԵՄԲԵՐ" },
+    { upper: "ՆՈՅԵՄԲԵՐ", title: "Նոյեմբեր", date: "ՆՈՅԵՄԲԵՐ" },
+    { upper: "ԴԵԿՏԵՄԲԵՐ", title: "Դեկտեմբեր", date: "ԴԵԿՏԵՄԲԵՐ" }
+  ],
+  en: [
+    { upper: "JANUARY", title: "January", date: "JANUARY" },
+    { upper: "FEBRUARY", title: "February", date: "FEBRUARY" },
+    { upper: "MARCH", title: "March", date: "MARCH" },
+    { upper: "APRIL", title: "April", date: "APRIL" },
+    { upper: "MAY", title: "May", date: "MAY" },
+    { upper: "JUNE", title: "June", date: "JUNE" },
+    { upper: "JULY", title: "July", date: "JULY" },
+    { upper: "AUGUST", title: "August", date: "AUGUST" },
+    { upper: "SEPTEMBER", title: "September", date: "SEPTEMBER" },
+    { upper: "OCTOBER", title: "October", date: "OCTOBER" },
+    { upper: "NOVEMBER", title: "November", date: "NOVEMBER" },
+    { upper: "DECEMBER", title: "December", date: "DECEMBER" }
+  ],
+  ru: [
+    { upper: "ЯНВАРЬ", title: "Январь", date: "ЯНВАРЯ" },
+    { upper: "ФЕВРАЛЬ", title: "Февраль", date: "ФЕВРАЛЯ" },
+    { upper: "МАРТ", title: "Март", date: "МАРТА" },
+    { upper: "АПРЕЛЬ", title: "Апрель", date: "АПРЕЛЯ" },
+    { upper: "МАЙ", title: "Май", date: "МАЯ" },
+    { upper: "ИЮНЬ", title: "Июнь", date: "ИЮНЯ" },
+    { upper: "ИЮЛЬ", title: "Июль", date: "ИЮЛЯ" },
+    { upper: "АВГУСТ", title: "Август", date: "АВГУСТА" },
+    { upper: "СЕНТЯБРЬ", title: "Сентябрь", date: "СЕНТЯБРЯ" },
+    { upper: "ОКТЯБРЬ", title: "Октябрь", date: "ОКТЯБРЯ" },
+    { upper: "НОЯБРЬ", title: "Ноябрь", date: "НОЯБРЯ" },
+    { upper: "ДЕКАБРЬ", title: "Декабрь", date: "ДЕКАБРЯ" }
+  ]
+};
+
+function localized(value){
+  if(typeof value === "string") return value;
+  return value?.[currentLanguage] || value?.hy || value?.en || "";
+}
+
+function setText(selector, value){
+  const element = $(selector);
+  if(element) element.textContent = value;
+}
+
+function timeLabel(time){
+  if(currentLanguage === "en") return `at ${time}`;
+  if(currentLanguage === "ru") return `в ${time}`;
+  return `ժամը ${time}`;
+}
+
+function formatWeddingDate(){
+  const { day, month, year } = ACTIVE_WEDDING.date;
+  const monthData = MONTHS[currentLanguage][month - 1];
+  return `${day} ${monthData.date} ${year}`;
+}
+
+function applyWeddingConfig(){
+  const { names, date, ceremony, reception, music } = ACTIVE_WEDDING;
+  const name1 = localized(names.first);
+  const name2 = localized(names.second);
+  const joiner = currentLanguage === "hy" ? "և" : currentLanguage === "ru" ? "и" : "and";
+  const monthData = MONTHS[currentLanguage][date.month - 1];
+  const dd = String(date.day).padStart(2, "0");
+  const mm = String(date.month).padStart(2, "0");
+  const firstInitial = names.first.en.charAt(0).toUpperCase();
+  const secondInitial = names.second.en.charAt(0).toUpperCase();
+  const monogram = `${firstInitial}<i>&</i>${secondInitial}`;
+
+  document.title = currentLanguage === "hy"
+    ? `${name1} & ${name2} — Հարսանեկան հրավեր`
+    : currentLanguage === "ru"
+      ? `${name1} & ${name2} — Свадебное приглашение`
+      : `${name1} & ${name2} — Wedding Invitation`;
+
+  ["#gateMonogram", "#headerMonogram", "#footerMonogram"].forEach(selector => {
+    const element = $(selector);
+    if(element) element.innerHTML = monogram;
+  });
+
+  setText("#gateName1", name1);
+  setText("#gateName2", name2);
+  setText("#gateAnd", joiner);
+  setText("#heroName1", name1);
+  setText("#heroName2", name2);
+  setText("#heroAnd", joiner);
+
+  setText("#gateDate", `${dd} · ${mm} · ${date.year}`);
+  setText("#heroDate", formatWeddingDate());
+  setText("#ceremonyDate", formatWeddingDate());
+  setText("#receptionDate", formatWeddingDate());
+  setText("#ceremonyTime", timeLabel(ceremony.time));
+  setText("#receptionTime", timeLabel(reception.time));
+
+  const ceremonyPlace = $("#ceremonyPlace");
+  if(ceremonyPlace) ceremonyPlace.innerHTML = `${localized(ceremony.name)}<br>${localized(ceremony.location)}`;
+  const receptionPlace = $("#receptionPlace");
+  if(receptionPlace) receptionPlace.innerHTML = `${localized(reception.name)}<br>${localized(reception.location)}`;
+
+  const ceremonyMapLink = $("#ceremonyMapLink");
+  if(ceremonyMapLink) ceremonyMapLink.href = `https://maps.google.com/?q=${encodeURIComponent(ceremony.mapQuery)}`;
+  const receptionMapLink = $("#receptionMapLink");
+  if(receptionMapLink) receptionMapLink.href = `https://maps.google.com/?q=${encodeURIComponent(reception.mapQuery)}`;
+
+  setText("#calendarDateTitle", `${date.day} ${monthData.title}`);
+  setText("#calendarMonth", monthData.upper);
+  setText("#calendarYear", date.year);
+  setText("#footerDate", `${dd}.${mm}.${date.year}`);
+  setText("#musicTitle", music.title);
+  setText("#danceMusicTitle", music.title);
+
+  const audio = $("#weddingMusic");
+  if(audio && audio.getAttribute("src") !== music.url) audio.src = music.url;
+
+  if(typeof renderCalendar === "function") renderCalendar();
+  const activeMapTab = $(".map-tab.active");
+  if(activeMapTab && typeof selectPlace === "function") selectPlace(activeMapTab.dataset.place);
+}
+
 
 const TRANSLATIONS = {
   en: {
@@ -182,7 +323,6 @@ function translateText(source){
 function translatePage(language){
   currentLanguage = ["hy", "en", "ru"].includes(language) ? language : "hy";
   document.documentElement.lang = currentLanguage;
-  document.title = translateText(ORIGINAL_DOCUMENT_TITLE);
 
   const dynamicIds = new Set(["storyStatusText", "mapTitle", "mapSubtitle", "formStatus"]);
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -193,6 +333,7 @@ function translatePage(language){
   nodes.forEach(node => {
     const parent = node.parentElement;
     if(!parent || parent.closest("script, style, noscript")) return;
+    if(parent.closest("[data-wedding-dynamic]")) return;
     if(dynamicIds.has(parent.id)) return;
 
     if(node.__translationSource === undefined){
@@ -223,6 +364,8 @@ function translatePage(language){
   if(formStatus?.dataset.statusKey){
     formStatus.textContent = translateText(formStatus.dataset.statusKey);
   }
+
+  applyWeddingConfig();
 }
 
 /* --------------------------------------------------
@@ -370,7 +513,10 @@ const storyLive = $("#storyLive");
 let storyTimer = null;
 let storyRunning = false;
 let storyIndex = 0;
-let storyFirstCycleCompleted = false;
+// Never lock the page while the cinematic story is playing.
+// Treat the first cycle as already completed so the story simply loops
+// whenever it is visible and the user can scroll normally at all times.
+let storyFirstCycleCompleted = true;
 let storyScrollLocked = false;
 let storyLockedY = 0;
 let storyVisible = false;
@@ -461,41 +607,6 @@ function showScene(index){
   }
 }
 
-function lockScrollForStory(){
-  if(storyScrollLocked || storyFirstCycleCompleted) return;
-
-  // The first cinematic pass is kept in view so the guest sees the whole story.
-  storyLockedY = storySection.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({top: storyLockedY, behavior: "auto"});
-
-  storyScrollLocked = true;
-  document.documentElement.classList.add("story-scroll-locked");
-  document.body.classList.add("story-scroll-locked");
-
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${storyLockedY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
-}
-
-function unlockScrollAfterFirstCycle(){
-  if(!storyScrollLocked) return;
-
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.left = "";
-  document.body.style.right = "";
-  document.body.style.width = "";
-
-  document.documentElement.classList.remove("story-scroll-locked");
-  document.body.classList.remove("story-scroll-locked");
-
-  storyScrollLocked = false;
-  window.scrollTo({top: storyLockedY, behavior: "auto"});
-  updatePageUI();
-}
-
 function stopStory(){
   clearTimeout(storyTimer);
   storyTimer = null;
@@ -503,16 +614,6 @@ function stopStory(){
 }
 
 function finishStoryCycle(){
-  const isFirstCycle = !storyFirstCycleCompleted;
-
-  if(isFirstCycle){
-    storyFirstCycleCompleted = true;
-    storyLive?.classList.add("free-to-scroll");
-
-    // Release scrolling after the first full pass. The animation itself keeps looping.
-    window.setTimeout(unlockScrollAfterFirstCycle, 260);
-  }
-
   clearTimeout(storyTimer);
   storyTimer = window.setTimeout(() => {
     if(!storyVisible){
@@ -522,14 +623,14 @@ function finishStoryCycle(){
 
     showScene(0);
     scheduleNextScene();
-  }, isFirstCycle ? 650 : loopPause);
+  }, loopPause);
 }
 
 function scheduleNextScene(){
   clearTimeout(storyTimer);
 
   storyTimer = window.setTimeout(() => {
-    if(!storyVisible && storyFirstCycleCompleted){
+    if(!storyVisible){
       storyRunning = false;
       return;
     }
@@ -543,12 +644,8 @@ function scheduleNextScene(){
   }, sceneDurations[storyIndex]);
 }
 
-function startStory({lockFirstPass = false} = {}){
+function startStory(){
   if(storyRunning) return;
-
-  if(lockFirstPass && !storyFirstCycleCompleted){
-    lockScrollForStory();
-  }
 
   storyRunning = true;
   if(petalField) petalField.innerHTML = "";
@@ -557,25 +654,16 @@ function startStory({lockFirstPass = false} = {}){
 }
 
 /*
-  First visit: start when 55% of the story is visible and hold the first pass.
-  After that: the story loops forever while the section is on screen, but scrolling is free.
+  The story loops forever while the section is visible.
+  It never locks wheel, touch, keyboard, or page scrolling.
 */
 const storyObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    const ratio = entry.intersectionRatio;
-    storyVisible = entry.isIntersecting && ratio >= .16;
+    storyVisible = entry.isIntersecting && entry.intersectionRatio >= .16;
 
-    if(!storyFirstCycleCompleted && entry.isIntersecting && ratio >= .55 && !storyRunning){
-      startStory({lockFirstPass:true});
-      return;
-    }
-
-    if(storyFirstCycleCompleted && storyVisible && !storyRunning){
+    if(storyVisible && !storyRunning){
       startStory();
-      return;
-    }
-
-    if(storyFirstCycleCompleted && !storyVisible && storyRunning){
+    } else if(!storyVisible && storyRunning){
       stopStory();
     }
   });
@@ -586,26 +674,6 @@ const storyObserver = new IntersectionObserver(entries => {
 storyObserver.observe(storySection);
 showScene(0);
 
-/*
-  During only the first cinematic pass, block accidental wheel/touch/key scrolling.
-  The live indicator and moving progress bar make it clear the site is actively playing.
-*/
-function preventStoryScrollInput(event){
-  if(!storyScrollLocked) return;
-
-  if(
-    event.type === "wheel" ||
-    event.type === "touchmove" ||
-    ["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].includes(event.key)
-  ){
-    event.preventDefault();
-  }
-}
-
-window.addEventListener("wheel", preventStoryScrollInput, {passive:false});
-window.addEventListener("touchmove", preventStoryScrollInput, {passive:false});
-window.addEventListener("keydown", preventStoryScrollInput, {passive:false});
-
 /* --------------------------------------------------
    CALENDAR
    -------------------------------------------------- */
@@ -613,9 +681,9 @@ window.addEventListener("keydown", preventStoryScrollInput, {passive:false});
 const calendarDays = $("#calendarDays");
 
 function renderCalendar(){
-  const year = 2025;
-  const month = 4; // May
-  const weddingDay = 17;
+  const year = ACTIVE_WEDDING.date.year;
+  const month = ACTIVE_WEDDING.date.month - 1;
+  const weddingDay = ACTIVE_WEDDING.date.day;
 
   const firstDay = new Date(year, month, 1).getDay();
   const mondayIndex = (firstDay + 6) % 7;
@@ -656,13 +724,15 @@ const mapSubtitle = $("#mapSubtitle");
 const places = {
   church: {
     query: CONFIG.churchMapQuery,
-    title: "Սուրբ Գայանե եկեղեցի",
-    subtitle: "Էջմիածին · 16:00"
+    title: ACTIVE_WEDDING.ceremony.name,
+    location: ACTIVE_WEDDING.ceremony.location,
+    time: ACTIVE_WEDDING.ceremony.time
   },
   restaurant: {
     query: CONFIG.restaurantMapQuery,
-    title: "Royal Garden",
-    subtitle: "Երևան · 19:00"
+    title: ACTIVE_WEDDING.reception.name,
+    location: ACTIVE_WEDDING.reception.location,
+    time: ACTIVE_WEDDING.reception.time
   }
 };
 
@@ -670,8 +740,8 @@ function selectPlace(key){
   const place = places[key];
 
   map.src = `https://www.google.com/maps?q=${encodeURIComponent(place.query)}&output=embed`;
-  mapTitle.textContent = translateText(place.title);
-  mapSubtitle.textContent = translateText(place.subtitle);
+  mapTitle.textContent = localized(place.title);
+  mapSubtitle.textContent = `${localized(place.location)} · ${place.time}`;
 
   mapTabs.forEach(tab => {
     tab.classList.toggle("active", tab.dataset.place === key);
@@ -698,7 +768,10 @@ rsvpForm.addEventListener("submit", async e => {
   if(!rsvpForm.reportValidity()) return;
 
   const submitButton = rsvpForm.querySelector('button[type="submit"]');
-  const data = Object.fromEntries(new FormData(rsvpForm).entries());
+  const data = {
+    ...Object.fromEntries(new FormData(rsvpForm).entries()),
+    weddingId: ACTIVE_WEDDING_ID
+  };
 
   submitButton.disabled = true;
   formStatus.dataset.statusKey = "Ուղարկվում է…";

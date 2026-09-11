@@ -1,4 +1,4 @@
-import { WEDDING_EMAIL_CONFIG } from './wedding-config.mjs';
+import { WEDDING_EMAIL_CONFIGS } from './wedding-config.mjs';
 
 const escapeHtml = (value = '') => String(value)
   .trim()
@@ -16,9 +16,11 @@ export default async (request) => {
   }
 
   try {
-    const { firstName, lastName, guests, side, attendance, message = '' } = await request.json();
+    const { weddingId, firstName, lastName, guests, side, attendance, message = '' } = await request.json();
 
     if (
+      !weddingId ||
+      !WEDDING_EMAIL_CONFIGS[weddingId] ||
       !firstName ||
       !lastName ||
       !guests ||
@@ -28,11 +30,10 @@ export default async (request) => {
       return Response.json({ message: 'Invalid RSVP data.' }, { status: 400 });
     }
 
-    // Bride and groom stay separately configurable in wedding-config.mjs.
-    // For this wedding both currently point to the same Gmail address.
+    const wedding = WEDDING_EMAIL_CONFIGS[weddingId];
     const to = side === 'bride'
-      ? WEDDING_EMAIL_CONFIG.brideEmail
-      : WEDDING_EMAIL_CONFIG.groomEmail;
+      ? wedding.brideEmail
+      : wedding.groomEmail;
     const from = 'onboarding@resend.dev';
 
     if (!process.env.RESEND_API_KEY) {
@@ -48,9 +49,10 @@ export default async (request) => {
       body: JSON.stringify({
         from: `Wedding RSVP <${from}>`,
         to: [to],
-        subject: `Wedding RSVP — ${escapeHtml(firstName)} ${escapeHtml(lastName)}`,
+        subject: `${wedding.couple} RSVP — ${escapeHtml(firstName)} ${escapeHtml(lastName)}`,
         html: `
-          <h2>New Wedding RSVP</h2>
+          <h2>${escapeHtml(wedding.couple)} — New Wedding RSVP</h2>
+          <p><strong>Wedding:</strong> ${escapeHtml(wedding.couple)}</p>
           <p><strong>Name:</strong> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</p>
           <p><strong>Guests:</strong> ${escapeHtml(guests)}</p>
           <p><strong>Side:</strong> ${side === 'bride' ? 'Bride' : 'Groom'}</p>

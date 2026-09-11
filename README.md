@@ -1,20 +1,42 @@
-# Wedding Website — Complete Version
+# Multi-Wedding Invitation — Netlify + Resend
 
-Complete project with HTML, CSS, JavaScript, all wedding images, and local MP3 background music.
+One codebase can serve multiple couples. The selected wedding is controlled by the `wedding` query parameter.
 
-## Run
-Open `index.html` directly or use VS Code Live Server.
+## Included demo weddings
 
-## Music
-The website uses:
-`assets/music/ti-amo.mp3`
+- Hrant & Anna: `/?wedding=hrant-anna`
+- Vahagn & Ekaterina: `/?wedding=vahagn-ekaterina`
 
-Music starts after the visitor clicks the Open Invitation button, then loops. The floating music control and first-dance button mute/unmute the same track.
+If `wedding` is missing or unknown, the site falls back to `hrant-anna`.
 
+## Public wedding configuration
 
-## Infinite cinematic story update
-- Story scenes are ~30% faster.
-- The first pass stays centered so guests see the complete animation.
-- Scrolling unlocks automatically after the first pass.
-- The story then loops continuously while the story section is visible.
-- A pulsing live indicator, scene counter, animated progress and subtle light sweep show that the site is actively playing.
+Edit `public/weddings-config.js` to change public information such as:
+
+- couple names in Armenian / English / Russian
+- wedding date
+- church name, location, time, map query
+- restaurant name, location, time, map query
+- music title and file URL
+
+Both demo weddings currently reuse the existing date, locations, images, and music. Change those values in the config when you have the real details for each couple.
+
+## RSVP email configuration
+
+Edit `netlify/functions/wedding-config.mjs` for private recipient routing.
+
+Each wedding has separate `brideEmail` and `groomEmail` fields. They are currently both set to `margarsusanna5@gmail.com` for both demo weddings.
+
+The frontend sends the active `weddingId` with every RSVP. The Netlify Function validates it and selects the matching wedding/email configuration before sending through Resend.
+
+## Netlify
+
+- Publish directory: `public`
+- Functions directory: `netlify/functions`
+- Required Environment Variable: `RESEND_API_KEY`
+
+Do not put the Resend API key in GitHub or frontend JavaScript.
+
+## Animation and scrolling
+
+The cinematic story loops continuously while visible. It does not lock wheel, touch, keyboard, or normal page scrolling.

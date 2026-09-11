@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#f5e9de" />
-  <title>Արփինե & Տիգրան — Հարսանեկան հրավեր</title>
+  <title>Հարսանեկան հրավեր</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,16 +24,16 @@
 
     <div class="gate-card">
       <p class="eyebrow">ՀԱՐՍԱՆԵԿԱՆ ՀՐԱՎԵՐ</p>
-      <div class="gate-monogram">A <i>&</i> T</div>
+      <div class="gate-monogram" id="gateMonogram" data-wedding-dynamic>H <i>&</i> A</div>
 
-      <h1>
-        <span>Արփինե</span>
-        <em>և</em>
-        <span>Տիգրան</span>
+      <h1 data-wedding-dynamic>
+        <span id="gateName1">Հրանտ</span>
+        <em id="gateAnd">և</em>
+        <span id="gateName2">Աննա</span>
       </h1>
 
       <div class="ornament"><i></i><b>✦</b><i></i></div>
-      <p class="gate-date">17 · 05 · 2025</p>
+      <p class="gate-date" id="gateDate" data-wedding-dynamic>17 · 05 · 2025</p>
 
       <button id="openInvitation" class="open-button" type="button">
         <span>ԲԱՑԵԼ ՀՐԱՎԵՐԸ</span>
@@ -51,7 +51,7 @@
     <span class="music-icon">♫</span>
     <span class="music-copy">
       <small>Հնչում է</small>
-      <strong>Ti Amo</strong>
+      <strong id="musicTitle" data-wedding-dynamic>Ti Amo</strong>
     </span>
     <span class="bars"><i></i><i></i><i></i><i></i></span>
   </button>
@@ -59,7 +59,7 @@
   <div class="page-progress" id="pageProgress"></div>
 
   <header class="header" id="header">
-    <a href="#hero" class="brand">A<i>&</i>T</a>
+    <a href="#hero" class="brand" id="headerMonogram" data-wedding-dynamic>H<i>&</i>A</a>
 
     <nav class="desktop-nav">
       <a href="#story">ՄԵՐ ՊԱՏՄՈՒԹՅՈՒՆԸ</a>
@@ -83,15 +83,15 @@
       <div class="hero-copy reveal">
         <p class="eyebrow">ՄԵՐ ՍԻՐՈ ՕՐԸ</p>
 
-        <h2 class="hero-names">
-          <span>Արփինե</span>
-          <em>և</em>
-          <span>Տիգրան</span>
+        <h2 class="hero-names" data-wedding-dynamic>
+          <span id="heroName1">Հրանտ</span>
+          <em id="heroAnd">և</em>
+          <span id="heroName2">Աննա</span>
         </h2>
 
         <div class="ornament"><i></i><b>✦</b><i></i></div>
 
-        <p class="date">17 ՄԱՅԻՍ 2025</p>
+        <p class="date" id="heroDate" data-wedding-dynamic>17 ՄԱՅԻՍ 2025</p>
         <p class="quote">«Այն, ինչ սկսվում է սիրուց, դառնում է հավերժություն…»</p>
       </div>
 
@@ -192,10 +192,10 @@
         <article class="event reveal">
           <div class="event-icon">♜</div>
           <p class="event-label">ՀԱՐՍԱՆԵԿԱՆ ԱՐԱՐՈՂՈՒԹՅՈՒՆ</p>
-          <h3>17 ՄԱՅԻՍ 2025</h3>
-          <strong>ժամը 16:00</strong>
-          <p>Սուրբ Գայանե եկեղեցի<br>Էջմիածին, Հայաստան</p>
-          <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Saint+Gayane+Church+Vagharshapat">⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ</a>
+          <h3 id="ceremonyDate" data-wedding-dynamic>17 ՄԱՅԻՍ 2025</h3>
+          <strong id="ceremonyTime" data-wedding-dynamic>ժամը 16:00</strong>
+          <p id="ceremonyPlace" data-wedding-dynamic>Սուրբ Գայանե եկեղեցի<br>Էջմիածին, Հայաստան</p>
+          <a id="ceremonyMapLink" target="_blank" rel="noopener" href="https://maps.google.com/?q=Saint+Gayane+Church+Vagharshapat">⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ</a>
         </article>
 
         <div class="event-divider"><span>✦</span></div>
@@ -203,10 +203,10 @@
         <article class="event reveal">
           <div class="event-icon">♧</div>
           <p class="event-label">ՀԱՆԴԻՍՈՒԹՅՈՒՆ</p>
-          <h3>17 ՄԱՅԻՍ 2025</h3>
-          <strong>ժամը 19:00</strong>
-          <p>Royal Garden<br>Երևան, Հայաստան</p>
-          <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Royal+Garden+Yerevan">⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ</a>
+          <h3 id="receptionDate" data-wedding-dynamic>17 ՄԱՅԻՍ 2025</h3>
+          <strong id="receptionTime" data-wedding-dynamic>ժամը 19:00</strong>
+          <p id="receptionPlace" data-wedding-dynamic>Royal Garden<br>Երևան, Հայաստան</p>
+          <a id="receptionMapLink" target="_blank" rel="noopener" href="https://maps.google.com/?q=Royal+Garden+Yerevan">⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ</a>
         </article>
       </div>
     </section>
@@ -217,13 +217,13 @@
 
         <div class="calendar-wrap reveal">
           <p class="eyebrow">ՊԱՀԵՔ ԱՄՍԱԹԻՎԸ</p>
-          <h2>17 Մայիս</h2>
+          <h2 id="calendarDateTitle" data-wedding-dynamic>17 Մայիս</h2>
           <p class="muted">Մեր պատմության նոր էջի առաջին օրը։</p>
 
           <div class="calendar">
             <div class="calendar-head">
-              <strong>ՄԱՅԻՍ</strong>
-              <span>2025</span>
+              <strong id="calendarMonth" data-wedding-dynamic>ՄԱՅԻՍ</strong>
+              <span id="calendarYear" data-wedding-dynamic>2025</span>
             </div>
 
             <div class="week">
@@ -289,7 +289,7 @@
 
         <button class="dance-music" id="danceMusic" type="button">
           <span>♫</span>
-          <b>Ti Amo</b>
+          <b id="danceMusicTitle" data-wedding-dynamic>Ti Amo</b>
           <i class="mini-bars"><u></u><u></u><u></u><u></u></i>
         </button>
       </div>
@@ -352,13 +352,14 @@
 
   <footer class="footer">
     <div class="footer-copy reveal">
-      <div class="footer-brand">A<i>&</i>T</div>
-      <p>17.05.2025</p>
+      <div class="footer-brand" id="footerMonogram" data-wedding-dynamic>H<i>&</i>A</div>
+      <p id="footerDate" data-wedding-dynamic>17.05.2025</p>
       <h3>«Մեր սիրո պատմությունը<br>շարունակվում է…»</h3>
       <span>A LOVE STORY · ROOTED IN ARMENIA</span>
     </div>
   </footer>
 
+  <script src="weddings-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
