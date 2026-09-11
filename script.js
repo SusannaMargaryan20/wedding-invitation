@@ -9,6 +9,219 @@ const $ = (selector, root=document) => root.querySelector(selector);
 const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
 
 /* --------------------------------------------------
+   TRANSLATION
+   -------------------------------------------------- */
+
+let currentLanguage = "hy";
+const ORIGINAL_DOCUMENT_TITLE = document.title;
+
+const TRANSLATIONS = {
+  en: {
+    "Արփինե & Տիգրան — Հարսանեկան հրավեր": "Arpine & Tigran — Wedding Invitation",
+    "ՀԱՐՍԱՆԵԿԱՆ ՀՐԱՎԵՐ": "WEDDING INVITATION",
+    "Արփինե": "Arpine",
+    "և": "and",
+    "Տիգրան": "Tigran",
+    "ԲԱՑԵԼ ՀՐԱՎԵՐԸ": "OPEN INVITATION",
+    "Հրավերը բացվում է երաժշտությամբ": "The invitation opens with music",
+    "Հնչում է": "Now playing",
+    "ՄԵՐ ՊԱՏՄՈՒԹՅՈՒՆԸ": "OUR STORY",
+    "ՄԵՐ ՕՐԸ": "OUR DAY",
+    "ՎԱՅՐԵՐԸ": "LOCATIONS",
+    "ՄԵՐ ՍԻՐՈ ՕՐԸ": "OUR DAY OF LOVE",
+    "17 ՄԱՅԻՍ 2025": "17 MAY 2025",
+    "«Այն, ինչ սկսվում է սիրուց, դառնում է հավերժություն…»": "“What begins with love becomes forever…”",
+    "ՊԱՏՄՈՒԹՅՈՒՆԸ ՇԱՐՈՒՆԱԿՎՈՒՄ Է": "THE STORY CONTINUES",
+    "Մոտենում են": "Coming closer",
+    "Երկու ճանապարհ,": "Two paths,",
+    "մեկ հանդիպում": "one meeting",
+    "Նրանք գալիս են միմյանց ընդառաջ՝ դեպի իրենց կյանքի ամենակարևոր օրը։": "They move toward each other and toward the most important day of their lives.",
+    "Միասին՝ դեպի եկեղեցի": "Together, toward the church",
+    "Նրանք քայլում են դեպի հայկական եկեղեցու դռները՝ ձեռք ձեռքի։": "Hand in hand, they walk toward the doors of the Armenian church.",
+    "«Ես ընտրում եմ քեզ՝": "“I choose you—",
+    "այսօր և ամեն օր…»": "today and every day…”",
+    "Եվ սկսվում է": "And so begins",
+    "մեր նոր ճանապարհը": "our new journey",
+    "Եկեղեցուց դուրս՝ մեր սիրելիների ժպիտների և վարդի թերթիկների միջով։": "Outside the church, they step into smiles from loved ones and a shower of rose petals.",
+    "Սպասում ենք Ձեզ մեր ամենագեղեցիկ օրը կիսելու": "We look forward to sharing our most beautiful day with you",
+    "ՀԱՐՍԱՆԵԿԱՆ ԱՐԱՐՈՂՈՒԹՅՈՒՆ": "WEDDING CEREMONY",
+    "ժամը 16:00": "at 16:00",
+    "Սուրբ Գայանե եկեղեցի": "Saint Gayane Church",
+    "Էջմիածին, Հայաստան": "Etchmiadzin, Armenia",
+    "⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ": "⌖ VIEW MAP",
+    "ՀԱՆԴԻՍՈՒԹՅՈՒՆ": "RECEPTION",
+    "ժամը 19:00": "at 19:00",
+    "Երևան, Հայաստան": "Yerevan, Armenia",
+    "ՊԱՀԵՔ ԱՄՍԱԹԻՎԸ": "SAVE THE DATE",
+    "17 Մայիս": "17 May",
+    "Մեր պատմության նոր էջի առաջին օրը։": "The first day of a new chapter in our story.",
+    "ՄԱՅԻՍ": "MAY",
+    "ԵՐԿ": "MON",
+    "ԵՐՔ": "TUE",
+    "ՉՐՔ": "WED",
+    "ՀՆԳ": "THU",
+    "ՈՒՐ": "FRI",
+    "ՇԲԹ": "SAT",
+    "ԿԻՐ": "SUN",
+    "ՄԵՐ ՎԱՅՐԵՐԸ": "OUR LOCATIONS",
+    "Գտեք մեզ քարտեզի վրա": "Find us on the map",
+    "ԵԿԵՂԵՑԻ": "CHURCH",
+    "ՌԵՍՏՈՐԱՆ": "RESTAURANT",
+    "Էջմիածին · 16:00": "Etchmiadzin · 16:00",
+    "Երևան · 19:00": "Yerevan · 19:00",
+    "ԵՐԲ ՍԿՍՎՈՒՄ Է ԵՐԱԺՇՏՈՒԹՅՈՒՆԸ": "WHEN THE MUSIC BEGINS",
+    "Մեր առաջին պարը": "Our first dance",
+    "Մի պահ, որտեղ մնացած աշխարհը լռում է։": "A moment when the rest of the world falls silent.",
+    "Կլինե՞ք մեզ հետ": "Will you join us",
+    "մեր ամենագեղեցիկ օրը նշելու…": "to celebrate our most beautiful day…",
+    "Անուն *": "First name *",
+    "Ազգանուն *": "Last name *",
+    "Հյուրերի քանակ *": "Number of guests *",
+    "Կողմը *": "Side *",
+    "Հարսի կողմը": "Bride's side",
+    "Փեսայի կողմը": "Groom's side",
+    "Մասնակցություն *": "Attendance *",
+    "Այո": "Yes",
+    "Ոչ": "No",
+    "Մաղթանք / հաղորդագրություն": "Wish / message",
+    "ՈՒՂԱՐԿԵԼ ՊԱՏԱՍԽԱՆԸ": "SEND RESPONSE",
+    "«Մեր սիրո պատմությունը": "“Our love story",
+    "շարունակվում է…»": "continues…”",
+    "Խոստումների պահը": "The moment of vows",
+    "Վարդերի ճանապարհը": "The path of roses",
+    "Պատմությունը շարունակվում է": "The story continues",
+    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Thank you. We look forward to celebrating with you ♡"
+  },
+  ru: {
+    "Արփինե & Տիգրան — Հարսանեկան հրավեր": "Арпине & Тигран — Свадебное приглашение",
+    "ՀԱՐՍԱՆԵԿԱՆ ՀՐԱՎԵՐ": "СВАДЕБНОЕ ПРИГЛАШЕНИЕ",
+    "Արփինե": "Арпине",
+    "և": "и",
+    "Տիգրան": "Тигран",
+    "ԲԱՑԵԼ ՀՐԱՎԵՐԸ": "ОТКРЫТЬ ПРИГЛАШЕНИЕ",
+    "Հրավերը բացվում է երաժշտությամբ": "Приглашение откроется с музыкой",
+    "Հնչում է": "Сейчас играет",
+    "ՄԵՐ ՊԱՏՄՈՒԹՅՈՒՆԸ": "НАША ИСТОРИЯ",
+    "ՄԵՐ ՕՐԸ": "НАШ ДЕНЬ",
+    "ՎԱՅՐԵՐԸ": "МЕСТА",
+    "ՄԵՐ ՍԻՐՈ ՕՐԸ": "ДЕНЬ НАШЕЙ ЛЮБВИ",
+    "17 ՄԱՅԻՍ 2025": "17 МАЯ 2025",
+    "«Այն, ինչ սկսվում է սիրուց, դառնում է հավերժություն…»": "«То, что начинается с любви, становится вечностью…»",
+    "ՊԱՏՄՈՒԹՅՈՒՆԸ ՇԱՐՈՒՆԱԿՎՈՒՄ Է": "ИСТОРИЯ ПРОДОЛЖАЕТСЯ",
+    "Մոտենում են": "Идут навстречу друг другу",
+    "Երկու ճանապարհ,": "Два пути,",
+    "մեկ հանդիպում": "одна встреча",
+    "Նրանք գալիս են միմյանց ընդառաջ՝ դեպի իրենց կյանքի ամենակարևոր օրը։": "Они идут навстречу друг другу — к самому важному дню своей жизни.",
+    "Միասին՝ դեպի եկեղեցի": "Вместе — к церкви",
+    "Նրանք քայլում են դեպի հայկական եկեղեցու դռները՝ ձեռք ձեռքի։": "Держась за руки, они идут к дверям армянской церкви.",
+    "«Ես ընտրում եմ քեզ՝": "«Я выбираю тебя —",
+    "այսօր և ամեն օր…»": "сегодня и каждый день…»",
+    "Եվ սկսվում է": "И начинается",
+    "մեր նոր ճանապարհը": "наш новый путь",
+    "Եկեղեցուց դուրս՝ մեր սիրելիների ժպիտների և վարդի թերթիկների միջով։": "Из церкви они выходят под улыбки близких и лепестки роз.",
+    "Սպասում ենք Ձեզ մեր ամենագեղեցիկ օրը կիսելու": "Будем рады разделить с вами наш самый прекрасный день",
+    "ՀԱՐՍԱՆԵԿԱՆ ԱՐԱՐՈՂՈՒԹՅՈՒՆ": "СВАДЕБНАЯ ЦЕРЕМОНИЯ",
+    "ժամը 16:00": "в 16:00",
+    "Սուրբ Գայանե եկեղեցի": "Церковь Святой Гаянэ",
+    "Էջմիածին, Հայաստան": "Эчмиадзин, Армения",
+    "⌖ ԴԻՏԵԼ ՔԱՐՏԵԶԸ": "⌖ ПОКАЗАТЬ НА КАРТЕ",
+    "ՀԱՆԴԻՍՈՒԹՅՈՒՆ": "ТОРЖЕСТВО",
+    "ժամը 19:00": "в 19:00",
+    "Երևան, Հայաստան": "Ереван, Армения",
+    "ՊԱՀԵՔ ԱՄՍԱԹԻՎԸ": "СОХРАНИТЕ ДАТУ",
+    "17 Մայիս": "17 мая",
+    "Մեր պատմության նոր էջի առաջին օրը։": "Первый день новой главы нашей истории.",
+    "ՄԱՅԻՍ": "МАЙ",
+    "ԵՐԿ": "ПН",
+    "ԵՐՔ": "ВТ",
+    "ՉՐՔ": "СР",
+    "ՀՆԳ": "ЧТ",
+    "ՈՒՐ": "ПТ",
+    "ՇԲԹ": "СБ",
+    "ԿԻՐ": "ВС",
+    "ՄԵՐ ՎԱՅՐԵՐԸ": "НАШИ МЕСТА",
+    "Գտեք մեզ քարտեզի վրա": "Найдите нас на карте",
+    "ԵԿԵՂԵՑԻ": "ЦЕРКОВЬ",
+    "ՌԵՍՏՈՐԱՆ": "РЕСТОРАН",
+    "Էջմիածին · 16:00": "Эчмиадзин · 16:00",
+    "Երևան · 19:00": "Ереван · 19:00",
+    "ԵՐԲ ՍԿՍՎՈՒՄ Է ԵՐԱԺՇՏՈՒԹՅՈՒՆԸ": "КОГДА НАЧИНАЕТСЯ МУЗЫКА",
+    "Մեր առաջին պարը": "Наш первый танец",
+    "Մի պահ, որտեղ մնացած աշխարհը լռում է։": "Мгновение, когда весь остальной мир затихает.",
+    "Կլինե՞ք մեզ հետ": "Будете ли вы с нами",
+    "մեր ամենագեղեցիկ օրը նշելու…": "чтобы отпраздновать наш самый прекрасный день…",
+    "Անուն *": "Имя *",
+    "Ազգանուն *": "Фамилия *",
+    "Հյուրերի քանակ *": "Количество гостей *",
+    "Կողմը *": "Сторона *",
+    "Հարսի կողմը": "Со стороны невесты",
+    "Փեսայի կողմը": "Со стороны жениха",
+    "Մասնակցություն *": "Участие *",
+    "Այո": "Да",
+    "Ոչ": "Нет",
+    "Մաղթանք / հաղորդագրություն": "Пожелание / сообщение",
+    "ՈՒՂԱՐԿԵԼ ՊԱՏԱՍԽԱՆԸ": "ОТПРАВИТЬ ОТВЕТ",
+    "«Մեր սիրո պատմությունը": "«История нашей любви",
+    "շարունակվում է…»": "продолжается…»",
+    "Խոստումների պահը": "Момент клятв",
+    "Վարդերի ճանապարհը": "Дорога из роз",
+    "Պատմությունը շարունակվում է": "История продолжается",
+    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Спасибо. Будем рады отпраздновать этот день вместе с вами ♡"
+  }
+};
+
+function translateText(source){
+  if(currentLanguage === "hy") return source;
+  return TRANSLATIONS[currentLanguage]?.[source] || source;
+}
+
+function translatePage(language){
+  currentLanguage = ["hy", "en", "ru"].includes(language) ? language : "hy";
+  document.documentElement.lang = currentLanguage;
+  document.title = translateText(ORIGINAL_DOCUMENT_TITLE);
+
+  const dynamicIds = new Set(["storyStatusText", "mapTitle", "mapSubtitle", "formStatus"]);
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(node => {
+    const parent = node.parentElement;
+    if(!parent || parent.closest("script, style, noscript")) return;
+    if(dynamicIds.has(parent.id)) return;
+
+    if(node.__translationSource === undefined){
+      node.__translationSource = node.nodeValue;
+    }
+
+    const sourceValue = node.__translationSource;
+    const trimmed = sourceValue.trim();
+    if(!trimmed) return;
+
+    const translated = translateText(trimmed);
+    const leading = sourceValue.match(/^\s*/)?.[0] || "";
+    const trailing = sourceValue.match(/\s*$/)?.[0] || "";
+    node.nodeValue = `${leading}${translated}${trailing}`;
+  });
+
+  $$(".lang").forEach(button => {
+    button.classList.toggle("active", button.textContent.trim().toLowerCase() === currentLanguage);
+  });
+
+  if(typeof updateStoryActivity === "function") updateStoryActivity(storyIndex);
+
+  const activeMapTab = $(".map-tab.active");
+  if(activeMapTab && typeof selectPlace === "function"){
+    selectPlace(activeMapTab.dataset.place);
+  }
+
+  if(formStatus?.textContent.trim()){
+    formStatus.textContent = translateText("Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡");
+  }
+}
+
+/* --------------------------------------------------
    MUSIC
    -------------------------------------------------- */
 
@@ -184,7 +397,7 @@ function updateStoryActivity(index){
   }
 
   if(storyStatusText){
-    storyStatusText.textContent = storySceneLabels[index] || "Պատմությունը շարունակվում է";
+    storyStatusText.textContent = translateText(storySceneLabels[index] || "Պատմությունը շարունակվում է");
   }
 
   if(storyLive){
@@ -430,8 +643,8 @@ function selectPlace(key){
   const place = places[key];
 
   map.src = `https://www.google.com/maps?q=${encodeURIComponent(place.query)}&output=embed`;
-  mapTitle.textContent = place.title;
-  mapSubtitle.textContent = place.subtitle;
+  mapTitle.textContent = translateText(place.title);
+  mapSubtitle.textContent = translateText(place.subtitle);
 
   mapTabs.forEach(tab => {
     tab.classList.toggle("active", tab.dataset.place === key);
@@ -463,7 +676,7 @@ rsvpForm.addEventListener("submit", e => {
   localStorage.setItem("wedding-rsvps", JSON.stringify(saved));
 
   rsvpForm.reset();
-  formStatus.innerHTML = "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡";
+  formStatus.textContent = translateText("Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡");
 });
 
 /* Start with the invitation gate locked. */
@@ -552,3 +765,16 @@ if(danceSection && danceFrameA && danceFrameB){
 
   danceObserver.observe(danceSection);
 }
+
+
+/* --------------------------------------------------
+   LANGUAGE SWITCHER
+   -------------------------------------------------- */
+
+$$(".lang").forEach(button => {
+  button.addEventListener("click", () => {
+    translatePage(button.textContent.trim().toLowerCase());
+  });
+});
+
+translatePage("hy");
