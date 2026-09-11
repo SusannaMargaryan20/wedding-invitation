@@ -378,3 +378,178 @@ input,select,textarea{width:100%;border:1px solid rgba(113,74,56,.2);border-radi
   .dance-frame{transition:none!important;animation:none!important}
   .dance-glow{animation:none!important}
 }
+
+/* =========================================================
+   MOBILE IMAGE FRAMING FIX
+   Keep desktop untouched; on phones preserve the original
+   image composition instead of heavily cropping landscape art.
+   ========================================================= */
+@media(max-width:680px){
+  /* HERO: keep the original 16:9 composition visible. */
+  .hero-image{
+    width:calc(100% + 32px);
+    height:auto;
+    min-height:0;
+    aspect-ratio:16 / 9;
+    margin:28px -16px 0;
+    overflow:hidden;
+    background:#ead5c5;
+  }
+  .hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+    animation:heroZoomMobile 14s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoomMobile{
+    from{transform:scale(1)}
+    to{transform:scale(1.035)}
+  }
+  .hero-wash{
+    background:linear-gradient(180deg,var(--paper) 0%,rgba(245,233,222,.18) 18%,transparent 42%);
+  }
+
+  /* STORY: use a proper landscape stage at the top of the scene.
+     Text stays below it so the image is no longer cropped to a tall phone. */
+  .story-section{
+    height:680px;
+    min-height:680px;
+    background:#ead5c5;
+  }
+  .story-frame{background:linear-gradient(180deg,#d9bda8 0 34%,#f0ded2 58%,#ead6c8 100%)}
+
+  .story-scene>img{
+    inset:0 0 auto 0;
+    width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
+    object-fit:cover;
+    object-position:center center;
+    transform:scale(1);
+    background:#d3ad92;
+  }
+  .story-scene.active>img{
+    animation:cameraMobile var(--scene-duration,3.2s) cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes cameraMobile{
+    from{transform:scale(1)}
+    to{transform:scale(1.035)}
+  }
+
+  .story-scene--enter img,
+  .story-scene--vows img,
+  .story-scene--exit img{
+    object-position:center center;
+  }
+
+  /* The first scene uses background-image layers instead of <img>. */
+  .approach-base,
+  .approach-person{
+    inset:0 0 auto 0;
+    width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
+    background-size:100% 100%;
+    background-position:center center;
+    background-repeat:no-repeat;
+  }
+  .approach-base{transform:scale(1)}
+  @keyframes approachCameraMobile{
+    from{transform:scale(1)}
+    to{transform:scale(1.035)}
+  }
+  @keyframes brideApproachMobile{
+    from{transform:translateX(0) scale(1)}
+    to{transform:translateX(2.2vw) scale(1.02)}
+  }
+  @keyframes groomApproachMobile{
+    from{transform:translateX(0) scale(1)}
+    to{transform:translateX(-2vw) scale(1.02)}
+  }
+  .story-scene--approach.active .approach-base{animation:approachCameraMobile var(--scene-duration,3.2s) cubic-bezier(.2,.7,.2,1) forwards}
+  .story-scene--approach.active .approach-bride{animation:brideApproachMobile var(--scene-duration,3.2s) cubic-bezier(.2,.7,.2,1) forwards}
+  .story-scene--approach.active .approach-groom{animation:groomApproachMobile var(--scene-duration,3.2s) cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* Darken/fade only toward the lower text area, not over the whole photo. */
+  .scene-overlay-left,
+  .scene-overlay-right{
+    background:linear-gradient(180deg,
+      transparent 0%,
+      transparent 28%,
+      rgba(242,226,214,.18) 36%,
+      rgba(242,226,214,.94) 55%,
+      rgba(242,226,214,.98) 100%);
+  }
+  .vow-shade{
+    background:linear-gradient(180deg,rgba(48,28,20,.10) 0 30%,rgba(48,28,20,.42) 43%,rgba(48,28,20,.62) 100%);
+  }
+  .vow-copy{
+    place-content:end center;
+    padding:0 20px 102px;
+  }
+  .vow-copy p{font-size:32px}
+
+  .scene-copy,
+  .scene-copy-left,
+  .scene-copy-right,
+  .scene-copy-bottom{
+    left:20px;
+    right:20px;
+    top:auto;
+    bottom:70px;
+    width:auto;
+    max-width:520px;
+    transform:none;
+    text-align:left;
+  }
+
+  /* DANCE: let the animated image occupy its natural aspect ratio in flow.
+     This keeps the dress and both dancers visible on narrow screens. */
+  .dance{
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    background:#2f1c17;
+  }
+  .dance-animation{
+    position:relative;
+    top:auto;
+    right:auto;
+    bottom:auto;
+    width:100%;
+    height:auto;
+    aspect-ratio:950 / 780;
+    flex:0 0 auto;
+    overflow:hidden;
+  }
+  .dance-frame{
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+    transform:scale(1);
+  }
+  .dance-frame.active{animation:danceFrameDriftMobile 1.15s ease-in-out both}
+  @keyframes danceFrameDriftMobile{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.018)}
+    100%{transform:scale(1.006)}
+  }
+  .dance-animation::before{
+    background:linear-gradient(0deg,rgba(38,21,16,.45) 0%,transparent 35%);
+  }
+  .dance-overlay{
+    background:linear-gradient(0deg,rgba(47,28,23,.96) 0 38%,rgba(47,28,23,.10) 62%,transparent 76%);
+  }
+  .dance-copy{
+    position:relative;
+    width:100%;
+    max-width:none;
+    margin-top:-54px;
+    padding:82px 22px 62px;
+    text-align:center;
+  }
+  .dance-music{margin-left:auto;margin-right:auto}
+}
