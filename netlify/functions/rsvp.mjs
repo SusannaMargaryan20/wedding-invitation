@@ -37,45 +37,65 @@ const validPhone = value => {
 const emailTemplate = ({ wedding, firstName, lastName, phone, guests, side, attendance, message, language }) => {
   const t = TEXT[language];
   const fullName = `${escapeHtml(firstName)} ${escapeHtml(lastName)}`;
+  const couple = escapeHtml(wedding.names?.[language] || wedding.couple);
   const sideText = side === 'bride' ? t.bride : t.groom;
   const attendanceText = attendance === 'yes' ? t.yes : t.no;
   const safeMessage = escapeHtml(message) || t.empty;
+  const date = wedding.date
+    ? `${String(wedding.date.day).padStart(2, '0')}.${String(wedding.date.month).padStart(2, '0')}.${wedding.date.year}`
+    : '';
+
+  const headerText = {
+    hy: { eyebrow: 'ՀԱՐՍԱՆԵԿԱՆ ՀՐԱՎԻՐԱՏՈՄՍ', response: 'Նոր մասնակցության պատասխան', note: 'Հաղորդագրություն չկա', footer: 'Սիրով ստեղծված հարսանեկան հրավիրատոմս' },
+    en: { eyebrow: 'WEDDING INVITATION', response: 'New attendance response', note: 'No message', footer: 'Wedding invitation made with love' },
+    ru: { eyebrow: 'СВАДЕБНОЕ ПРИГЛАШЕНИЕ', response: 'Новый ответ об участии', note: 'Сообщения нет', footer: 'Свадебное приглашение, созданное с любовью' }
+  }[language];
 
   const row = (label, value) => `
     <tr>
-      <td style="padding:12px 0;color:#9b7866;font-size:12px;letter-spacing:.08em;text-transform:uppercase;vertical-align:top;width:42%;">${label}</td>
-      <td style="padding:12px 0;color:#4e342a;font-size:15px;font-weight:600;vertical-align:top;">${value}</td>
+      <td style="padding:15px 0;border-bottom:1px solid #ddc5b8;color:#9a806f;font-size:14px;line-height:1.4;width:42%;vertical-align:top;">${label}</td>
+      <td align="right" style="padding:15px 0;border-bottom:1px solid #ddc5b8;color:#44312a;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.4;vertical-align:top;">${value}</td>
     </tr>`;
 
   return `<!doctype html>
-  <html lang="${language}"><body style="margin:0;background:#f6eee9;font-family:Arial,'Helvetica Neue',sans-serif;color:#4e342a;">
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f6eee9;padding:32px 12px;">
-      <tr><td align="center">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fffaf6;border-radius:22px;overflow:hidden;box-shadow:0 12px 36px rgba(91,58,44,.10);">
-          <tr><td style="padding:38px 36px 30px;text-align:center;background:linear-gradient(135deg,#ead7ca,#f8eee8);">
-            <div style="font-family:Georgia,serif;font-size:30px;color:#6d4938;letter-spacing:.02em;">${escapeHtml(wedding.couple)}</div>
-            <div style="width:42px;height:1px;background:#b88d78;margin:18px auto;"></div>
-            <div style="font-family:Georgia,serif;font-size:22px;color:#6d4938;">${t.title}</div>
-            <div style="margin-top:8px;font-size:13px;line-height:1.6;color:#9b7866;">${t.subtitle}</div>
-          </td></tr>
-          <tr><td style="padding:30px 36px 12px;">
-            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
-              ${row(t.guest, fullName)}
-              ${row(t.phone, escapeHtml(phone))}
-              ${row(t.guests, escapeHtml(guests))}
-              ${row(t.side, sideText)}
-              ${row(t.attendance, attendanceText)}
-            </table>
-          </td></tr>
-          <tr><td style="padding:10px 36px 34px;">
-            <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9b7866;margin-bottom:10px;">${t.message}</div>
-            <div style="padding:18px 20px;background:#f8efea;border-left:3px solid #c9a18d;border-radius:10px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:#5c4033;white-space:pre-wrap;">${safeMessage}</div>
-          </td></tr>
-          <tr><td style="padding:20px 36px;text-align:center;border-top:1px solid #efe1d9;font-size:11px;color:#ad8d7d;">${t.footer}</td></tr>
-        </table>
-      </td></tr>
-    </table>
-  </body></html>`;
+<html lang="${language}">
+<body style="margin:0;padding:0;background:#f5eeea;font-family:Arial,'Helvetica Neue',sans-serif;color:#44312a;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f5eeea;">
+    <tr><td align="center" style="padding:22px 12px;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:620px;background:#f4ddd2;border:2px solid #a97932;border-radius:34px;overflow:hidden;">
+        <tr><td align="center" style="background:#351d14;padding:70px 28px 62px;color:#d1a14b;">
+          <div style="font-size:24px;line-height:1;margin-bottom:28px;color:#b88635;">✣</div>
+          <div style="font-size:12px;letter-spacing:5px;color:#b88635;margin-bottom:28px;">${headerText.eyebrow}</div>
+          <div style="font-family:Georgia,'Times New Roman',serif;font-size:38px;line-height:1.15;color:#f1dfd4;margin-bottom:24px;">${couple}</div>
+          ${date ? `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;letter-spacing:6px;color:#c7a992;margin-bottom:32px;">${date}</div>` : ''}
+          <div style="font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.5;color:#c7aa9a;">${headerText.response}</div>
+        </td></tr>
+
+        <tr><td style="padding:58px 48px 26px;background:#f4ddd2;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+            ${row(t.guest, fullName)}
+            ${row(t.phone, escapeHtml(phone))}
+            ${row(t.guests, escapeHtml(guests))}
+            ${row(t.side, sideText)}
+          </table>
+        </td></tr>
+
+        <tr><td style="padding:18px 48px 48px;background:#f4ddd2;">
+          <div style="font-size:12px;letter-spacing:4px;color:#a97932;margin-bottom:18px;text-transform:uppercase;">${t.attendance}</div>
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr><td style="background:#faeee9;border-left:4px solid #9a6d2b;padding:22px 26px;font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:1.45;color:#44312a;">${attendanceText}</td></tr>
+          </table>
+
+          <div style="font-size:12px;letter-spacing:4px;color:#a97932;margin:34px 0 14px;text-transform:uppercase;">${t.message}</div>
+          <div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.7;color:#5a443a;white-space:pre-wrap;">${safeMessage}</div>
+        </td></tr>
+
+        <tr><td align="center" style="padding:26px 30px 34px;border-top:1px solid #d8b9a8;background:#f4ddd2;color:#b39584;font-size:12px;line-height:1.6;letter-spacing:1px;">✦ &nbsp; ${headerText.footer} &nbsp; ✦</td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
 };
 
 export default async request => {
