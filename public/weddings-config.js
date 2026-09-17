@@ -21,7 +21,7 @@ window.WEDDING_CONFIGS = {
     },
     music: {
       title: "Ti Amo",
-      url: "/wedding-music.mp3"
+      url: "wedding-music.mp3"
     }
   },
 
@@ -47,7 +47,7 @@ window.WEDDING_CONFIGS = {
     },
     music: {
       title: "Ti Amo",
-      url: "/wedding-music.mp3"
+      url: "wedding-music.mp3"
     }
   }
 };

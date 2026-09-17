@@ -617,3 +617,45 @@ input,select,textarea{width:100%;border:1px solid rgba(113,74,56,.2);border-radi
     object-position:center center;
   }
 }
+
+/* Requested refinement: keep the original design/animation, hide only the top story label. */
+.story-live{display:none!important}
+
+/* Slightly larger church/story images on phones without changing desktop. */
+@media(max-width:680px){
+  .story-scene>img,
+  .approach-base,
+  .approach-person{
+    aspect-ratio:3 / 2;
+  }
+}
+
+/* Mobile ceremony spacing refinement */
+@media(max-width:680px){
+  .story-section{
+    height:600px;
+    min-height:600px;
+  }
+
+  .story-scene>img,
+  .approach-base,
+  .approach-person{
+    aspect-ratio:4 / 3;
+  }
+
+  .scene-copy,
+  .scene-copy-left,
+  .scene-copy-right,
+  .scene-copy-bottom{
+    top:calc(75vw + 18px);
+    bottom:auto;
+  }
+
+  .scene-num{
+    margin-bottom:10px;
+  }
+
+  .scene-copy h2{
+    margin-bottom:9px;
+  }
+}

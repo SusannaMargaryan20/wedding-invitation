@@ -217,6 +217,7 @@ const TRANSLATIONS = {
     "մեր ամենագեղեցիկ օրը նշելու…": "to celebrate our most beautiful day…",
     "Անուն *": "First name *",
     "Ազգանուն *": "Last name *",
+    "Հեռախոսահամար *": "Phone number *",
     "Հյուրերի քանակ *": "Number of guests *",
     "Կողմը *": "Side *",
     "Հարսի կողմը": "Bride's side",
@@ -233,7 +234,9 @@ const TRANSLATIONS = {
     "Պատմությունը շարունակվում է": "The story continues",
     "Ուղարկվում է…": "Sending…",
     "Չհաջողվեց ուղարկել։ Փորձեք կրկին։": "Could not send. Please try again.",
-    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Thank you. We look forward to celebrating with you ♡"
+    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Thank you. We look forward to celebrating with you ♡",
+    "Անունը և ազգանունը գրեք միայն հայերեն։": "Please enter first and last name using English letters only.",
+    "Մուտքագրեք վավեր հեռախոսահամար։": "Please enter a valid phone number."
   },
   ru: {
     "Արփինե & Տիգրան — Հարսանեկան հրավեր": "Арпине & Тигран — Свадебное приглашение",
@@ -295,6 +298,7 @@ const TRANSLATIONS = {
     "մեր ամենագեղեցիկ օրը նշելու…": "чтобы отпраздновать наш самый прекрасный день…",
     "Անուն *": "Имя *",
     "Ազգանուն *": "Фамилия *",
+    "Հեռախոսահամար *": "Номер телефона *",
     "Հյուրերի քանակ *": "Количество гостей *",
     "Կողմը *": "Сторона *",
     "Հարսի կողմը": "Со стороны невесты",
@@ -311,7 +315,9 @@ const TRANSLATIONS = {
     "Պատմությունը շարունակվում է": "История продолжается",
     "Ուղարկվում է…": "Отправляется…",
     "Չհաջողվեց ուղարկել։ Փորձեք կրկին։": "Не удалось отправить. Попробуйте ещё раз.",
-    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Спасибо. Будем рады отпраздновать этот день вместе с вами ♡"
+    "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡": "Спасибо. Будем рады отпраздновать этот день вместе с вами ♡",
+    "Անունը և ազգանունը գրեք միայն հայերեն։": "Введите имя и фамилию только русскими буквами.",
+    "Մուտքագրեք վավեր հեռախոսահամար։": "Введите корректный номер телефона."
   }
 };
 
@@ -320,9 +326,50 @@ function translateText(source){
   return TRANSLATIONS[currentLanguage]?.[source] || source;
 }
 
+const NAME_PATTERNS = {
+  hy: /^[\u0531-\u0556\u0561-\u0587\s'’\-]+$/u,
+  en: /^[A-Za-z\s'’\-]+$/,
+  ru: /^[А-Яа-яЁё\s'’\-]+$/u
+};
+
+function validateLocalizedNameInput(input){
+  if(!input) return true;
+  const value = input.value.trim();
+  const valid = !value || NAME_PATTERNS[currentLanguage].test(value);
+  input.setCustomValidity(valid ? "" : translateText("Անունը և ազգանունը գրեք միայն հայերեն։"));
+  return valid;
+}
+
+function validatePhoneInput(input){
+  if(!input) return true;
+  const value = input.value.trim();
+  const digits = value.replace(/\D/g, "");
+  const valid = !value || (digits.length >= 8 && digits.length <= 15 && /^\+?[0-9()\s\-]+$/.test(value));
+  input.setCustomValidity(valid ? "" : translateText("Մուտքագրեք վավեր հեռախոսահամար։"));
+  return valid;
+}
+
+function refreshRsvpValidation(){
+  const form = document.getElementById("rsvpForm");
+  const firstName = form?.elements?.firstName;
+  const lastName = form?.elements?.lastName;
+  const phone = form?.elements?.phone;
+  [firstName, lastName].forEach(input => {
+    if(input){
+      input.setCustomValidity("");
+      if(input.value) validateLocalizedNameInput(input);
+    }
+  });
+  if(phone){
+    phone.setCustomValidity("");
+    if(phone.value) validatePhoneInput(phone);
+  }
+}
+
 function translatePage(language){
   currentLanguage = ["hy", "en", "ru"].includes(language) ? language : "hy";
   document.documentElement.lang = currentLanguage;
+  refreshRsvpValidation();
 
   const dynamicIds = new Set(["storyStatusText", "mapTitle", "mapSubtitle", "formStatus"]);
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -760,17 +807,34 @@ selectPlace("church");
 
 const rsvpForm = $("#rsvpForm");
 const formStatus = $("#formStatus");
-const RSVP_API_URL = "/api/rsvp"; // Netlify routes this to the RSVP serverless function.
+const RSVP_API_URL = "/api/rsvp";
+
+const firstNameInput = rsvpForm.elements.firstName;
+const lastNameInput = rsvpForm.elements.lastName;
+const phoneInput = rsvpForm.elements.phone;
+
+[firstNameInput, lastNameInput].forEach(input => {
+  input.addEventListener("input", () => validateLocalizedNameInput(input));
+  input.addEventListener("blur", () => validateLocalizedNameInput(input));
+});
+
+phoneInput.addEventListener("input", () => validatePhoneInput(phoneInput));
+phoneInput.addEventListener("blur", () => validatePhoneInput(phoneInput));
 
 rsvpForm.addEventListener("submit", async e => {
   e.preventDefault();
+
+  validateLocalizedNameInput(firstNameInput);
+  validateLocalizedNameInput(lastNameInput);
+  validatePhoneInput(phoneInput);
 
   if(!rsvpForm.reportValidity()) return;
 
   const submitButton = rsvpForm.querySelector('button[type="submit"]');
   const data = {
     ...Object.fromEntries(new FormData(rsvpForm).entries()),
-    weddingId: ACTIVE_WEDDING_ID
+    weddingId: ACTIVE_WEDDING_ID,
+    language: currentLanguage
   };
 
   submitButton.disabled = true;
