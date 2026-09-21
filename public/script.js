@@ -99,7 +99,10 @@ function applyWeddingConfig(){
   if(images){
     $$('[data-wedding-image]').forEach(element => {
       const key = element.dataset.weddingImage;
-      if(images[key]) element.src = images[key];
+      if(images[key]) {
+        element.src = images[key];
+        element.closest('.client-story-photo')?.classList.add('has-image');
+      }
     });
 
     $$('[data-wedding-background]').forEach(element => {

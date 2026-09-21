@@ -660,3 +660,47 @@ input,select,textarea{width:100%;border:1px solid rgba(113,74,56,.2);border-radi
     margin-bottom:9px;
   }
 }
+
+
+/* Client photos are real image elements, never cinematic section backgrounds. */
+.client-story-photo{
+  position:absolute;
+  z-index:4;
+  display:none;
+  width:clamp(210px,24vw,350px);
+  aspect-ratio:4 / 5;
+  padding:8px;
+  background:rgba(250,243,236,.94);
+  border:1px solid rgba(214,176,142,.55);
+  box-shadow:0 22px 60px rgba(42,24,17,.24);
+  overflow:hidden;
+}
+.client-story-photo.has-image{display:block}
+.client-story-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.client-story-photo--right{right:clamp(30px,8vw,130px);top:50%;transform:translateY(-50%) rotate(1.2deg)}
+.client-story-photo--left{left:clamp(30px,8vw,130px);top:50%;transform:translateY(-50%) rotate(-1.2deg)}
+.story-scene.active .client-story-photo{animation:clientPhotoIn .75s ease .18s both}
+@keyframes clientPhotoIn{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:blur(0)}}
+
+/* Keep the original cinematic artwork as the scene background. */
+.story-scene--approach .approach-base,
+.story-scene--approach .approach-person{
+  background-image:url("assets/images/scene-approach.gif");
+}
+
+@media(max-width:680px){
+  .client-story-photo{
+    width:min(42vw,190px);
+    aspect-ratio:4 / 5;
+    padding:5px;
+    top:20px;
+  }
+  .client-story-photo--right{right:16px;transform:rotate(1deg)}
+  .client-story-photo--left{left:16px;transform:rotate(-1deg)}
+}
