@@ -119,23 +119,30 @@ export default async request => {
       return Response.json({ message: 'Email service is not configured.' }, { status: 500 });
     }
 
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'Wedding RSVP <onboarding@resend.dev>';
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'Wedding RSVP <onboarding@resend.dev>',
+        from: fromEmail,
         to: [to],
         subject: `${wedding.couple} — ${t.subject}: ${String(firstName).trim()} ${String(lastName).trim()}`,
         html: emailTemplate({ wedding, firstName, lastName, phone, guests, side, attendance, message, language: lang })
       })
     });
 
+    const resendResult = await response.json().catch(() => null);
+
     if (!response.ok) {
-      console.error('Resend error:', await response.text());
-      return Response.json({ message: 'Could not send RSVP email.' }, { status: 502 });
+      console.error('Resend error:', resendResult);
+      return Response.json({
+        message: resendResult?.message || 'Could not send RSVP email.',
+        code: resendResult?.name || 'RESEND_ERROR'
+      }, { status: 502 });
     }
 
-    return Response.json({ success: true });
+    return Response.json({ success: true, emailId: resendResult?.id || null });
   } catch (error) {
     console.error(error);
     return Response.json({ message: 'Could not send RSVP email.' }, { status: 500 });

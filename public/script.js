@@ -868,7 +868,11 @@ rsvpForm.addEventListener("submit", async e => {
       body: JSON.stringify(data)
     });
 
-    if(!response.ok) throw new Error("RSVP request failed");
+    const result = await response.json().catch(() => null);
+
+    if(!response.ok || result?.success !== true){
+      throw new Error(result?.message || "RSVP request failed");
+    }
 
     rsvpForm.reset();
     formStatus.dataset.statusKey = "Շնորհակալ ենք։ Սիրով սպասում ենք Ձեզ ♡";
