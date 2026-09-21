@@ -49,5 +49,54 @@ window.WEDDING_CONFIGS = {
       title: "Ti Amo",
       url: "wedding-music.mp3"
     }
+  },
+  "egor-anna": {
+  names: {
+    first: { hy: "Եգոր", en: "Egor", ru: "Егор" },
+    second: { hy: "Աննա", en: "Anna", ru: "Анна" },
+    groom: { hy: "Եգոր", en: "Egor", ru: "Егор" },
+    bride: { hy: "Աննա", en: "Anna", ru: "Анна" }
+  },
+
+  date: {
+    year: 2027,
+    month: 7,
+    day: 7
+  },
+
+  ceremony: {
+    time: "16:00",
+    name: {
+      hy: "Սուրբ Գայանե եկեղեցի",
+      en: "Saint Gayane Church",
+      ru: "Церковь Святой Гаянэ"
+    },
+    location: {
+      hy: "Էջմիածին, Հայաստան",
+      en: "Etchmiadzin, Armenia",
+      ru: "Эчмиадзин, Армения"
+    },
+    mapQuery: "Saint Gayane Church, Vagharshapat, Armenia"
+  },
+
+  reception: {
+    time: "19:00",
+    name: {
+      hy: "Դվին",
+      en: "Dvin",
+      ru: "Двин"
+    },
+    location: {
+      hy: "Երևան, Հայաստան",
+      en: "Yerevan, Armenia",
+      ru: "Ереван, Армения"
+    },
+    mapQuery: "Dvin, Yerevan, Armenia"
+  },
+
+  music: {
+    title: "Ti Amo",
+    url: "wedding-music.mp3"
   }
+}
 };

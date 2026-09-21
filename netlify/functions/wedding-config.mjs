@@ -12,5 +12,12 @@ export const WEDDING_EMAIL_CONFIGS = {
     date: { year: 2025, month: 5, day: 17 },
     brideEmail: 'margarsusanna5@gmail.com',
     groomEmail: 'margarsusanna5@gmail.com'
+  },
+   'egor-anna': {
+    couple: 'Egor & Anna',
+    names: { hy: 'Եգոր & Աննա', en: 'Egor & Anna', ru: 'Egor & Anna' },
+    date: { year: 2025, month: 5, day: 17 },
+    brideEmail: 'egor.margaryan@gmail.com',
+    groomEmail: 'anna.manukyan112001@gmail.com'
   }
 };
