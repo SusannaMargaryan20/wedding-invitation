@@ -51,6 +51,9 @@ window.WEDDING_CONFIGS = {
     }
   },
   "egor-anna": {
+    images: {
+      hero: "assets/images/egor-anna/hero.jpg",
+    },
   names: {
     first: { hy: "Եգոր", en: "Egor", ru: "Егор" },
     second: { hy: "Աննա", en: "Anna", ru: "Анна" },

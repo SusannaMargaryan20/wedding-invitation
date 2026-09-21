@@ -94,7 +94,15 @@ function formatWeddingDate(){
 }
 
 function applyWeddingConfig(){
-  const { names, date, ceremony, reception, music } = ACTIVE_WEDDING;
+  const { names, date, ceremony, reception, music, images } = ACTIVE_WEDDING;
+
+  const heroImage = $("#heroImage");
+
+  if(heroImage && images?.hero){
+    heroImage.src = images.hero;
+    heroImage.alt = `${names.first.en} & ${names.second.en}`;
+  }
+
   const name1 = localized(names.first);
   const name2 = localized(names.second);
   const joiner = currentLanguage === "hy" ? "և" : currentLanguage === "ru" ? "и" : "and";
@@ -104,6 +112,7 @@ function applyWeddingConfig(){
   const firstInitial = names.first.en.charAt(0).toUpperCase();
   const secondInitial = names.second.en.charAt(0).toUpperCase();
   const monogram = `${firstInitial}<i>&</i>${secondInitial}`;
+
 
   document.title = currentLanguage === "hy"
     ? `${name1} & ${name2} — Հարսանեկան հրավեր`
