@@ -51,55 +51,34 @@ window.WEDDING_CONFIGS = {
     }
   },
   "egor-anna": {
+    names: {
+      first: { hy: "Եգոր", en: "Egor", ru: "Егор" },
+      second: { hy: "Աննա", en: "Anna", ru: "Анна" },
+      groom: { hy: "Եգոր", en: "Egor", ru: "Егор" },
+      bride: { hy: "Աննա", en: "Anna", ru: "Анна" }
+    },
+    date: { year: 2027, month: 7, day: 7 },
     images: {
       hero: "assets/images/egor-anna/hero.jpg",
+      storyApproach: "assets/images/egor-anna/story-approach.jpg",
+      storyEnter: "assets/images/egor-anna/story-enter.jpg",
+      storyVows: "assets/images/egor-anna/story-vows.jpg",
+      storyExit: "assets/images/egor-anna/story-exit.jpg",
+      ceremony: "assets/images/egor-anna/ceremony.jpg",
+      reception: "assets/images/egor-anna/reception.jpg"
     },
-  names: {
-    first: { hy: "Եգոր", en: "Egor", ru: "Егор" },
-    second: { hy: "Աննա", en: "Anna", ru: "Анна" },
-    groom: { hy: "Եգոր", en: "Egor", ru: "Егор" },
-    bride: { hy: "Աննա", en: "Anna", ru: "Анна" }
-  },
-
-  date: {
-    year: 2027,
-    month: 7,
-    day: 7
-  },
-
-  ceremony: {
-    time: "16:00",
-    name: {
-      hy: "Սուրբ Գայանե եկեղեցի",
-      en: "Saint Gayane Church",
-      ru: "Церковь Святой Гаянэ"
+    ceremony: {
+      time: "16:00",
+      name: { hy: "Սուրբ Գայանե եկեղեցի", en: "Saint Gayane Church", ru: "Церковь Святой Гаянэ" },
+      location: { hy: "Էջմիածին, Հայաստան", en: "Etchmiadzin, Armenia", ru: "Эчмиадзин, Армения" },
+      mapQuery: "Saint Gayane Church, Vagharshapat, Armenia"
     },
-    location: {
-      hy: "Էջմիածին, Հայաստան",
-      en: "Etchmiadzin, Armenia",
-      ru: "Эчмиадзин, Армения"
+    reception: {
+      time: "19:00",
+      name: { hy: "Դվին", en: "Dvin", ru: "Двин" },
+      location: { hy: "Երևան, Հայաստան", en: "Yerevan, Armenia", ru: "Ереван, Армения" },
+      mapQuery: "Dvin, Yerevan, Armenia"
     },
-    mapQuery: "Saint Gayane Church, Vagharshapat, Armenia"
-  },
-
-  reception: {
-    time: "19:00",
-    name: {
-      hy: "Դվին",
-      en: "Dvin",
-      ru: "Двин"
-    },
-    location: {
-      hy: "Երևան, Հայաստան",
-      en: "Yerevan, Armenia",
-      ru: "Ереван, Армения"
-    },
-    mapQuery: "Dvin, Yerevan, Armenia"
-  },
-
-  music: {
-    title: "Ti Amo",
-    url: "wedding-music.mp3"
+    music: { title: "Ti Amo", url: "wedding-music.mp3" }
   }
-}
 };

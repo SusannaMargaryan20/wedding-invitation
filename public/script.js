@@ -96,11 +96,19 @@ function formatWeddingDate(){
 function applyWeddingConfig(){
   const { names, date, ceremony, reception, music, images } = ACTIVE_WEDDING;
 
-  const heroImage = $("#heroImage");
+  if(images){
+    $$('[data-wedding-image]').forEach(element => {
+      const key = element.dataset.weddingImage;
+      if(images[key]) element.src = images[key];
+    });
 
-  if(heroImage && images?.hero){
-    heroImage.src = images.hero;
-    heroImage.alt = `${names.first.en} & ${names.second.en}`;
+    $$('[data-wedding-background]').forEach(element => {
+      const key = element.dataset.weddingBackground;
+      if(images[key]) element.style.setProperty('--wedding-bg', `url("${images[key]}")`);
+    });
+
+    const heroImage = $("#heroImage");
+    if(heroImage && images.hero) heroImage.alt = `${names.first.en} & ${names.second.en}`;
   }
 
   const name1 = localized(names.first);
